@@ -6,3 +6,23 @@
         </div>
     </div>
 </div>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Slug</th>
+            <!-- <th scope="col">Editar</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let producto of productos">
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.slug }}</td>
+            <!-- <td><span class="badge badge-secondary pointer" routerLink="/marcas/editar-marca/{{ marca._id }}">Editar</span></td> -->
+        </tr>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-info" *ngIf="desde > 0" (click)="cambiarDesde(-8)">&lt;&lt; Anterior</button>
+<button type="button" class="btn btn-info" *ngIf="desde + 8 < totalProductos" (click)="cambiarDesde(+8)">Siguiente &gt;&gt;</button>
