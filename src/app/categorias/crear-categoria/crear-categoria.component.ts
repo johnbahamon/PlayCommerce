@@ -124,7 +124,8 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   agregarDetalleACategoria() {
-    if (this.detalle === undefined) {
+    if (!this.detalle) {
+      swal(':(', 'No escribiste título al detalle', 'warning');
       this.agregarDetalle = false;
       return;
     }

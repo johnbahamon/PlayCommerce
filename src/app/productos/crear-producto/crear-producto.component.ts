@@ -194,6 +194,11 @@ export class CrearProductoComponent implements OnInit {
     }
 
     console.log(pictures);
+
+    this.apiService.peticionesPut(`productos/${this.productoId}`, pictures )
+      .subscribe((data: any) => {
+        swal('Bien', 'Actualizada', 'success');
+      });
   }
 
 }
