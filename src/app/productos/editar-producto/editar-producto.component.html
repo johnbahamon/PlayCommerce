@@ -1,0 +1,41 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Editar Producto</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button routerLink="/productos" class="btn btn-sm btn-outline-secondary">Productos</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h3 style="text-align: center" *ngIf="!cargando">{{ producto.nombre }}</h3>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h5>Accesorios</h5>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let accesorio of accesorios">{{ accesorio.nombre }}</li>
+            </ul>
+            <hr>
+            <h5>Repuestos</h5>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let repuesto of repuestos">{{ repuesto.nombre }}</li>
+            </ul>
+        </div>
+        <div class="col">
+            <input #inputProducto type="text">
+            <hr>
+            <ul [style.display]="productosFiltrados.length> 0 ? 'block' : 'none'">
+                <li *ngFor="let producto of productosFiltrados">
+                    <span>{{ producto.nombre }}</span>
+                    <button type="button" class="btn btn-link" (click)="elegirRepuesto(producto)">Repuesto</button> --
+                    <button type="button" class="btn btn-link" (click)="elegirAccesorio(producto)">Accesorio</button>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-primary" (click)="actualizarProducto()">Actualizar</button>
+    </div>
+</div>

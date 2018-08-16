@@ -10,6 +10,7 @@ import { CrearCategoriaComponent } from './categorias/crear-categoria/crear-cate
 import { ProductosComponent } from './productos/productos.component';
 import { CrearProductoComponent } from './productos/crear-producto/crear-producto.component';
 import { ProductoComponent } from './productos/producto/producto.component';
+import { EditarProductoComponent } from './productos/editar-producto/editar-producto.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
+    { path: 'productos/producto/editar/:id', component: EditarProductoComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }

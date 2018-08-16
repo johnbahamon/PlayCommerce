@@ -14,7 +14,7 @@
         <div class="col">
             <img [src]="producto.pictures.large[producto.pictures.pp - 1]" alt="">
             <hr>
-            <img *ngFor="let img of producto.pictures.small" [src]="img" alt="">
+            <img class="pointer" *ngFor="let img of producto.pictures.small; let i = index" [src]="img" alt="" (click)="producto.pictures.pp = i + 1">
         </div>
         <div class="col">
             <h3>Caracteristicas</h3>
