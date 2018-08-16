@@ -9,6 +9,7 @@ import { CategoriasComponent } from './categorias/categorias.component';
 import { CrearCategoriaComponent } from './categorias/crear-categoria/crear-categoria.component';
 import { ProductosComponent } from './productos/productos.component';
 import { CrearProductoComponent } from './productos/crear-producto/crear-producto.component';
+import { ProductoComponent } from './productos/producto/producto.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
+    { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }

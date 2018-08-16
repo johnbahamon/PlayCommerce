@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Detalles del Producto</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <button routerLink="/productos" class="btn btn-sm btn-outline-secondary">Productos</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" *ngIf="!cargando">
+    <h3 style="text-align: center">{{ producto.nombre }}</h3>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <img [src]="producto.pictures.large[producto.pictures.pp - 1]" alt="">
+            <hr>
+            <img *ngFor="let img of producto.pictures.small" [src]="img" alt="">
+        </div>
+        <div class="col">
+            <h3>Caracteristicas</h3>
+            <div class="form-group row" *ngFor="let caracteristica of caracteristicas">
+                <label class="col-sm-4 col-form-label">{{ caracteristica }}</label>
+                <div class="col-sm-8">
+                    <input type="text" readonly class="form-control-plaintext" [value]="producto.caracteristicas[caracteristica]">
+                </div>
+            </div>
+            <hr>
+            <h3>Detalles</h3>
+            <div class="form-group row" *ngFor="let detalle of detalles">
+                <label class="col-sm-4 col-form-label">{{ detalle }}</label>
+                <div class="col-sm-8">
+                    <input type="text" readonly class="form-control-plaintext" [value]="producto.detalles[detalle]">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
