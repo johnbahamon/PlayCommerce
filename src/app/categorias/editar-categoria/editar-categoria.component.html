@@ -28,6 +28,8 @@
                     <ng-container *ngIf="detalle[3]">
                         <span *ngFor="let unidad of detalle[3]" class="badge badge-secondary badge-pill">{{ unidad }}</span>
                     </ng-container>
+                    <span class="badge badge-warning pointer" *ngIf="i > 0" (click)="subir(i)">Up</span>
+                    <span class="badge badge-warning pointer" *ngIf="i < detalles.length" (click)="bajar(i)">Dw</span>
                     <span class="badge badge-danger badge-pill pointer" (click)="detalles.splice(i, 1)">x</span>
                 </li>
             </ul>

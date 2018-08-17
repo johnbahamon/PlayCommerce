@@ -132,4 +132,14 @@ export class EditarCategoriaComponent implements OnInit {
 
   }
 
+  subir(indice) {
+    this.detalles.splice(indice - 1, 0, this.detalles[indice]);
+    this.detalles.splice(indice + 1, 1);
+  }
+
+  bajar(indice) {
+    this.detalles.splice(indice + 2, 0, this.detalles[indice]);
+    this.detalles.splice(indice, 1);
+  }
+
 }

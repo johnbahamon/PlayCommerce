@@ -6,3 +6,27 @@
         </div>
     </div>
 </div>
+
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Tipo Id</th>
+            <th scope="col">Id</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Ciudad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let proveedor of proveedores">
+            <td>{{ proveedor.nombre }}</td>
+            <td>{{ proveedor.tipoId }}</td>
+            <td>{{ proveedor.numeroId }}</td>
+            <td>{{ proveedor.telefono }}</td>
+            <td>{{ proveedor.ciudad }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-info" *ngIf="desde > 0" (click)="cambiarDesde(-8)">&lt;&lt; Anterior</button>
+<button type="button" class="btn btn-info" *ngIf="desde + 8 < totalProveedores" (click)="cambiarDesde(+8)">Siguiente &gt;&gt;</button>
