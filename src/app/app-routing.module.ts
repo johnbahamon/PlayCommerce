@@ -1,3 +1,4 @@
+import { ComprasComponent } from './compras/compras.component';
 import { EditarMarcaComponent } from './marcas/editar-marca/editar-marca.component';
 import { EditarCategoriaComponent } from './categorias/editar-categoria/editar-categoria.component';
 import { NgModule } from '@angular/core';
@@ -13,6 +14,7 @@ import { ProductoComponent } from './productos/producto/producto.component';
 import { EditarProductoComponent } from './productos/editar-producto/editar-producto.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CrearProveedorComponent } from './proveedores/crear-proveedor/crear-proveedor.component';
+import { CrearCompraComponent } from './compras/crear-compra/crear-compra.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -27,6 +29,8 @@ const appRoutes: Routes = [
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },
     { path: 'proveedores/crear-proveedor', component: CrearProveedorComponent },
+    { path: 'compras', component: ComprasComponent },
+    { path: 'compras/crear-compra', component: CrearCompraComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];
@@ -35,7 +39,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
+      // { enableTracing: true } // <-- debugging purposes only
     )
   ],
   exports: [

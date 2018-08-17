@@ -46,4 +46,33 @@ export class CategoriasComponent implements OnInit {
 
   }
 
+  crearArbol() {
+    this.apiService.peticionGet('categorias-lista-completa')
+      .subscribe((resultado: any) => {
+        const data = resultado.categorias;
+        // console.log(data);
+        const indexed_nodes = {}, tree_roots = [];
+        for (let k = 0; k < data.length; k += 1) {
+          // console.log(k);
+          data[k].children = [];
+          // console.log(data[k]);
+        }
+        for (let i = 0; i < data.length; i += 1) {
+            // console.log(i);
+            indexed_nodes[data[i]._id] = data[i];
+        }
+        for (let j = 0; j < data.length; j += 1) {
+          // console.log(j);
+          // console.log(data[j]);
+            const parent = data[j].parent;
+            if (parent === undefined) {
+                tree_roots.push(data[j]);
+            } else {
+                indexed_nodes[parent].children.push(data[j]);
+            }
+        }
+        console.log(JSON.stringify(tree_roots, undefined, '\t'));
+      });
+  }
+
 }
