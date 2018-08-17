@@ -19,7 +19,7 @@
         <div class="col">
             <h3>Caracteristicas</h3>
             <div class="form-group row" *ngFor="let caracteristica of caracteristicasCap; let i = index">
-                <ng-template [ngIf]="producto.caracteristicas[caracteristica[1]]">
+                <ng-template [ngIf]="producto.caracteristicas[caracteristica[1]] || producto.caracteristicas[caracteristica[1]] === 0">
                     <label class="col-sm-4 col-form-label">{{ caracteristica[0] }}</label>
                     <div class="col-sm-8">
                         <input type="text" readonly class="form-control-plaintext" [value]="producto.caracteristicas[caracteristica[1]]">
