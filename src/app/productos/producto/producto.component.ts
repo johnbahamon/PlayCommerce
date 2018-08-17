@@ -16,15 +16,15 @@ export class ProductoComponent implements OnInit {
   caracteristicas: string[] = [];
   detalles: string[] = [];
 
-  caracteristicasCap: string[] = [
-    'Modelo',
-    'Precio',
-    'Existencias',
-    'Color',
-    'Referencia',
-    'Garantía',
-    'CMMF',
-    'Código de Barras'
+  caracteristicasCap: any[] = [
+    ['Modelo', 'modelo'],
+    ['Precio', 'precio'],
+    ['Existencias', 'existencias'],
+    ['Color', 'color'],
+    ['Referencia', 'referencia'],
+    ['Garantía', 'garantia'],
+    ['CMMF', 'cmmf'],
+    ['Código de Barras', 'codigo_de_barras']
   ];
 
   detallesCap: string[] = [];

@@ -21,6 +21,8 @@ import { EditarCategoriaComponent } from './categorias/editar-categoria/editar-c
 import { EditarMarcaComponent } from './marcas/editar-marca/editar-marca.component';
 import { ProductoComponent } from './productos/producto/producto.component';
 import { EditarProductoComponent } from './productos/editar-producto/editar-producto.component';
+import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { CrearProveedorComponent } from './proveedores/crear-proveedor/crear-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { EditarProductoComponent } from './productos/editar-producto/editar-prod
     EditarCategoriaComponent,
     EditarMarcaComponent,
     ProductoComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
+    ProveedoresComponent,
+    CrearProveedorComponent
   ],
   imports: [
     BrowserModule,
