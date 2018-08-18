@@ -198,6 +198,8 @@ export class CrearProductoComponent implements OnInit {
     this.apiService.peticionesPut(`productos/${this.productoId}`, pictures )
       .subscribe((data: any) => {
         swal('Bien', 'Actualizada', 'success');
+        this.servicioURL.resetear();
+        this.coleccion = [];
       });
   }
 
