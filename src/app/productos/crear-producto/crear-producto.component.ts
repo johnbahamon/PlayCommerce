@@ -85,12 +85,12 @@ export class CrearProductoComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.apiService.peticionGet('categorias-lista-completa')
+    this.apiService.peticionGet('categorias-lista-completa-populada')
       .subscribe((data: any) => {
         this.categorias = data.categorias;
       });
 
-      this.busquedaService.obtenerCategorias('categorias-lista-completa');
+      this.busquedaService.obtenerCategorias('categorias-lista-completa-populada');
 
       fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
       , distinctUntilChanged()
