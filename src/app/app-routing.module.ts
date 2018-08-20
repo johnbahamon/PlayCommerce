@@ -15,6 +15,7 @@ import { EditarProductoComponent } from './productos/editar-producto/editar-prod
 import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CrearProveedorComponent } from './proveedores/crear-proveedor/crear-proveedor.component';
 import { CrearCompraComponent } from './compras/crear-compra/crear-compra.component';
+import { CrearDesdeComponent } from './productos/crear-desde/crear-desde.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
+    { path: 'productos/crear-desde/:id', component: CrearDesdeComponent },
     { path: 'productos/editar-producto/:id', component: EditarProductoComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },

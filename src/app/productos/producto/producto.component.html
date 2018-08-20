@@ -8,7 +8,12 @@
 </div>
 
 <div class="container" *ngIf="!cargando">
-    <h3 style="text-align: center">{{ producto.nombre }}</h3>
+    <h3 style="text-align: center">
+        {{ producto.nombre }}
+        <span class="badge badge-secondary pointer" routerLink="/productos/crear-desde/{{ producto._id }}">
+            Crear Copia
+        </span>
+    </h3>
     <hr>
     <div class="row">
         <div class="col" *ngIf="producto.pictures.large.length > 0">

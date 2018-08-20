@@ -25,6 +25,7 @@ import { ProveedoresComponent } from './proveedores/proveedores.component';
 import { CrearProveedorComponent } from './proveedores/crear-proveedor/crear-proveedor.component';
 import { ComprasComponent } from './compras/compras.component';
 import { CrearCompraComponent } from './compras/crear-compra/crear-compra.component';
+import { CrearDesdeComponent } from './productos/crear-desde/crear-desde.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CrearCompraComponent } from './compras/crear-compra/crear-compra.compon
     ProveedoresComponent,
     CrearProveedorComponent,
     ComprasComponent,
-    CrearCompraComponent
+    CrearCompraComponent,
+    CrearDesdeComponent
   ],
   imports: [
     BrowserModule,
