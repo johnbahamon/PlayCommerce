@@ -26,7 +26,6 @@ export class CrearProductoComponent implements OnInit {
     ['Color', 'text'],
     ['Referencia', 'text'],
     ['Garantía', 'text'],
-    ['CMMF', 'text'],
     ['Código de Barras', 'number']
   ];
 

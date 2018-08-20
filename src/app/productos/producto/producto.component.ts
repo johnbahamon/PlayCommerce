@@ -23,7 +23,6 @@ export class ProductoComponent implements OnInit {
     ['Color', 'color'],
     ['Referencia', 'referencia'],
     ['Garantía', 'garantia'],
-    ['CMMF', 'cmmf'],
     ['Código de Barras', 'codigo_de_barras']
   ];
 
