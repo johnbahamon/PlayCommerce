@@ -6,3 +6,47 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form>
+                <div class="form-group">
+                    <label>Contenido</label>
+                    <textarea class="form-control" rows="3" [(ngModel)]="texto" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Alineación</label>
+                    <select class="form-control" [(ngModel)]="alineacion" [ngModelOptions]="{standalone: true}">
+                        <option value="center">Centro</option>
+                        <option value="right">Derecha</option>
+                        <option value="left">Izquierda</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="custom-file">
+                        <input #productosImg type="file" class="custom-file-input" (change)="loadImages($event)" accept="image/*">
+                        <label class="custom-file-label">Elegir Archivo...</label>
+                    </div>
+                </div>
+
+                <app-custom-canvas *ngFor="let dato of coleccion" [image]="dato" [carpeta]="this.productoId"></app-custom-canvas>
+
+                <br><br>
+                <div *ngIf="servicioURL.obtenerUrls() && servicioURL.obtenerUrls().length > 0">
+                    <div *ngFor="let url of servicioURL.obtenerUrls(); let i = index">
+                        <p>{{ url }}</p>
+                        <img src="{{ url }}" alt="" width="100px">
+                    </div>
+                </div>
+                <br><br>
+                <div *ngIf="this.servicioURL.urlFirebase.length > 0">
+                    <button type="button" class="btn btn-primary" (click)="agregarDescripcion()" *ngIf="this.coleccion.length === this.servicioURL.urlFirebase.length">Agregar Imagenes al Producto</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
