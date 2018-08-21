@@ -1,3 +1,4 @@
+import { BusquedaProveedoresService } from './../../servicios/busqueda-proveedores.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
 import { BusquedaService } from '../../servicios/busqueda.service';
@@ -7,6 +8,7 @@ import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operato
 import { FuncionesService } from '../../servicios/funciones.service';
 import { NgForm } from '@angular/forms';
 import { UrlFirebaseService } from '../../servicios/url-firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-producto',
@@ -16,6 +18,7 @@ import { UrlFirebaseService } from '../../servicios/url-firebase.service';
 export class CrearProductoComponent implements OnInit {
 
   @ViewChild('inputCategoria') inputCategoria;
+  @ViewChild('inputProveedor') inputProveedor;
 
   productoId: string;
 
@@ -28,6 +31,9 @@ export class CrearProductoComponent implements OnInit {
     ['Garantía', 'text'],
     ['Código de Barras', 'number']
   ];
+
+  cmmfs: any[] = [];
+  cmmfProveedores: any[] = [];
 
   caracteristicasSlug: string[] = [];
 
@@ -44,17 +50,29 @@ export class CrearProductoComponent implements OnInit {
   categorias: any[] = [];
   categoriasFiltradas: any[] = [];
 
+  proveedoresFiltrados: any[] = [];
+
   buscarCategoria: boolean = false;
+
+  proveedorElegido: any = {
+    nombre: ''
+  };
+  cmmf: string;
 
   coleccion = [];
 
   pp: number = 1;
 
+  videoUrls: any[] = [];
+  videoUrl: string;
+
   constructor(
     private apiService: ApiService,
     private busquedaService: BusquedaService,
     private funcionesService: FuncionesService,
-    public servicioURL: UrlFirebaseService
+    public servicioURL: UrlFirebaseService,
+    private busquedaProveedoresService: BusquedaProveedoresService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -125,7 +143,9 @@ export class CrearProductoComponent implements OnInit {
       caracteristicas: {},
       detalles: {},
       pp: this.pp,
-      pictures: this.servicioURL.obtenerUrls()
+      pictures: this.servicioURL.obtenerUrls(),
+      videos: this.videoUrls,
+      cmmf: this.cmmfs
     };
     // Features
     this.caracteristicasSlug.forEach(element => {
@@ -154,6 +174,7 @@ export class CrearProductoComponent implements OnInit {
       .subscribe((data: any) => {
         this.productoId = data.producto._id;
         swal(`Muy bien`, `Producto con Id ${this.productoId} creado`, 'success');
+        this.router.navigate([`/productos/producto/${this.productoId}`]);
       });
   }
 
@@ -200,6 +221,54 @@ export class CrearProductoComponent implements OnInit {
         this.servicioURL.resetear();
         this.coleccion = [];
       });
+  }
+
+  agregarVideo() {
+    if (!this.videoUrl) {
+      swal(':(', 'No has escrito ninguna url', 'error');
+      return;
+    }
+    this.videoUrls.push(this.videoUrl);
+    this.videoUrl = '';
+  }
+
+  cargarProveedores() {
+    if (this.busquedaProveedoresService.listaProveedores = []) {
+      this.busquedaProveedoresService.obtenerProveedores('proveedores-lista-completa');
+    }
+
+    fromEvent(this.inputProveedor.nativeElement, 'keyup').pipe(debounceTime(400)
+      , distinctUntilChanged()
+      , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+      , switchMap(title => this.busquedaProveedoresService.obtenerProveedoresFiltrados(title)))
+      .subscribe((provedores: any) => {
+        this.proveedoresFiltrados = provedores;
+        console.log(this.proveedoresFiltrados);
+      });
+  }
+
+  elegirProveedor(proveedor) {
+    this.proveedorElegido = proveedor;
+    this.inputProveedor.nativeElement.focus();
+    this.inputProveedor.nativeElement.value = '';
+    this.proveedoresFiltrados = [];
+  }
+
+  guardarCmmf() {
+    console.log('Guardar cmmf', this.proveedorElegido.nombre.length, this.cmmf);
+    if (!this.proveedorElegido.nombre || !this.cmmf) {
+      swal(':(', 'Imposible añadir CMMF', 'error');
+    }
+    const cmmfUnit = {
+      proveedor: this.proveedorElegido._id,
+      codigo: this.cmmf,
+    };
+    this.cmmfs.push(cmmfUnit);
+    this.cmmfProveedores.push(this.proveedorElegido.nombre);
+    this.cmmf = '';
+    this.proveedorElegido = {
+      nombre: ''
+    };
   }
 
 }

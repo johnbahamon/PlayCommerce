@@ -21,7 +21,7 @@ export class CrearDesdeComponent implements OnInit {
     ['Existencias', 'existencias', 'number'],
     ['Color', 'color', 'text'],
     ['Referencia', 'referencia', 'text'],
-    ['CMMF', 'cmmf', 'text'],
+    // ['CMMF', 'cmmf', 'text'],
     ['Código de Barras', 'codigo_de_barras', 'text'],
   ];
 

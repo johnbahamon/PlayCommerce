@@ -23,9 +23,11 @@ export class ProductosComponent implements OnInit {
   }
 
   cargarProductos() {
-    this.apiService.peticionGet('productos')
+    this.apiService.peticionGet('productos?desde=' + this.desde)
       .subscribe((data: any) => {
+        console.log(data);
         this.productos = data.productos;
+        this.totalProductos = data.total;
         this.cargando = false;
       });
   }

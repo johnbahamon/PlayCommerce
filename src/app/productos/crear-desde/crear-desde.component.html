@@ -9,6 +9,20 @@
 
 <div class="container" *ngIf="!cargando">
 
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-1">
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <button routerLink="/productos/producto/{{ productoId }}" class="btn btn-sm btn-outline-secondary">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
     <form (keydown.enter)="$event.preventDefault()" (submit)="crearProducto(productForm)" #productForm="ngForm">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Nombre</label>
