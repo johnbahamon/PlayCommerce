@@ -72,8 +72,9 @@
                         <th style="width: 5%">#</th>
                         <th style="width: 31%">Producto</th>
                         <th style="width: 8%">Cant.</th>
-                        <th style="width: 13%">Vr Unit.</th>
-                        <th style="width: 13%">Vr. Venta</th>
+                        <th style="width: 13%">Precio Fijo</th>
+                        <th style="width: 13%">Precio Unitario</th>
+                        <th style="width: 13%">Precio Total</th>
                         <!-- <th style="width: 8%">Desc. 2 (%)</th> -->
                         <!-- <th style="width: 10%">Iva (%)</th>
                         <th style="width: 10%">+Iva</th>
@@ -99,6 +100,9 @@
                         </td>
                         <td>
                             <input class="form-control" (keyup)="actualizar($event)" type="number" min="0" max="100" [(ngModel)]="product.valorVenta" [ngModelOptions]="{standalone: true}">
+                        </td>
+                        <td>
+                            <input class="form-control" (keyup)="actualizar($event)" type="number" readonly min="0" max="100" [(ngModel)]="product.valorTotal" [ngModelOptions]="{standalone: true}" value="{{ this.Math.round(product.qty * product.valorVenta) }}">
                         </td>
                         <!-- <td>
                             <input class="form-control" (keyup)="actualizar($event)" type="number" min="0" max="100" [(ngModel)]="product.discount2" [ngModelOptions]="{standalone: true}">

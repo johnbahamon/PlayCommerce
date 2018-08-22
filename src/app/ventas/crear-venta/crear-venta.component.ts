@@ -103,7 +103,8 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
         productName: producto.nombre,
         qty: 1,
         unitValue: producto.caracteristicas.precio,
-        valorVenta: 0
+        valorVenta: 0,
+        valorTotal: 0
       };
       // console.log(product);
       this.actualizar('e');
