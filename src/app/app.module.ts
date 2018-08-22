@@ -31,6 +31,9 @@ import { AgregarDescripcionComponent } from './productos/editar-producto/agregar
 import { CompraComponent } from './compras/compra/compra.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
+import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,10 @@ import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component'
     AgregarDescripcionComponent,
     CompraComponent,
     VentasComponent,
-    CrearVentaComponent
+    CrearVentaComponent,
+    UsuariosComponent,
+    CrearUsuarioComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

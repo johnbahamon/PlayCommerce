@@ -21,6 +21,8 @@ import { AgregarDescripcionComponent } from './productos/editar-producto/agregar
 import { CompraComponent } from './compras/compra/compra.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -43,6 +45,8 @@ const appRoutes: Routes = [
     { path: 'compras/compra/:id', component: CompraComponent },
     { path: 'ventas', component: VentasComponent },
     { path: 'ventas/crear-venta', component: CrearVentaComponent },
+    { path: 'usuarios', component: UsuariosComponent },
+    { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];

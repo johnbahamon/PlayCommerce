@@ -64,7 +64,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
   }
 
   obtenerSuppliers() {
-    this.busquedaProvedoresService.obtenerProveedores('proveedores-lista-completa');
+    this.busquedaProvedoresService.obtenerProveedores('usuarios-por-tipo-lista-completa?tipo=proveedor');
 
     fromEvent(this.searchSup.nativeElement, 'keyup')
       .pipe(

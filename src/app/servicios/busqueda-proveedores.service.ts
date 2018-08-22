@@ -16,7 +16,7 @@ export class BusquedaProveedoresService {
   obtenerProveedores( url ) {
     this.apiService.peticionGet( url )
       .subscribe( (data: any) => {
-        this.listaProveedores = data.proveedores;
+        this.listaProveedores = data.usuarios;
         console.log('LISTA DE proveedores COMPLETA this.listaproveedores');
         console.log(this.listaProveedores);
         console.log('LISTA DE proveedores COMPLETA this.listaproveedores');
