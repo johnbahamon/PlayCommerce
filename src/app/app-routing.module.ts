@@ -18,6 +18,9 @@ import { CrearCompraComponent } from './compras/crear-compra/crear-compra.compon
 import { CrearDesdeComponent } from './productos/crear-desde/crear-desde.component';
 import { AgregarImagenesComponent } from './productos/editar-producto/agregar-imagenes/agregar-imagenes.component';
 import { AgregarDescripcionComponent } from './productos/editar-producto/agregar-descripcion/agregar-descripcion.component';
+import { CompraComponent } from './compras/compra/compra.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -37,6 +40,9 @@ const appRoutes: Routes = [
     { path: 'proveedores/crear-proveedor', component: CrearProveedorComponent },
     { path: 'compras', component: ComprasComponent },
     { path: 'compras/crear-compra', component: CrearCompraComponent },
+    { path: 'compras/compra/:id', component: CompraComponent },
+    { path: 'ventas', component: VentasComponent },
+    { path: 'ventas/crear-venta', component: CrearVentaComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];

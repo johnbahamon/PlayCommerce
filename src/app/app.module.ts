@@ -28,6 +28,9 @@ import { CrearCompraComponent } from './compras/crear-compra/crear-compra.compon
 import { CrearDesdeComponent } from './productos/crear-desde/crear-desde.component';
 import { AgregarImagenesComponent } from './productos/editar-producto/agregar-imagenes/agregar-imagenes.component';
 import { AgregarDescripcionComponent } from './productos/editar-producto/agregar-descripcion/agregar-descripcion.component';
+import { CompraComponent } from './compras/compra/compra.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +52,10 @@ import { AgregarDescripcionComponent } from './productos/editar-producto/agregar
     CrearCompraComponent,
     CrearDesdeComponent,
     AgregarImagenesComponent,
-    AgregarDescripcionComponent
+    AgregarDescripcionComponent,
+    CompraComponent,
+    VentasComponent,
+    CrearVentaComponent
   ],
   imports: [
     BrowserModule,
