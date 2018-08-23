@@ -169,7 +169,7 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.busqueda.obtenerCategorias('categorias-lista-completa');
+    this.busqueda.obtenerCategorias('categorias-lista-completa-populada');
 
     fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
     , distinctUntilChanged()

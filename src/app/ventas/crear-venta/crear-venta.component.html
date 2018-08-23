@@ -93,16 +93,16 @@
                             </div>
                         </td>
                         <td>
-                            <input class="form-control" (keyup)="actualizar($event)" type="number" min="0" [(ngModel)]="product.qty" [ngModelOptions]="{standalone: true}">
+                            <input class="form-control" (change)="actualizar($event)" type="number" min="0" [(ngModel)]="product.qty" [ngModelOptions]="{standalone: true}">
                         </td>
                         <td>
-                            <input class="form-control" (keyup)="actualizar($event)" type="number" readonly min="0" [(ngModel)]="product.unitValue" [ngModelOptions]="{standalone: true}">
+                            <input class="form-control" (change)="actualizar($event)" type="number" readonly min="0" [(ngModel)]="product.unitValue" [ngModelOptions]="{standalone: true}">
                         </td>
                         <td>
-                            <input class="form-control" (keyup)="actualizar($event)" type="number" min="0" max="100" [(ngModel)]="product.valorVenta" [ngModelOptions]="{standalone: true}">
+                            <input class="form-control" (change)="actualizar($event)" type="number" min="0" max="100" [(ngModel)]="product.valorVenta" [ngModelOptions]="{standalone: true}">
                         </td>
                         <td>
-                            <input class="form-control" (keyup)="actualizar($event)" type="number" readonly min="0" max="100" [(ngModel)]="product.valorTotal" [ngModelOptions]="{standalone: true}" value="{{ this.Math.round(product.qty * product.valorVenta) }}">
+                            <input class="form-control" (change)="actualizar($event)" type="number" readonly min="0" max="100" [(ngModel)]="product.valorTotal" [ngModelOptions]="{standalone: true}" value="{{ this.Math.round(product.qty * product.valorVenta) }}">
                         </td>
                         <!-- <td>
                             <input class="form-control" (keyup)="actualizar($event)" type="number" min="0" max="100" [(ngModel)]="product.discount2" [ngModelOptions]="{standalone: true}">
