@@ -34,6 +34,7 @@ import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component'
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
+import { VentaComponent } from './ventas/venta/venta.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { UsuarioComponent } from './usuarios/usuario/usuario.component';
     CrearVentaComponent,
     UsuariosComponent,
     CrearUsuarioComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    VentaComponent
   ],
   imports: [
     BrowserModule,

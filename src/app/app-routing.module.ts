@@ -23,6 +23,7 @@ import { VentasComponent } from './ventas/ventas.component';
 import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
+import { VentaComponent } from './ventas/venta/venta.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     { path: 'compras/compra/:id', component: CompraComponent },
     { path: 'ventas', component: VentasComponent },
     { path: 'ventas/crear-venta', component: CrearVentaComponent },
+    { path: 'ventas/venta/:id', component: VentaComponent },
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },

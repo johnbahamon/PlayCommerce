@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { BusquedaProductosService } from '../../servicios/busqueda-productos.service';
-import { BusquedaProveedoresService } from '../../servicios/busqueda-proveedores.service';
 import { ApiService } from '../../servicios/api.service';
 
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { BusquedaClientesService } from '../../servicios/busqueda-clientes.service';
 
 @Component({
   selector: 'app-crear-venta',
@@ -22,8 +22,8 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
 
   // suppliers: Array<any>;
 
-  proveedoresEncontrados: Array<any> = [];
-  proveedorElegido: any;
+  clientesEncontrados: Array<any> = [];
+  clienteElegido: any;
 
   productosEncontrados: Array<any> = [];
   productoElegido: any;
@@ -45,12 +45,13 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
   productSearch: string;
 
   // ValoresGuardar
-  supplierDate: any;
-  supplierNumber: string;
+  fechaFactura: any;
+  numeroFactura: any;
+
 
   constructor(
     public busquedaProductosService: BusquedaProductosService,
-    public busquedaProvedoresService: BusquedaProveedoresService,
+    public busquedaClientesService: BusquedaClientesService,
     public _apiService: ApiService
   ) {
     this.Math = Math;
@@ -64,21 +65,21 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
   }
 
   obtenerSuppliers() {
-    this.busquedaProvedoresService.obtenerProveedores('usuarios-por-tipo-lista-completa?tipo=proveedor');
+    this.busquedaClientesService.obtenerClientes('usuarios-por-tipo-lista-completa?tipo=cliente');
 
     fromEvent(this.searchSup.nativeElement, 'keyup')
       .pipe(
         debounceTime(400),
         distinctUntilChanged(),
         map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value),
-        switchMap(title => this.busquedaProvedoresService.obtenerProveedoresFiltrados(title)))
-      .subscribe((suppliers: any) => {
-        this.proveedoresEncontrados = suppliers;
+        switchMap(title => this.busquedaClientesService.obtenerClientesFiltrados(title)))
+      .subscribe((clientes: any) => {
+        this.clientesEncontrados = clientes;
       });
   }
 
-  elegirProveedor( supplier ) {
-    this.proveedorElegido = supplier;
+  elegirCliente( cliente ) {
+    this.clienteElegido = cliente;
   }
 
   obtenerProductos() {
@@ -99,7 +100,7 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
 
     if (!this.idProductosElegidos.includes(producto._id)) {
       const product = {
-        productId: producto._id,
+        productoId: producto._id,
         productName: producto.nombre,
         qty: 1,
         unitValue: producto.caracteristicas.precio,
@@ -111,7 +112,7 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
 
       this.productosElegidos[this.productosElegidos.length] = product;
 
-      this.idProductosElegidos.push(product.productId);
+      this.idProductosElegidos.push(product.productoId);
       this.productSearch = '';
       this.productosEncontrados = [];
       console.log(this.productosElegidos);
@@ -132,68 +133,55 @@ export class CrearVentaComponent implements OnInit, AfterViewInit {
   }
 
   actualizar(e) {
-    let _grossTotal = 0;
-    // let _discounts = 0;
+    let _total = 0;
 
     for ( const product of this.productosElegidos ) {
-      _grossTotal += product.qty * product.valorVenta;
-      // _discounts += ( product.qty * product.unitValue * ( 10000 - (( 100 - product.discount ) * ( 100 - product.discount2 )))) / 10000;
+      _total += product.qty * product.valorVenta;
     }
 
-    this.grossTotal = Math.round(_grossTotal);
-    // this.discounts = Math.round(_discounts);
-    this.subtotal = Math.round(this.grossTotal / 1.19);
-    this.iva = Math.round(this.grossTotal - this.subtotal);
-    // this.total = Math.round(this.subtotal + this.iva);
+    this.total = Math.round(_total);
+    this.subtotal = Math.round(this.total / 1.19);
+    this.iva = Math.round(this.total - this.subtotal);
   }
 
   prueba() {
-    console.log('supplierDate', this.supplierDate);
-    console.log('supplier', this.proveedorElegido._id);
-    console.log('supplierNumber', this.supplierNumber);
+    console.log('Fecha de Factura', this.hoy);
+    console.log('Cliente', this.clienteElegido._id);
 
-    const productsInvoice = [];
+
+    const productosEnVenta = [];
 
     this.productosElegidos.forEach( (element: any) => {
-      const productInvoice = {
-        productId: element.productId,
-        qty: element.qty,
-        unitValue: element.unitValue,
-        discount: element.discount,
-        discount2: element.discount2,
-        tax: element.tax,
-        // tslint:disable-next-line:max-line-length
-        withTax: Math.round( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ),
-        // tslint:disable-next-line:max-line-length
-        withTaxUnit: Math.round(( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ) / element.qty )
+      const productoEnVenta = {
+        productoId: element.productoId,
+        cantidad: element.qty,
+        valorFijo: element.unitValue,
+        valorVenta: element.valorVenta,
+        valorTotal: Math.round(element.qty * element.valorVenta)
       };
-      productsInvoice.push(productInvoice);
+      productosEnVenta.push(productoEnVenta);
     });
 
-    console.log('products', productsInvoice);
-    console.log('grossTotal', this.grossTotal);
-    console.log('discounts', this.discounts);
+    console.log('products', productosEnVenta);
     console.log('subtotal', this.subtotal);
     console.log('iva', this.iva);
     console.log('total', this.total);
 
-    const invoice = {
-      supplierDate: this.supplierDate,
-      supplier: this.proveedorElegido._id,
-      supplierNumber: this.supplierNumber,
-      products: productsInvoice,
-      grossTotal: this.grossTotal,
-      discounts: this.discounts,
+    const venta = {
+      // fechaFactura: this.hoy,
+      clienteId: this.clienteElegido._id,
+      // numeroDeFactura: this.numeroFactura,
+      productos: productosEnVenta,
       subtotal: this.subtotal,
       iva: this.iva,
       total: this.total
     };
 
-    console.log(invoice);
+    console.log(venta);
 
-    this._apiService.peticionesPost('compras', invoice)
+    this._apiService.peticionesPost('ventas', venta)
       .subscribe( (data: any) => {
-        swal('Compra', 'Creada con Exito', 'success');
+        swal('Venta', 'Creada con Exito', 'success');
       });
 
 

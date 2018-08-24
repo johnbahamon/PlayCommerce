@@ -6,3 +6,30 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <table class="table table-striped table-sm">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>#</th>
+                <th>Cliente</th>
+                <th>Total</th>
+                <th>Detalles</th>
+                <!-- <th>Editar</th> -->
+                <!-- <th>Eliminar</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let venta of ventas; let i = index">
+                <td>{{ venta.fechaDeFactura | date }}</td>
+                <td>{{ venta.numeroDeFactura }}</td>
+                <td>{{ venta.clienteId.nombre }}</td>
+                <td>{{ venta.total }}</td>
+                <td><a routerLink="/ventas/venta/{{ venta._id }}" class="badge badge-info">Detalles</a></td>
+                <!-- <td><a routerLink="/" class="badge badge-info">Editar</a></td> -->
+                <!-- <td><span class="badge badge-danger pointer" (click)="deleteventa(venta._id)">Eliminar</span></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>

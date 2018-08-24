@@ -1,3 +1,4 @@
+import { ApiService } from './../servicios/api.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VentasComponent implements OnInit {
 
-  constructor() { }
+  ventas: any[] = [];
+
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit() {
+    this.cargarVentas();
+  }
+
+  cargarVentas() {
+    this.apiService.peticionGet('ventas')
+      .subscribe((data: any) => {
+        this.ventas = data.ventas;
+        console.log(this.ventas);
+      });
   }
 
 }

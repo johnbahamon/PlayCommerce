@@ -31,22 +31,22 @@
                     <div class="col">
                         <label for="">Cliente: </label>
                     </div>
-                    <div class="col" [hidden]="proveedorElegido">
+                    <div class="col" [hidden]="clienteElegido">
                         <input #searchSup type="text" class="form-control" placeholder="Buscar Cliente">
-                        <ul #suggestionsSuppliers [style.display]="proveedoresEncontrados.length > 0 ? 'block' : 'none'">
-                            <li *ngFor="let proveedor of proveedoresEncontrados">
-                                {{ proveedor.nombre }}
-                                <button type="button" class="btn btn-link" (click)="elegirProveedor(proveedor)">Elegir Proveedor</button>
+                        <ul #suggestionsSuppliers [style.display]="clientesEncontrados.length > 0 ? 'block' : 'none'">
+                            <li *ngFor="let cliente of clientesEncontrados">
+                                {{ cliente.numeroId }} - {{ cliente.nombre }}
+                                <button type="button" class="btn btn-link" (click)="elegirCliente(cliente)">Elegir Cliente</button>
                             </li>
                         </ul>
                     </div>
-                    <div class="col" *ngIf="proveedorElegido">
+                    <div class="col" *ngIf="clienteElegido">
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" readonly class="form-control" value="{{ proveedorElegido.nombre }}">
+                                <input type="text" readonly class="form-control" value="{{ clienteElegido.nombre }}">
                             </div>
                             <div class="col-1">
-                                <button type="button" class="btn btn-link" (click)="proveedorElegido = null">X</button>
+                                <button type="button" class="btn btn-link" (click)="clienteElegido = null">X</button>
                             </div>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                         <label for="">Factura: </label>
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Numero de Factura" [(ngModel)]="supplierNumber" name="supplierNumber">
+                        <input type="text" class="form-control" placeholder="Numero de Factura" [(ngModel)]="numeroFactura" name="numeroFactura">
                     </div>
                 </div>
             </div>
@@ -163,7 +163,7 @@
                         <div class="form-group row">
                             <label for="" class="col-6 text-right"><h5>Total</h5></label>
                             <div class="col-5">
-                                <input class="form-control" type="number" readonly [(ngModel)]="grossTotal" [ngModelOptions]="{standalone: true}">
+                                <input class="form-control" type="number" readonly [(ngModel)]="total" [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                     </div>

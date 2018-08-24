@@ -24,6 +24,7 @@ export class CategoriasComponent implements OnInit {
     this.apiService.peticionGet('categorias?desde=' + this.desde)
       .subscribe((data: any) => {
         this.categorias = data.categorias;
+        console.log(this.categorias);
         this.totalCategorias = data.total;
       });
   }
