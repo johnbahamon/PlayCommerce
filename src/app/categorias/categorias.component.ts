@@ -47,36 +47,31 @@ export class CategoriasComponent implements OnInit {
 
   }
 
-  crearArbol() {
-    this.apiService.peticionGet('categorias-lista-completa')
-      .subscribe((resultado: any) => {
-        const data = resultado.categorias;
+  async crearArbol() {
+    const resultado: any =  await this.apiService.peticionGet('categorias-lista-completa-crear-arbol').toPromise();
+
+    const data = resultado.categorias;
+    console.log(data);
         const indexed_nodes = {}, tree_roots = [];
-
         for (let k = 0; k < data.length; k += 1) {
-          data[k].children = [];
+            data[k].children = [];
         }
-
+        console.log(data);
         for (let i = 0; i < data.length; i += 1) {
-          indexed_nodes[data[i]._id] = data[i];
+            indexed_nodes[data[i]._id] = data[i];
         }
-
+        console.log(indexed_nodes);
         for (let j = 0; j < data.length; j += 1) {
-          const parent = data[j].parent;
-          if (parent === undefined) {
-            tree_roots.push(data[j]);
-          } else {
-            indexed_nodes[parent].children.push(data[j]);
-            console.log('### indexed_nodes[parent].children.push(data[j]); ###');
-            console.log('Parent');
+            const parent = data[j].parent;
             console.log(parent);
-            console.log('data[j]');
-            console.log(data[j]);
-            // console.log(JSON.stringify(indexed_nodes[parent], undefined, '\t'));
-          }
+            if (parent === undefined) {
+                tree_roots.push(data[j]);
+            } else {
+                indexed_nodes[parent].children.push(data[j]);
+            }
         }
-        // console.log(JSON.stringify(tree_roots, undefined, '\t'));
-      });
+        console.log(JSON.stringify(tree_roots, undefined, '\t'));
+
   }
 
 }
