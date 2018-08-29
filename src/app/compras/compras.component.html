@@ -16,8 +16,8 @@
                 <th>Proveedor</th>
                 <th>Total</th>
                 <th>Detalles</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <!-- <th>Editar</th>
+                <th>Eliminar</th> -->
             </tr>
         </thead>
         <tbody>
@@ -26,8 +26,8 @@
                 <td>{{ invoice.supplier.nombre }}</td>
                 <td>{{ invoice.total }}</td>
                 <td><a routerLink="/compras/compra/{{ invoice._id }}" class="badge badge-info">Detalles</a></td>
-                <td><a routerLink="/" class="badge badge-info">Editar</a></td>
-                <td><span class="badge badge-danger pointer" (click)="deleteInvoice(invoice._id)">Eliminar</span></td>
+                <!-- <td><a routerLink="/" class="badge badge-info">Editar</a></td>
+                <td><span class="badge badge-danger pointer" (click)="deleteInvoice(invoice._id)">Eliminar</span></td> -->
             </tr>
         </tbody>
     </table>

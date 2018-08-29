@@ -20,7 +20,8 @@
                     
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item pointer" routerLink="/productos/editar-producto/agregar-imagenes/{{ producto._id }}">Agregar Imágenes</a>
+                    <a *ngIf="producto.pictures.small.length === 0" class="dropdown-item pointer" routerLink="/productos/editar-producto/agregar-imagenes/{{ producto._id }}">Agregar Imágenes</a>
+                    <a *ngIf="producto.pictures.small.length > 0" class="dropdown-item pointer" routerLink="/productos/editar-producto/eliminar-imagenes/{{ producto._id }}">Eliminar Imágenes</a>
                     <a class="dropdown-item pointer" routerLink="/productos/editar-producto/agregar-descripcion/{{ producto._id }}">Agregar Descripción</a>
                     <a class="dropdown-item pointer" routerLink="/productos/editar-producto/{{ producto._id }}">Agregar Accesorios</a>
                     <a class="dropdown-item pointer" routerLink="/productos/editar-producto/{{ producto._id }}">Agregar Repuestos</a>

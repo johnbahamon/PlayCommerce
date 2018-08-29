@@ -1,3 +1,4 @@
+import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
 import { CategoriaComponent } from './categorias/categoria/categoria.component';
 import { ComprasComponent } from './compras/compras.component';
 import { EditarMarcaComponent } from './marcas/editar-marca/editar-marca.component';
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
     { path: 'productos/crear-desde/:id', component: CrearDesdeComponent },
     { path: 'productos/editar-producto/:id', component: EditarProductoComponent },
     { path: 'productos/editar-producto/agregar-imagenes/:id', component: AgregarImagenesComponent },
+    { path: 'productos/editar-producto/eliminar-imagenes/:id', component: EliminarImagenesComponent },
     { path: 'productos/editar-producto/agregar-descripcion/:id', component: AgregarDescripcionComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },

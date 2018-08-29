@@ -37,6 +37,7 @@ import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { VentaComponent } from './ventas/venta/venta.component';
 import { MarcaComponent } from './marcas/marca/marca.component';
 import { CategoriaComponent } from './categorias/categoria/categoria.component';
+import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { CategoriaComponent } from './categorias/categoria/categoria.component';
     UsuarioComponent,
     VentaComponent,
     MarcaComponent,
-    CategoriaComponent
+    CategoriaComponent,
+    EliminarImagenesComponent
   ],
   imports: [
     BrowserModule,

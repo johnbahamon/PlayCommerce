@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../servicios/api.service';
 
@@ -7,6 +8,8 @@ import { ApiService } from '../servicios/api.service';
   styleUrls: ['./categorias.component.css']
 })
 export class CategoriasComponent implements OnInit {
+
+  url: string = environment.urlApi;
 
   categorias: any[] = [];
   desde: number = 0;
@@ -50,7 +53,7 @@ export class CategoriasComponent implements OnInit {
   async crearArbol() {
     const resultado: any =  await this.apiService.peticionGet('categorias-lista-completa-crear-arbol').toPromise();
 
-    const data = resultado.categorias;
+        const data = resultado.categorias;
         const indexed_nodes = {}, tree_roots = [];
         for (let k = 0; k < data.length; k += 1) {
             data[k].children = [];

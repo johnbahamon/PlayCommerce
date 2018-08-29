@@ -76,56 +76,6 @@ export class AgregarImagenesComponent implements OnInit {
     this.pp = indice + 1;
   }
 
-  eliminarImagen(imagen: string, indice: number) {
-    console.log(imagen);
-    console.log(imagen.includes('thumb%40100_'));
-    const ref = imagen.split('bigsaledev.appspot.com/o/')[1].split('?alt=')[0];
-    const newRef = ref.replace('%2F', '/');
-    const newRef2 = newRef.replace('%40', '@');
-    console.log(ref);
-    console.log(newRef);
-    console.log(newRef2);
-    const refArray = [ newRef2, newRef2.replace('thumb@100_', ''), newRef2.replace('thumb@100_', 'thumb@300_') ];
 
-    refArray.forEach((element) => {
-      const desertRef = this.storage.ref(element);
-      desertRef.delete();
-    });
-
-    this.producto.pictures.large.splice(indice, 1);
-    this.producto.pictures.small.splice(indice, 1);
-    this.producto.pictures.medium.splice(indice, 1);
-
-    // // Create a reference to the file to delete
-    // const desertRef = this.storage.ref(newRef2);
-    // // Delete the file
-    // desertRef.delete();
-
-    const pictures = {
-      pp: 1,
-      large: this.producto.pictures.large,
-      medium: this.producto.pictures.medium,
-      small: this.producto.pictures.small
-    };
-
-    if (indice >= this.producto.pictures.pp || this.producto.pictures.pp === 1 ) {
-      console.log('primera condición');
-      console.log(indice, this.producto.pictures.pp);
-      pictures.pp = this.producto.pictures.pp;
-    } else {
-      console.log(indice, this.producto.pictures.pp);
-      console.log('segunda condición');
-      pictures.pp = this.producto.pictures.pp - 1;
-    }
-
-    console.log(pictures);
-
-    this.apiService.peticionesPut(`productos/${this.productoId}`, pictures )
-      .subscribe((data: any) => {
-        swal('Bien', 'Actualizada', 'success');
-        this.servicioURL.resetear();
-        this.coleccion = [];
-      });
-  }
 
 }

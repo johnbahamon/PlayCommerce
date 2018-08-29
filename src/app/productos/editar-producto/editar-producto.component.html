@@ -2,7 +2,7 @@
     <h1 class="h2">Editar Producto</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
-            <button routerLink="/productos" class="btn btn-sm btn-outline-secondary">Productos</button>
+            <button *ngIf="productoId" routerLink="/productos/producto/{{productoId}}" class="btn btn-sm btn-outline-secondary">Volver</button>
         </div>
     </div>
 </div>
