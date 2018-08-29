@@ -51,16 +51,13 @@ export class CategoriasComponent implements OnInit {
     const resultado: any =  await this.apiService.peticionGet('categorias-lista-completa-crear-arbol').toPromise();
 
     const data = resultado.categorias;
-    console.log(data);
         const indexed_nodes = {}, tree_roots = [];
         for (let k = 0; k < data.length; k += 1) {
             data[k].children = [];
         }
-        console.log(data);
         for (let i = 0; i < data.length; i += 1) {
             indexed_nodes[data[i]._id] = data[i];
         }
-        console.log(indexed_nodes);
         for (let j = 0; j < data.length; j += 1) {
             const parent = data[j].parent;
             console.log(parent);
