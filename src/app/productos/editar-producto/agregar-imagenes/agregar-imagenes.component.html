@@ -15,6 +15,17 @@
     </div>
 </div>
 
+<div *ngIf="producto">
+    <div *ngIf="producto.pictures">
+        <div *ngIf="producto.pictures.small.length > 0">
+            <div *ngFor="let imagen of producto.pictures.small; let i = index">
+                <img [src]="imagen">
+                <button type="button" class="btn btn-danger" (click)="eliminarImagen(imagen, i)">Borrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <app-custom-canvas *ngFor="let dato of coleccion" [image]="dato" [carpeta]="this.productoId"></app-custom-canvas>
 
 <br><br>

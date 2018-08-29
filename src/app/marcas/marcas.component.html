@@ -14,6 +14,7 @@
         <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Slug</th>
+            <th scope="col">Ver más</th>
             <th scope="col">Editar</th>
         </tr>
     </thead>
@@ -21,6 +22,7 @@
         <tr *ngFor="let marca of marcas">
             <td>{{ marca.nombre }}</td>
             <td>{{ marca.slug }}</td>
+            <td><span class="badge badge-secondary pointer" routerLink="/marcas/marca/{{ marca._id }}">Ver más</span></td>
             <td><span class="badge badge-secondary pointer" routerLink="/marcas/editar-marca/{{ marca._id }}">Editar</span></td>
         </tr>
     </tbody>

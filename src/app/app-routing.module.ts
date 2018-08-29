@@ -1,3 +1,4 @@
+import { CategoriaComponent } from './categorias/categoria/categoria.component';
 import { ComprasComponent } from './compras/compras.component';
 import { EditarMarcaComponent } from './marcas/editar-marca/editar-marca.component';
 import { EditarCategoriaComponent } from './categorias/editar-categoria/editar-categoria.component';
@@ -24,12 +25,15 @@ import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component'
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
 import { VentaComponent } from './ventas/venta/venta.component';
+import { MarcaComponent } from './marcas/marca/marca.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
+    { path: 'marcas/marca/:id', component: MarcaComponent },
     { path: 'marcas/crear-marca', component: CrearMarcaComponent },
     { path: 'marcas/editar-marca/:id', component: EditarMarcaComponent },
     { path: 'categorias', component: CategoriasComponent },
+    { path: 'categorias/categoria/:id', component: CategoriaComponent },
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },

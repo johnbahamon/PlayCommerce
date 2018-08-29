@@ -21,7 +21,7 @@ export class CategoriasComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.apiService.peticionGet('categorias?desde=' + this.desde)
+    this.apiService.peticionGet('categorias-paginadas?desde=' + this.desde)
       .subscribe((data: any) => {
         this.categorias = data.categorias;
         console.log(this.categorias);
@@ -51,28 +51,31 @@ export class CategoriasComponent implements OnInit {
     this.apiService.peticionGet('categorias-lista-completa')
       .subscribe((resultado: any) => {
         const data = resultado.categorias;
-        // console.log(data);
         const indexed_nodes = {}, tree_roots = [];
+
         for (let k = 0; k < data.length; k += 1) {
-          // console.log(k);
           data[k].children = [];
-          // console.log(data[k]);
         }
+
         for (let i = 0; i < data.length; i += 1) {
-            // console.log(i);
-            indexed_nodes[data[i]._id] = data[i];
+          indexed_nodes[data[i]._id] = data[i];
         }
+
         for (let j = 0; j < data.length; j += 1) {
-          // console.log(j);
-          // console.log(data[j]);
-            const parent = data[j].parent;
-            if (parent === undefined) {
-                tree_roots.push(data[j]);
-            } else {
-                indexed_nodes[parent].children.push(data[j]);
-            }
+          const parent = data[j].parent;
+          if (parent === undefined) {
+            tree_roots.push(data[j]);
+          } else {
+            indexed_nodes[parent].children.push(data[j]);
+            console.log('### indexed_nodes[parent].children.push(data[j]); ###');
+            console.log('Parent');
+            console.log(parent);
+            console.log('data[j]');
+            console.log(data[j]);
+            // console.log(JSON.stringify(indexed_nodes[parent], undefined, '\t'));
+          }
         }
-        console.log(JSON.stringify(tree_roots, undefined, '\t'));
+        // console.log(JSON.stringify(tree_roots, undefined, '\t'));
       });
   }
 

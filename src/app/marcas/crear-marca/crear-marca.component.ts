@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FuncionesService } from '../../servicios/funciones.service';
-import { BusquedaService } from './../../servicios/busqueda.service';
+import { BusquedaService } from '../../servicios/busqueda-categorias.service';
 import { ApiService } from '../../servicios/api.service';
 
 import { fromEvent } from 'rxjs';
@@ -70,14 +70,14 @@ export class CrearMarcaComponent implements OnInit {
   }
 
   cargarCategorias() {
-    if (this.busquedaService.listaCategorias.length === 0 ) {
-      this.busquedaService.obtenerCategorias('categorias');
+    if (!this.busquedaService.busquedaCargada) {
+      this.busquedaService.obtenerCategorias('categorias-lista-completa');
     }
 
     fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
     , distinctUntilChanged()
     , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
-    , switchMap(title => this.busquedaService.obtenerCategoriasFiltradasPrincipales(title)))
+    , switchMap(title => this.busquedaService.obtenerCategoriasFiltradas(title)))
     .subscribe((categories: any) => {
       this.categorias = categories;
     });

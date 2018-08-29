@@ -7,28 +7,31 @@
     </div>
 </div>
 
-<div>
-    <div class="input-group mb-3">
-        <input #inputCategoria type="text" class="form-control" placeholder="Buscar Categoria">
-    </div>
-    <ul [style.display]="categorias.length> 0 ? 'block' : 'none'">
-        <li *ngFor="let categoria of categorias">
-            <span>{{ categoria.parent ? categoria.parent.nombre : ''}} - {{ categoria.nombre }}</span>
-            <button type="button" class="btn btn-link" (click)="elegirCategoria(categoria._id)">Elegir Categoría</button>
-        </li>
-    </ul>
-</div>
-
-<div class="row">
-    <div class="col">
-        <ul class="list-group">
-            <li class="list-group-item" *ngFor="let categoria of categoriasElegidas; let i = index">
-                {{ categoria.nombre }}
-                <span class="badge badge-danger" (click)="elegirCategoria(i)">x</span>
+<div class="container">
+    <h3 *ngIf="marca">{{ marca.nombre }}</h3>
+    <div>
+        <div class="input-group mb-3">
+            <input #inputCategoria type="text" class="form-control" placeholder="Buscar Categoria">
+        </div>
+        <ul [style.display]="categorias.length> 0 ? 'block' : 'none'">
+            <li *ngFor="let categoria of categorias">
+                <span>{{ categoria.parent ? categoria.parent.nombre : ''}} - <strong>{{ categoria.nombre }}</strong></span>
+                <button type="button" class="btn btn-link" (click)="elegirCategoria(categoria)">Elegir Categoría</button>
             </li>
         </ul>
     </div>
-    <div class="col">
-        <button type="button" class="btn btn-primary" (click)="editarMarca()">Actualizar</button>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let categoria of categoriasElegidas; let i = index">
+                    {{ categoria }}
+                    <span class="badge badge-danger pointer" (click)="quitarCategoria(i)">x</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="editarMarca()">Actualizar</button>
+        </div>
     </div>
 </div>

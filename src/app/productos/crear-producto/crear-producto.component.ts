@@ -1,7 +1,7 @@
 import { BusquedaProveedoresService } from './../../servicios/busqueda-proveedores.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
-import { BusquedaService } from '../../servicios/busqueda.service';
+import { BusquedaService } from '../../servicios/busqueda-categorias.service';
 
 import { fromEvent } from 'rxjs';
 import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
@@ -44,6 +44,7 @@ export class CrearProductoComponent implements OnInit {
     nombre: ''
   };
   categoriaParent: any;
+  categoriaParentConDetalles: any;
 
 
   marcas: any[] = [];
@@ -102,17 +103,17 @@ export class CrearProductoComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.apiService.peticionGet('categorias-lista-completa-populada')
+    this.apiService.peticionGet('categorias-lista-completa')
       .subscribe((data: any) => {
         this.categorias = data.categorias;
       });
 
-      this.busquedaService.obtenerCategorias('categorias-lista-completa-populada');
+      this.busquedaService.obtenerCategorias('categorias-lista-completa');
 
       fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
       , distinctUntilChanged()
       , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
-      , switchMap(title => this.busquedaService.obtenerCategoriasFiltradasAdecuadas(title)))
+      , switchMap(title => this.busquedaService.obtenerCategoriasFiltradas(title)))
       .subscribe((categories: any) => {
         this.categoriasFiltradas = categories;
         console.log(this.categoriasFiltradas);
@@ -121,9 +122,14 @@ export class CrearProductoComponent implements OnInit {
   }
 
   elegirCategoria(categoria) {
+    console.log(categoria);
     this.categoria = categoria;
     this.buscarCategoria = false;
     this.categoriaParent = this.categorias.find( element => element._id === this.categoria.parent._id);
+    this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`)
+      .subscribe((data: any) => {
+        this.categoriaParentConDetalles = data.categoria;
+      });
   }
 
   buscarCategorias() {
@@ -153,7 +159,7 @@ export class CrearProductoComponent implements OnInit {
     });
 
     // specifics
-    this.categoriaParent.detalles.forEach(element => {
+    this.categoriaParentConDetalles.detalles.forEach(element => {
       if (element[3]) {
         const elementA = element[1] + '_A';
         const elementB = element[1] + '_B';
@@ -234,7 +240,7 @@ export class CrearProductoComponent implements OnInit {
 
   cargarProveedores() {
     if (this.busquedaProveedoresService.listaProveedores = []) {
-      this.busquedaProveedoresService.obtenerProveedores('proveedores-lista-completa');
+      this.busquedaProveedoresService.obtenerProveedores('usuarios-por-tipo-lista-completa?tipo=proveedor');
     }
 
     fromEvent(this.inputProveedor.nativeElement, 'keyup').pipe(debounceTime(400)

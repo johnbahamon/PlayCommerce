@@ -35,6 +35,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { VentaComponent } from './ventas/venta/venta.component';
+import { MarcaComponent } from './marcas/marca/marca.component';
+import { CategoriaComponent } from './categorias/categoria/categoria.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import { VentaComponent } from './ventas/venta/venta.component';
     UsuariosComponent,
     CrearUsuarioComponent,
     UsuarioComponent,
-    VentaComponent
+    VentaComponent,
+    MarcaComponent,
+    CategoriaComponent
   ],
   imports: [
     BrowserModule,

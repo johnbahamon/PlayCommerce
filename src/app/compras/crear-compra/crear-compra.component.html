@@ -38,7 +38,7 @@
                         <label for="">Proveedor: </label>
                     </div>
                     <div class="col" [hidden]="proveedorElegido">
-                        <input #searchSup type="text" class="form-control" placeholder="Buscar Proveedor">
+                        <input type="number" #searchSup class="form-control" placeholder="Buscar Nombre Proveedor">
                         <ul #suggestionsSuppliers [style.display]="proveedoresEncontrados.length > 0 ? 'block' : 'none'">
                             <li *ngFor="let proveedor of proveedoresEncontrados">
                                 {{ proveedor.nombre }}

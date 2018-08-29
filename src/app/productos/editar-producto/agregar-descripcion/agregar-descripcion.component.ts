@@ -81,7 +81,7 @@ export class AgregarDescripcionComponent implements OnInit {
     this.coleccion = event.target.files;
     console.log(this.coleccion);
     console.log(event.target.files[0].name);
-    if (event.target.files[0].name.indexOf('descripcion@') === 0) {
+    if (event.target.files[0].name.startsWith('descripcion@')) {
       const imageName = event.target.files[0].name;
       const file = event.target.files[0];
       const filePath = `${this.productoId}/${imageName}`;

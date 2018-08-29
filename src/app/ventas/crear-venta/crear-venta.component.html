@@ -32,7 +32,7 @@
                         <label for="">Cliente: </label>
                     </div>
                     <div class="col" [hidden]="clienteElegido">
-                        <input #searchSup type="text" class="form-control" placeholder="Buscar Cliente">
+                        <input #searchSup type="text" class="form-control" placeholder="Buscar Número Identificación">
                         <ul #suggestionsSuppliers [style.display]="clientesEncontrados.length > 0 ? 'block' : 'none'">
                             <li *ngFor="let cliente of clientesEncontrados">
                                 {{ cliente.numeroId }} - {{ cliente.nombre }}

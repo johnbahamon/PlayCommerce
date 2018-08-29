@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class BusquedaService {
 
+  busquedaCargada: boolean = false;
   listaCategorias: any[] = [];
   listaCategoriasAdecuadas: any[] = [];
   listaCategoriasPrincipales: any[] = [];
@@ -17,6 +18,7 @@ export class BusquedaService {
     this._apiService.peticionGet( url )
       .subscribe( (data: any) => {
         this.listaCategorias = data.categorias;
+        this.busquedaCargada = true;
         console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias');
         console.log(this.listaCategorias);
         console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias');

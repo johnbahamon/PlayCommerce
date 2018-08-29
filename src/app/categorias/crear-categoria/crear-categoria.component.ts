@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FuncionesService } from './../../servicios/funciones.service';
-import { BusquedaService } from '../../servicios/busqueda.service';
+import { BusquedaService } from '../../servicios/busqueda-categorias.service';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import { ApiService } from '../../servicios/api.service';
@@ -40,7 +41,8 @@ export class CrearCategoriaComponent implements OnInit {
 
   constructor(  private funcionesService: FuncionesService,
                 private busqueda: BusquedaService,
-                private apiService: ApiService
+                private apiService: ApiService,
+                private router: Router
               ) { }
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class CrearCategoriaComponent implements OnInit {
       .subscribe(
         (data: any) => {
           swal(`${data.categoria.nombre}`, 'Categoría creada exitosamente', 'success');
+          this.router.navigate([`/categorias/categoria/${data.categoria._id}`]);
         },
         (err: any) => {
           if (err.status === 0) {
@@ -169,7 +172,9 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.busqueda.obtenerCategorias('categorias-lista-completa-populada');
+    if (!this.busqueda.busquedaCargada) {
+      this.busqueda.obtenerCategorias('categorias-lista-completa');
+    }
 
     fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
     , distinctUntilChanged()
