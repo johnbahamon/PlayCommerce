@@ -63,9 +63,30 @@
         <div class="col" *ngIf="producto.descripcion.length > 0">
             <h4>Descripción</h4>
             <div *ngFor="let desc of producto.descripcion">
-                <p>{{ desc.texto }}</p>
-                <img [src]="desc.imagen" alt="">
+                <div class="row" *ngIf="desc.alineacion === 'left'">
+                    <div class="col">
+                        <img [src]="desc.imagen" alt="">
+                    </div>
+                    <div class="col">
+                        <p>{{ desc.texto }}</p>
+                    </div>
+                </div>
+                <div class="row" *ngIf="desc.alineacion === 'right'">
+                    <div class="col">
+                        <p>{{ desc.texto }}</p>
+                    </div>
+                    <div class="col">
+                        <img [src]="desc.imagen" alt="">
+                    </div>
+                </div>
+                <div class="row" *ngIf="desc.alineacion === 'center'">
+                    <div class="col">
+                        <p>{{ desc.texto }}</p>
+                        <img [src]="desc.imagen" alt="">
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

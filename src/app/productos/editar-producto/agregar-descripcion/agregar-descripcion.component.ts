@@ -69,6 +69,9 @@ export class AgregarDescripcionComponent implements OnInit {
   }
 
   grabarEnDb() {
+    console.log('this.descripcionPoducto');
+    console.log(this.descripcionPoducto);
+    console.log('this.descripcionPoducto');
     this.apiService.peticionesPut('productos/agregar-descripcion/' + this.productoId, this.descripcionPoducto)
       .subscribe((data: any) => {
         swal('Muy Bien', 'Descripción agregada con éxito', 'success');
