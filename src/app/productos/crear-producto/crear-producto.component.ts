@@ -67,6 +67,8 @@ export class CrearProductoComponent implements OnInit {
   videoUrls: any[] = [];
   videoUrl: string;
 
+  existeParent: boolean = false;
+
   constructor(
     private apiService: ApiService,
     private busquedaService: BusquedaService,
@@ -121,15 +123,34 @@ export class CrearProductoComponent implements OnInit {
 
   }
 
-  elegirCategoria(categoria) {
-    console.log(categoria);
+  async elegirCategoria(categoria) {
+    console.log(`Categoría En : ${categoria.nombre}`);
     this.categoria = categoria;
     this.buscarCategoria = false;
     this.categoriaParent = this.categorias.find( element => element._id === this.categoria.parent._id);
-    this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`)
+
+    do {
+      const data: any = await this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`).toPromise();
+
+          if (data.categoria.detalles.length > 0) {
+            this.existeParent = true;
+          } else {
+            this.categoriaParent = data.categoria;
+          }
+
+    } while (!this.existeParent);
+
+    console.log(`Categoría Elegida: ${this.categoria.nombre}`);
+    console.log(`Categoría Padre Elegida: ${this.categoriaParent.nombre}`);
+
+    this.apiService.peticionGet(`categorias/${this.categoria._id}`)
       .subscribe((data: any) => {
         this.categoriaParentConDetalles = data.categoria;
       });
+  }
+
+  encontrarParent() {
+
   }
 
   buscarCategorias() {
