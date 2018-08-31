@@ -95,6 +95,11 @@ export class CrearCategoriaComponent implements OnInit {
 
   elegirCategoria(categoria) {
     this.parent = categoria;
+    console.log(categoria);
+    this.apiService.peticionGet(`categorias/${categoria._id}`)
+      .subscribe((data: any) => {
+        this.detallesGlobal = data.categoria.detalles;
+      });
     this.buscarParent = false;
   }
 
