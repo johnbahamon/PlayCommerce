@@ -41,7 +41,7 @@ export class EliminarImagenesComponent implements OnInit {
   eliminarImagen(imagen: string, indice: number) {
     console.log(imagen);
     console.log(imagen.includes('thumb%40100_'));
-    const ref = imagen.split('bigsaledev.appspot.com/o/')[1].split('?alt=')[0];
+    const ref = imagen.split('appspot.com/o/')[1].split('?alt=')[0];
     const newRef = ref.replace('%2F', '/');
     const newRef2 = newRef.replace('%40', '@');
     console.log(ref);
