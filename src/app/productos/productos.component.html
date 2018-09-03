@@ -11,7 +11,8 @@
     <thead class="thead-light">
         <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Slug</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Referencia</th>
             <th scope="col">Ver</th>
             <!-- <th scope="col">Editar</th> -->
         </tr>
@@ -19,7 +20,8 @@
     <tbody>
         <tr *ngFor="let producto of productos">
             <td>{{ producto.nombre }}</td>
-            <td>{{ producto.slug }}</td>
+            <td>{{ producto.caracteristicas.modelo }}</td>
+            <td>{{ producto.caracteristicas.referencia }}</td>
             <td><span class="badge badge-secondary pointer" routerLink="/productos/producto/{{ producto._id }}">Ver</span></td>
             <!-- <td><span class="badge badge-secondary pointer" routerLink="/productos/editar-producto/{{ producto._id }}">Editar</span></td> -->
         </tr>
