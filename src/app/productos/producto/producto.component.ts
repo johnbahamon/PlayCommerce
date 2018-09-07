@@ -45,7 +45,7 @@ export class ProductoComponent implements OnInit {
         this.cargando = false;
         this.caracteristicas = Object.keys(this.producto.caracteristicas);
         this.detalles = Object.keys(this.producto.detalles);
-        this.detallesCap = this.producto.categoria_padre.detalles.map(element => element[0]);
+        this.detallesCap = this.producto.categoria.detalles.map(element => element[0]);
         console.log(this.producto);
         console.log(this.detallesCap);
       });
