@@ -1,3 +1,4 @@
+import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
 import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
 import { CategoriaComponent } from './categorias/categoria/categoria.component';
 import { ComprasComponent } from './compras/compras.component';
@@ -34,6 +35,7 @@ const appRoutes: Routes = [
     { path: 'marcas/crear-marca', component: CrearMarcaComponent },
     { path: 'marcas/editar-marca/:id', component: EditarMarcaComponent },
     { path: 'categorias', component: CategoriasComponent },
+    { path: 'categorias/ver-arbol-2', component: VerArbolDosComponent },
     { path: 'categorias/categoria/:id', component: CategoriaComponent },
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },

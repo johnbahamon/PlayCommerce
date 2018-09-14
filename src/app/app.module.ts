@@ -38,6 +38,7 @@ import { VentaComponent } from './ventas/venta/venta.component';
 import { MarcaComponent } from './marcas/marca/marca.component';
 import { CategoriaComponent } from './categorias/categoria/categoria.component';
 import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
+import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-
     VentaComponent,
     MarcaComponent,
     CategoriaComponent,
-    EliminarImagenesComponent
+    EliminarImagenesComponent,
+    VerArbolDosComponent
   ],
   imports: [
     BrowserModule,
