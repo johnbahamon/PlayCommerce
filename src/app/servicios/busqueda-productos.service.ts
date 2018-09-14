@@ -29,7 +29,8 @@ export class BusquedaProductosService {
 
   filtrarProductos(name) {
     console.log('FUNCION NORMAL # 2');
-    return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
+    // return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
+    return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.referencia)) : [];
   }
 
 }

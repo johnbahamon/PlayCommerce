@@ -127,7 +127,7 @@
                 <input #searchProd type="text" class="form-control" placeholder="Buscar Productos" [(ngModel)]="productSearch" [ngModelOptions]="{standalone: true}">
                 <ul #suggestionsProducts [style.display]=" productosEncontrados.length> 0 ? 'block' : 'none'">
                     <li *ngFor="let producto of productosEncontrados">
-                        {{ producto.nombre }}
+                      {{ producto.caracteristicas.referencia }} - {{ producto.nombre }}
                         <button type="button" class="btn btn-link" (click)="elegirProducto(producto)">Elegir Producto</button>
                     </li>
                 </ul>

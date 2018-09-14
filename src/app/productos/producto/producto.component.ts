@@ -1,14 +1,14 @@
 import { FuncionesService } from './../../servicios/funciones.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
   styleUrls: ['./producto.component.css']
 })
-export class ProductoComponent implements OnInit {
+export class ProductoComponent implements OnInit, OnDestroy {
 
   productoId: string;
   producto: any;
@@ -31,11 +31,20 @@ export class ProductoComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private funcionesService: FuncionesService
-  ) { }
+    private funcionesService: FuncionesService,
+    private router: Router
+  ) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+  };
+  }
 
   ngOnInit() {
     this.encontrarId();
+  }
+
+  ngOnDestroy() {
+    this.productoId = '';
   }
 
   cargarProducto() {
@@ -54,6 +63,10 @@ export class ProductoComponent implements OnInit {
   encontrarId() {
     this.productoId = this.route.snapshot.params.id;
     this.cargarProducto();
+  }
+
+  irAProductoTest() {
+    this.router.navigate(['productos', 'producto', 'gdgdfg']);
   }
 
 }
