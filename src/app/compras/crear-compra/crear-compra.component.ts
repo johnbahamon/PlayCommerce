@@ -45,7 +45,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
   productSearch: string;
 
   // ValoresGuardar
-  supplierDate: any;
+  supplierDate: Date;
   supplierNumber: string;
 
   constructor(
@@ -179,8 +179,10 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     console.log('iva', this.iva);
     console.log('total', this.total);
 
+
     const invoice = {
       supplierDate: this.supplierDate,
+      // supplierDate: this.supplierDate.getTime() + 1000 * 60 * 60 * 12,
       supplier: this.proveedorElegido._id,
       supplierNumber: this.supplierNumber,
       products: productsInvoice,

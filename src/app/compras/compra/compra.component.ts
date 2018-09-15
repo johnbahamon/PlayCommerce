@@ -29,6 +29,7 @@ export class CompraComponent implements OnInit {
     this._apiService.peticionGet( this.url )
       .subscribe( (data: any) => {
         this.invoice = data.invoice;
+        console.log(this.invoice);
       });
   }
 

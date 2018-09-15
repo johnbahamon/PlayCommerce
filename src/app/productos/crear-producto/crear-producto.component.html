@@ -92,11 +92,11 @@
                             <input type="text" class="form-control" [name]="caracteristica[1]" [placeholder]="caracteristica[0]" [(ngModel)]="this[caracteristica[1]]">
 
                         </ng-template>
-                        <ng-template [ngIf]="caracteristica[2] && caracteristica[3] === null">
+                        <ng-template [ngIf]="caracteristica[2] && caracteristica[3] === null && !caracteristica[4]">
 
                             <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]">
-                            <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
-                        </select>
+                                <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
+                            </select>
 
                         </ng-template>
                         <ng-template [ngIf]="caracteristica[2] === null && caracteristica[3]">
@@ -106,6 +106,14 @@
                                 <option *ngFor="let unidad of caracteristica[3]" [value]="unidad">{{ unidad }}</option>
                             </select>
                             <!-- </div> -->
+
+                        </ng-template>
+
+                        <ng-template [ngIf]="caracteristica[2] && caracteristica[3] === null && caracteristica[4]">
+
+                            <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]" multiple>
+                                <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
+                            </select>
 
                         </ng-template>
                     </div>

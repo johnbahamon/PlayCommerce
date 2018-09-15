@@ -39,6 +39,8 @@ export class CrearCategoriaComponent implements OnInit {
 
   buscarParent: boolean = false;
 
+  opcionesMultiples: boolean = false;
+
   constructor(  private funcionesService: FuncionesService,
                 private busqueda: BusquedaService,
                 private apiService: ApiService,
@@ -132,6 +134,9 @@ export class CrearCategoriaComponent implements OnInit {
   }
 
   agregarDetalleACategoria() {
+    console.log('this.opcionesMultiples');
+    console.log(this.opcionesMultiples);
+    console.log('this.opcionesMultiples');
     if (!this.detalle) {
       swal(':(', 'No escribiste título al detalle', 'warning');
       this.agregarDetalle = false;
@@ -158,11 +163,13 @@ export class CrearCategoriaComponent implements OnInit {
     if (this.agregarOpciones && this.opcionesParcial.length > 0) {
       detalleParcial[2] = this.opcionesParcial;
       detalleParcial[3] = null;
+      detalleParcial[4] = this.opcionesMultiples;
     }
 
     if (this.agregarUnidades && this.unidadesParcial.length > 0) {
       detalleParcial[2] = null;
       detalleParcial[3] = this.unidadesParcial;
+      detalleParcial[4] = false;
     }
 
     this.detallesGlobal.push(detalleParcial);
@@ -174,6 +181,7 @@ export class CrearCategoriaComponent implements OnInit {
     this.mostrarBotones = true;
     this.agregarOpciones = false;
     this.agregarUnidades = false;
+    this.opcionesMultiples = false;
   }
 
   cargarCategorias() {
