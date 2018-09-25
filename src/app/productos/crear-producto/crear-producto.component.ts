@@ -126,19 +126,22 @@ export class CrearProductoComponent implements OnInit {
   async elegirCategoria(categoria) {
     console.log(`Categoría En : ${categoria.nombre}`);
     this.categoria = categoria;
+    console.log('####this.categoria');
+    console.log(this.categoria);
+    console.log('####this.categoria');
     this.buscarCategoria = false;
     this.categoriaParent = this.categorias.find( element => element._id === this.categoria.parent._id);
 
-    do {
-      const data: any = await this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`).toPromise();
+    // do {
+    //   const data: any = await this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`).toPromise();
 
-          if (data.categoria.detalles.length > 0) {
-            this.existeParent = true;
-          } else {
-            this.categoriaParent = data.categoria;
-          }
+    //       if (data.categoria.detalles.length > 0) {
+    //         this.existeParent = true;
+    //       } else {
+    //         this.categoriaParent = data.categoria;
+    //       }
 
-    } while (!this.existeParent);
+    // } while (!this.existeParent);
 
     console.log(`Categoría Elegida: ${this.categoria.nombre}`);
     console.log(`Categoría Padre Elegida: ${this.categoriaParent.nombre}`);
