@@ -184,13 +184,13 @@ export class CrearProductoComponent implements OnInit {
 
     // specifics
     this.categoriaParentConDetalles.detalles.forEach(element => {
-      if (element[3]) {
-        const elementA = element[1] + '_A';
-        const elementB = element[1] + '_B';
-        producto.detalles[element[1]] = formValues[elementA] + ' ' + formValues[elementB];
-      } else {
+      // if (element[3]) {
+      //   const elementA = element[1] + '_A';
+      //   const elementB = element[1] + '_B';
+      //   producto.detalles[element[1]] = formValues[elementA] + ' ' + formValues[elementB];
+      // } else {
         producto.detalles[element[1]] = formValues[element[1]];
-      }
+      // }
     });
 
 

@@ -40,6 +40,7 @@ export class CrearCategoriaComponent implements OnInit {
   buscarParent: boolean = false;
 
   opcionesMultiples: boolean = false;
+  filtroImportante: boolean = true;
 
   constructor(  private funcionesService: FuncionesService,
                 private busqueda: BusquedaService,
@@ -162,7 +163,7 @@ export class CrearCategoriaComponent implements OnInit {
 
     if (this.agregarOpciones && this.opcionesParcial.length > 0) {
       detalleParcial[2] = this.opcionesParcial;
-      detalleParcial[3] = null;
+      detalleParcial[3] = this.filtroImportante;
       detalleParcial[4] = this.opcionesMultiples;
     }
 
@@ -182,6 +183,7 @@ export class CrearCategoriaComponent implements OnInit {
     this.agregarOpciones = false;
     this.agregarUnidades = false;
     this.opcionesMultiples = false;
+    this.filtroImportante = true;
   }
 
   cargarCategorias() {

@@ -10,6 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class EditarCategoriaComponent implements OnInit {
 
+  arrayDetalle: any[] = ['', '', [], true, false];
+  editarDetalle: boolean = false;
+  indiceDetalle: number = 1000;
+
   categoriaId: string;
   cargando: boolean = true;
 
@@ -30,7 +34,10 @@ export class EditarCategoriaComponent implements OnInit {
   agregarUnidad: boolean = false;
   mostrarBotones: boolean = true;
 
+  mostrarCategoria: boolean = true;
+  mostrarDetalle: boolean = false;
 
+  opcionNueva: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -67,14 +74,14 @@ export class EditarCategoriaComponent implements OnInit {
     this.opcion = '';
   }
 
-  agregarUnidadParcial() {
-    if (!this.unidad) {
-      swal(':(', 'No escribiste nada', 'warning');
-      return;
-    }
-    this.unidades.push(this.unidad);
-    this.unidad = '';
-  }
+  // agregarUnidadParcial() {
+  //   if (!this.unidad) {
+  //     swal(':(', 'No escribiste nada', 'warning');
+  //     return;
+  //   }
+  //   this.unidades.push(this.unidad);
+  //   this.unidad = '';
+  // }
 
   agregarDetalleParcial() {
     if (!this.detalle) {
@@ -140,6 +147,69 @@ export class EditarCategoriaComponent implements OnInit {
   bajar(indice) {
     this.detalles.splice(indice + 2, 0, this.detalles[indice]);
     this.detalles.splice(indice, 1);
+  }
+
+  subirOpcion(indice) {
+    this.arrayDetalle[2].splice(indice - 1, 0, this.arrayDetalle[2][indice]);
+    this.arrayDetalle[2].splice(indice + 1, 1);
+  }
+
+  bajarOpcion(indice) {
+    this.arrayDetalle[2].splice(indice + 2, 0, this.arrayDetalle[2][indice]);
+    this.arrayDetalle[2].splice(indice, 1);
+  }
+
+  modificarDetalle(indice) {
+    this.indiceDetalle = indice;
+    this.editarDetalle = true;
+    this.arrayDetalle = this.detalles[indice];
+    this.mostrarDetalle = true;
+    this.mostrarCategoria = false;
+  }
+
+  desocuparArrayDetalle() {
+    this.arrayDetalle = [
+      '', '', [], true, false
+    ];
+  }
+
+  guardarDetalle() {
+    console.log('Guardar Detalle');
+    console.log(this.indiceDetalle);
+    console.log(this.detalles);
+    console.log(this.arrayDetalle);
+    if (this.arrayDetalle[2] === null) { this.arrayDetalle[2] = []; }
+    this.arrayDetalle[1] = this.funcionesService.stringToSlug(this.arrayDetalle[0]);
+    console.log(this.arrayDetalle);
+    this.detalles[this.indiceDetalle] = this.arrayDetalle;
+    console.log(this.detalles);
+    this.desocuparArrayDetalle();
+    this.editarDetalle = false;
+    this.indiceDetalle = 1000;
+    this.mostrarCategoria = true;
+    this.mostrarDetalle = false;
+  }
+
+  agregarOpcionNueva() {
+    this.arrayDetalle[2].push(this.opcionNueva);
+    this.opcionNueva = '';
+  }
+
+  guardarDetalleNuevo() {
+    this.arrayDetalle[1] = this.funcionesService.stringToSlug(this.arrayDetalle[0]);
+    console.log(this.arrayDetalle);
+    this.detalles.push(this.arrayDetalle);
+    this.desocuparArrayDetalle();
+    this.mostrarCategoria = true;
+    this.mostrarDetalle = false;
+  }
+
+  cambioFiltro(indice) {
+    console.log(this.detalles[indice]);
+  }
+
+  cambioMultiple(indice) {
+    console.log(this.detalles[indice]);
   }
 
 }

@@ -48,12 +48,12 @@
                             <span *ngFor="let opcion of detalle[2]" class="badge badge-primary badge-pill">{{ opcion }}</span>
                         </ng-container>
                         <ng-container *ngIf="detalle[3]">
-                          <span *ngFor="let unidad of detalle[3]" class="badge badge-secondary badge-pill">{{ unidad }}</span>
+                            <span *ngFor="let unidad of detalle[3]" class="badge badge-secondary badge-pill">{{ unidad }}</span>
                         </ng-container>
                         <ng-container *ngIf="detalle[4]">
                             <span *ngFor="let opcion of detalle[2]" class="badge badge-success badge-pill">{{ opcion }}</span>
                         </ng-container>
-                      </li>
+                    </li>
                 </ul>
             </div>
 
@@ -85,21 +85,40 @@
                 <button type="button" class="btn btn-link" (click)="mostrarOpciones()">
                     Quiero agregar opciones a este detalle.
                 </button>
-                <button type="button" class="btn btn-link" (click)="mostrarUnidades()">
+                <!-- <button type="button" class="btn btn-link" (click)="mostrarUnidades()">
                     Quiero agregar unidades a este detalle.
-                </button>
+                </button> -->
             </div>
             <div *ngIf="agregarOpciones">
-              <div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <input type="checkbox" [(ngModel)]="opcionesMultiples">
-                      </div>
+                <div>
+                    <div class="row">
+
+                        <div class="col">
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" [(ngModel)]="opcionesMultiples">
+                                    </div>
+                                </div>
+                                <input type="text" readonly class="form-control" placeholder="Multiple">
+                            </div>
+
+                        </div>
+
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" [(ngModel)]="filtroImportante">
+                                    </div>
+                                </div>
+                                <input type="text" readonly class="form-control" placeholder="Filtro">
+                            </div>
+                        </div>
+
                     </div>
-                    <input type="text" readonly class="form-control" placeholder="Marca está casilla si quieres elegir mas de una opcion.">
-                  </div>
-              </div>
+                </div>
                 <div *ngIf="opcionesParcial.length > 0">
                     <ul class="list-inline">
                         <li class="list-inline-item" *ngFor="let opc of opcionesParcial">- {{ opc }}</li>

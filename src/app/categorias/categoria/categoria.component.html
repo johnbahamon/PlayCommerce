@@ -23,7 +23,7 @@
                 <tr>
                     <th scope="col">Detalle</th>
                     <th scope="col">Opciones</th>
-                    <th scope="col">Unidades</th>
+                    <th scope="col">Filtro</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,10 +33,9 @@
                         <span class="badge badge-primary ml-3" *ngFor="let opcion of detalle[2]">{{ opcion }}</span>
                     </td>
                     <td *ngIf="!detalle[2]"></td>
-                    <td *ngIf="detalle[3]">
-                        <span class="badge badge-info ml-3" *ngFor="let unidad of detalle[3]">{{ unidad }}</span>
+                    <td>
+                        <span class="badge ml-3">{{detalle[3] ? 'SI' : 'NO'}}</span>
                     </td>
-                    <td *ngIf="!detalle[3]"></td>
                 </tr>
             </tbody>
         </table>
