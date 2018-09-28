@@ -92,11 +92,11 @@
 
                 <div class="col-sm-10">
                     <div class="row">
-                        <ng-template [ngIf]="caracteristica[2] === null && caracteristica[3] === null">
+                        <!-- <ng-template [ngIf]="caracteristica[2] === null && caracteristica[3] === null">
                             <input type="text" class="form-control" [name]="caracteristica[1]" [placeholder]="caracteristica[0]" [(ngModel)]="this[caracteristica[1]]">
 
-                        </ng-template>
-                        <ng-template [ngIf]="caracteristica[2] && !caracteristica[4]">
+                        </ng-template> -->
+                        <ng-template [ngIf]="!caracteristica[4]">
 
                             <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]">
                                 <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
@@ -113,7 +113,7 @@
 
                         </ng-template> -->
 
-                        <ng-template [ngIf]="caracteristica[2] === null && caracteristica[4]">
+                        <ng-template [ngIf]="caracteristica[4]">
 
                             <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]" multiple>
                                 <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
