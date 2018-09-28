@@ -1,3 +1,4 @@
+import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
 import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
 import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
 import { CategoriaComponent } from './categorias/categoria/categoria.component';
@@ -28,6 +29,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.component';
 import { VentaComponent } from './ventas/venta/venta.component';
 import { MarcaComponent } from './marcas/marca/marca.component';
+import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -46,6 +48,8 @@ const appRoutes: Routes = [
     { path: 'productos/editar-producto/agregar-imagenes/:id', component: AgregarImagenesComponent },
     { path: 'productos/editar-producto/eliminar-imagenes/:id', component: EliminarImagenesComponent },
     { path: 'productos/editar-producto/agregar-descripcion/:id', component: AgregarDescripcionComponent },
+    { path: 'productos/editar-producto/agregar-hermanos/:id', component: AgregarHermanosComponent },
+    { path: 'productos/editar-producto/editar-detalles/:id', component: EditarDetallesComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },
     { path: 'proveedores/crear-proveedor', component: CrearProveedorComponent },

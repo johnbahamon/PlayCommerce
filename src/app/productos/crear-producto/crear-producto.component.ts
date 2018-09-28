@@ -1,3 +1,4 @@
+import { ColoresService } from './../../servicios/colores.service';
 import { BusquedaProveedoresService } from './../../servicios/busqueda-proveedores.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
@@ -19,6 +20,8 @@ export class CrearProductoComponent implements OnInit {
 
   @ViewChild('inputCategoria') inputCategoria;
   @ViewChild('inputProveedor') inputProveedor;
+
+  colores: any[] = [];
 
   productoId: string;
 
@@ -75,12 +78,14 @@ export class CrearProductoComponent implements OnInit {
     private funcionesService: FuncionesService,
     public servicioURL: UrlFirebaseService,
     private busquedaProveedoresService: BusquedaProveedoresService,
-    private router: Router
+    private router: Router,
+    private coloresService: ColoresService
   ) { }
 
   ngOnInit() {
     this.cargarMarcas();
     this.convertirCaracteristicas();
+    this.colores = this.coloresService.obtenerColores();
   }
 
   elegir(event) {
