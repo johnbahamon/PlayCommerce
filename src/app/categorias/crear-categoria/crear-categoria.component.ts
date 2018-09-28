@@ -78,7 +78,7 @@ export class CrearCategoriaComponent implements OnInit {
       .subscribe(
         (data: any) => {
           swal(`${data.categoria.nombre}`, 'Categoría creada exitosamente', 'success');
-          this.router.navigate([`/categorias/categoria/${data.categoria._id}`]);
+          this.router.navigate([`/categorias/editar-categoria/${data.categoria._id}`]);
         },
         (err: any) => {
           if (err.status === 0) {

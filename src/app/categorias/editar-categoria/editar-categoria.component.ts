@@ -1,7 +1,7 @@
 import { FuncionesService } from './../../servicios/funciones.service';
 import { ApiService } from './../../servicios/api.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editar-categoria',
@@ -42,7 +42,8 @@ export class EditarCategoriaComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private funcionesService: FuncionesService
+    private funcionesService: FuncionesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -135,6 +136,7 @@ export class EditarCategoriaComponent implements OnInit {
     this.apiService.peticionesPut(`categorias/${this.categoria._id}`, objetoEditado)
       .subscribe((data: any) => {
         swal(':)', 'Categoría Editada Perfectamente', 'success');
+        this.router.navigate(['categorias', 'categoria', data.categoria._id]);
       });
 
   }
