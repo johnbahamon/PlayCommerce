@@ -1,3 +1,4 @@
+import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
 import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
 import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
 import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-imagenes/eliminar-imagenes.component';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
     { path: 'productos/editar-producto/agregar-descripcion/:id', component: AgregarDescripcionComponent },
     { path: 'productos/editar-producto/agregar-hermanos/:id', component: AgregarHermanosComponent },
     { path: 'productos/editar-producto/editar-detalles/:id', component: EditarDetallesComponent },
+    { path: 'productos/editar-producto/agregar-videos-cmmf/:id', component: AgregarVideosCmmfComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },
     { path: 'proveedores/crear-proveedor', component: CrearProveedorComponent },

@@ -16,6 +16,9 @@ export class EditarDetallesComponent implements OnInit {
 
   detalles: any[] = [];
 
+  detallesAnteriores: any;
+
+
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
@@ -38,6 +41,8 @@ export class EditarDetallesComponent implements OnInit {
         console.log(this.producto.categoria.nombre);
         this.detalles = data.producto.categoria.detalles;
         console.log(this.detalles);
+        this.detallesAnteriores = data.producto.detalles;
+        console.log({detallesAnteriores: this.detallesAnteriores});
         this.cargando = false;
       });
   }
@@ -52,7 +57,8 @@ export class EditarDetallesComponent implements OnInit {
 
     console.log(detallesObjeto);
 
-    this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, detallesObjeto)
+    // this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, detallesObjeto)
+    this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, this.detallesAnteriores)
       .subscribe((data: any) => {
         console.log(data);
         this.router.navigate(['productos', 'producto', data.producto._id]);

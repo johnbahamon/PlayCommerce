@@ -41,6 +41,7 @@ import { EliminarImagenesComponent } from './productos/editar-producto/eliminar-
 import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
 import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
 import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
+import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { EditarDetallesComponent } from './productos/editar-producto/editar-deta
     EliminarImagenesComponent,
     VerArbolDosComponent,
     AgregarHermanosComponent,
-    EditarDetallesComponent
+    EditarDetallesComponent,
+    AgregarVideosCmmfComponent
   ],
   imports: [
     BrowserModule,
