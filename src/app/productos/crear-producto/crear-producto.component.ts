@@ -135,7 +135,7 @@ export class CrearProductoComponent implements OnInit {
     console.log(this.categoria);
     console.log('####this.categoria');
     this.buscarCategoria = false;
-    this.categoriaParent = this.categorias.find( element => element._id === this.categoria.parent._id);
+    // this.categoriaParent = this.categorias.find( element => element._id === this.categoria.parent._id);
 
     // do {
     //   const data: any = await this.apiService.peticionGet(`categorias/${this.categoriaParent._id}`).toPromise();
@@ -149,11 +149,12 @@ export class CrearProductoComponent implements OnInit {
     // } while (!this.existeParent);
 
     console.log(`Categoría Elegida: ${this.categoria.nombre}`);
-    console.log(`Categoría Padre Elegida: ${this.categoriaParent.nombre}`);
+    // console.log(`Categoría Padre Elegida: ${this.categoriaParent.nombre}`);
 
     this.apiService.peticionGet(`categorias/${this.categoria._id}`)
       .subscribe((data: any) => {
         this.categoriaParentConDetalles = data.categoria;
+        console.log({categoriaPArentConDetalles: this.categoriaParentConDetalles});
       });
   }
 
@@ -174,7 +175,7 @@ export class CrearProductoComponent implements OnInit {
       slug: this.funcionesService.stringToSlug(this.nombre),
       marca: this.marca,
       categoria: this.categoria._id,
-      categoria_padre: this.categoriaParent._id,
+      // categoria_padre: this.categoriaParent._id,
       caracteristicas: {},
       detalles: {},
       pp: this.pp,

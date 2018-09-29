@@ -43,21 +43,30 @@
             <img class="pointer" *ngFor="let img of producto.pictures.small; let i = index" [src]="img" alt="" (click)="producto.pictures.pp = i + 1">
         </div>
         <div class="col">
-            <h3>Caracteristicas</h3>
-            <div class="form-group row" *ngFor="let caracteristica of caracteristicasCap; let i = index">
-                <ng-template [ngIf]="producto.caracteristicas[caracteristica[1]] || producto.caracteristicas[caracteristica[1]] === 0">
-                    <label class="col-sm-4 col-form-label">{{ caracteristica[0] }}</label>
-                    <div class="col-sm-8">
-                        <input type="text" readonly class="form-control-plaintext" [value]="producto.caracteristicas[caracteristica[1]]">
+            <div class="row">
+                <div class="col">
+
+                    <h3>Caracteristicas</h3>
+                    <div class="form-group row" *ngFor="let caracteristica of caracteristicasCap; let i = index">
+                        <ng-template [ngIf]="producto.caracteristicas[caracteristica[1]] || producto.caracteristicas[caracteristica[1]] === 0">
+                            <label class="col-sm-4 col-form-label">{{ caracteristica[0] }}</label>
+                            <div class="col-sm-8">
+                                <input type="text" readonly class="form-control-plaintext" [value]="producto.caracteristicas[caracteristica[1]]">
+                            </div>
+                        </ng-template>
                     </div>
-                </ng-template>
+                </div>
             </div>
             <hr>
-            <h3>Detalles</h3>
-            <div class="form-group row" *ngFor="let detalle of detalles; let i = index">
-                <label class="col-sm-4 col-form-label">{{ detallesCap[i] }}</label>
-                <div class="col-sm-8">
-                    <input type="text" readonly class="form-control-plaintext" [value]="producto.detalles[detalle]">
+            <div class="row" *ngIf="detalles && detalles.length > 0">
+                <div class="col">
+                    <h3>Detalles</h3>
+                    <div class="form-group row" *ngFor="let detalle of detalles; let i = index">
+                        <label class="col-sm-4 col-form-label">{{ detallesCap[i] }}</label>
+                        <div class="col-sm-8">
+                            <input type="text" readonly class="form-control-plaintext" [value]="producto.detalles[detalle]">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -51,11 +51,12 @@ export class ProductoComponent implements OnInit, OnDestroy {
     this.apiService.peticionGet('productos/' + this.productoId)
       .subscribe((data: any) => {
         this.producto = data.producto;
+        console.log({producto: this.producto});
         this.cargando = false;
         this.caracteristicas = Object.keys(this.producto.caracteristicas);
-        this.detalles = Object.keys(this.producto.detalles);
+        this.detalles = this.producto.categoria.detalles.map(element => element[1]);
         this.detallesCap = this.producto.categoria.detalles.map(element => element[0]);
-        console.log(this.producto);
+        console.log(this.detalles);
         console.log(this.detallesCap);
       });
   }
