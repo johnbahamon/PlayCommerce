@@ -57,8 +57,8 @@ export class EditarDetallesComponent implements OnInit {
 
     console.log(detallesObjeto);
 
-    // this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, detallesObjeto)
-    this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, this.detallesAnteriores)
+    this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, detallesObjeto)
+    // this.apiService.peticionesPut(`editar-detalles/${this.productoId}`, this.detallesAnteriores)
       .subscribe((data: any) => {
         console.log(data);
         this.router.navigate(['productos', 'producto', data.producto._id]);
