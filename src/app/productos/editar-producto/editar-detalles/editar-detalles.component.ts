@@ -50,6 +50,9 @@ export class EditarDetallesComponent implements OnInit {
   }
 
   arreglarDetalles() {
+    if (this.detallesAnteriores === undefined) {
+      this.detallesAnteriores = {};
+    }
     this.detalles.forEach(element => {
       this.objetoDetallesTrocado[element[1]] = this.detallesAnteriores[element[1]] ? this.detallesAnteriores[element[1]] : undefined;
     });
