@@ -19,9 +19,9 @@ export class BusquedaService {
       .subscribe( (data: any) => {
         this.listaCategorias = data.categorias;
         this.busquedaCargada = true;
-        console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias');
+        console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias SERVICIO');
         console.log(this.listaCategorias);
-        console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias');
+        console.log('LISTA DE CATEGORIAS COMPLETA this.listaCategorias SERVICIO');
       });
   }
 

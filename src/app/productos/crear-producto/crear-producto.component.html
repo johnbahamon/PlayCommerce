@@ -53,7 +53,7 @@
                     <hr>
                     <ul [style.display]="categoriasFiltradas.length> 0 ? 'block' : 'none'">
                         <li *ngFor="let categoria of categoriasFiltradas">
-                            <span>{{ categoria.parent ? categoria.parent.nombre : ''}} - {{ categoria.nombre }}</span>
+                            <span>{{ categoria.abuelo ? categoria.abuelo.nombre : ''}} - {{ categoria.parent ? categoria.parent.nombre : ''}} - {{ categoria.nombre }}</span>
                             <button type="button" class="btn btn-link" (click)="elegirCategoria(categoria)">Elegir Categoría</button>
                         </li>
                     </ul>

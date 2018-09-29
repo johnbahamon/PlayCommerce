@@ -115,7 +115,7 @@ export class CrearProductoComponent implements OnInit {
         this.categorias = data.categorias;
       });
 
-      this.busquedaService.obtenerCategorias('categorias-lista-completa');
+      this.busquedaService.obtenerCategorias('crear-arbol-parent');
 
       fromEvent(this.inputCategoria.nativeElement, 'keyup').pipe(debounceTime(400)
       , distinctUntilChanged()
@@ -123,7 +123,7 @@ export class CrearProductoComponent implements OnInit {
       , switchMap(title => this.busquedaService.obtenerCategoriasFiltradas(title)))
       .subscribe((categories: any) => {
         this.categoriasFiltradas = categories;
-        console.log(this.categoriasFiltradas);
+        console.log({categoriasFiltradas: this.categoriasFiltradas});
       });
 
   }
