@@ -18,6 +18,8 @@ export class EditarDetallesComponent implements OnInit {
 
   detallesAnteriores: any;
 
+  objetoDetallesTrocado: any = {};
+
 
   constructor(
     private route: ActivatedRoute,
@@ -43,8 +45,16 @@ export class EditarDetallesComponent implements OnInit {
         console.log(this.detalles);
         this.detallesAnteriores = data.producto.detalles;
         console.log({detallesAnteriores: this.detallesAnteriores});
-        this.cargando = false;
+        this.arreglarDetalles();
       });
+  }
+
+  arreglarDetalles() {
+    this.detalles.forEach(element => {
+      this.objetoDetallesTrocado[element[1]] = this.detallesAnteriores[element[1]] ? this.detallesAnteriores[element[1]] : undefined;
+    });
+    console.log({objetoDetallesTrocados: this.objetoDetallesTrocado});
+    this.cargando = false;
   }
 
   editar(form: NgForm) {
