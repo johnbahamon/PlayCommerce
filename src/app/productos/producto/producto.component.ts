@@ -51,13 +51,15 @@ export class ProductoComponent implements OnInit, OnDestroy {
     this.apiService.peticionGet('productos/' + this.productoId)
       .subscribe((data: any) => {
         this.producto = data.producto;
+        this.producto.detalles = this.producto.detalles || {};
         console.log({producto: this.producto});
-        this.cargando = false;
         this.caracteristicas = Object.keys(this.producto.caracteristicas);
         this.detalles = this.producto.categoria.detalles.map(element => element[1]);
+        // this.detalles = this.producto.categoria.detalles.map(element => element[1]) ? this.producto.categoria.detalles.map(element => element[1]) : {};
         this.detallesCap = this.producto.categoria.detalles.map(element => element[0]);
         console.log(this.detalles);
         console.log(this.detallesCap);
+        this.cargando = false;
       });
   }
 
