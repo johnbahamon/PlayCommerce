@@ -42,6 +42,7 @@ import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.c
 import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
 import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
 import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
+import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-
     VerArbolDosComponent,
     AgregarHermanosComponent,
     EditarDetallesComponent,
-    AgregarVideosCmmfComponent
+    AgregarVideosCmmfComponent,
+    BusquedaProductosComponent
   ],
   imports: [
     BrowserModule,

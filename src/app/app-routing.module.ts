@@ -1,3 +1,4 @@
+import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
 import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
 import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
 import { VerArbolDosComponent } from './categorias/ver-arbol-dos/ver-arbol-dos.component';
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
+    { path: 'productos/busqueda-productos', component: BusquedaProductosComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
     { path: 'productos/crear-desde/:id', component: CrearDesdeComponent },
     { path: 'productos/editar-producto/:id', component: EditarProductoComponent },
