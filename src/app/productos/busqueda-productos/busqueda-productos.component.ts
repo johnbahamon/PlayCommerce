@@ -46,6 +46,8 @@ export class BusquedaProductosComponent implements OnInit {
 
   elegirCategoria(categoria) {
     this.categoriaElegida = categoria;
+    this.inputCategoria.nativeElement.value = '';
+    this.categoriasFiltradas = [];
     this.cargarProductos();
   }
 
