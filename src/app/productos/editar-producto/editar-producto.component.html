@@ -16,11 +16,43 @@
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let accesorio of accesorios">{{ accesorio.nombre }}</li>
             </ul>
+            <table class="table table-striped" *ngIf="producto">
+                <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let accesorio of producto.accesorios">
+                        <td>
+                            <img [src]="accesorio.pictures.small[0]" alt="">
+                        </td>
+                        <th>{{ accesorio.caracteristicas.referencia }}-{{ accesorio.nombre }}-{{ accesorio.caracteristicas.modelo }}</th>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
             <h5>Repuestos</h5>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let repuesto of repuestos">{{ repuesto.nombre }}</li>
             </ul>
+            <table class="table table-striped" *ngIf="producto">
+                <thead>
+                    <tr>
+                        <th scope="col">Imagen</th>
+                        <th scope="col">Descripción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let repuesto of producto.repuestos">
+                        <td>
+                            <img [src]="repuesto.pictures.small[0]" alt="">
+                        </td>
+                        <th>{{ repuesto.caracteristicas.referencia }}-{{ repuesto.nombre }}-{{ repuesto.caracteristicas.modelo }}</th>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="col">
             <input #inputProducto type="text">
@@ -34,6 +66,11 @@
             </ul>
         </div>
 
+    </div>
+    <div class="row">
+        <div class="col">
+
+        </div>
     </div>
     <div class="row">
         <button type="button" class="btn btn-primary" (click)="actualizarProducto()">Actualizar</button>

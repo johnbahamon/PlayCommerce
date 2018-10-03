@@ -42,8 +42,8 @@ export class EditarProductoComponent implements OnInit {
     this.apiService.peticionGet('productos/' + this.productoId)
       .subscribe((data: any) => {
         this.producto = data.producto;
-        this.repuestosId = this.producto.repuestos;
-        this.accesoriosId = this.producto.accesorios;
+        this.repuestosId = this.producto.repuestos.map(el => el._id);
+        this.accesoriosId = this.producto.accesorios.map(el => el._id);
         this.cargando = false;
       });
   }
