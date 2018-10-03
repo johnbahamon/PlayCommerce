@@ -21,6 +21,9 @@ export class CrearProductoComponent implements OnInit {
   @ViewChild('inputCategoria') inputCategoria;
   @ViewChild('inputProveedor') inputProveedor;
 
+  referenciaBuscar: string;
+  referenciaExiste: boolean = true;
+
   colores: any[] = [];
 
   productoId: string;
@@ -30,7 +33,7 @@ export class CrearProductoComponent implements OnInit {
     ['Precio', 'number'],
     ['Existencias', 'number'],
     ['Color', 'text'],
-    ['Referencia', 'text'],
+    // ['Referencia', 'text'],
     ['Garantía', 'text'],
     ['Código de Barras', 'number']
   ];
@@ -86,6 +89,21 @@ export class CrearProductoComponent implements OnInit {
     this.cargarMarcas();
     this.convertirCaracteristicas();
     this.colores = this.coloresService.obtenerColores();
+  }
+
+  verificarReferencia() {
+    console.log(this.referenciaBuscar);
+    if (this.referenciaBuscar === '' || this.referenciaBuscar === null || this.referenciaBuscar === undefined) {
+      return;
+    }
+    this.apiService.peticionGet(`productos/referencia/${this.referenciaBuscar}`)
+      .subscribe((data: any) => {
+        console.log(data.productos.length);
+        if (data.productos.length === 0) {
+          console.log('No hay productos');
+          this.referenciaExiste = false;
+        }
+      });
   }
 
   elegir(event) {
@@ -176,7 +194,9 @@ export class CrearProductoComponent implements OnInit {
       marca: this.marca,
       categoria: this.categoria._id,
       // categoria_padre: this.categoriaParent._id,
-      caracteristicas: {},
+      caracteristicas: {
+        referencia: this.referenciaBuscar
+      },
       detalles: {},
       pp: this.pp,
       pictures: this.servicioURL.obtenerUrls(),
