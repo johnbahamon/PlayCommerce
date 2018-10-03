@@ -43,6 +43,7 @@ import { AgregarHermanosComponent } from './productos/editar-producto/agregar-he
 import { EditarDetallesComponent } from './productos/editar-producto/editar-detalles/editar-detalles.component';
 import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
 import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
+import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { BusquedaProductosComponent } from './productos/busqueda-productos/busqu
     AgregarHermanosComponent,
     EditarDetallesComponent,
     AgregarVideosCmmfComponent,
-    BusquedaProductosComponent
+    BusquedaProductosComponent,
+    CrearPedidoComponent
   ],
   imports: [
     BrowserModule,
