@@ -48,6 +48,10 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
   supplierDate: Date;
   supplierNumber: string;
 
+  dueDate: Date;
+
+  paymentMethod: string = 'contado';
+
   constructor(
     public busquedaProductosService: BusquedaProductosService,
     public busquedaProvedoresService: BusquedaProveedoresService,
@@ -182,6 +186,8 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
 
     const invoice = {
       supplierDate: this.supplierDate,
+      paymentMethod: this.paymentMethod,
+      dueDate: undefined,
       // supplierDate: this.supplierDate.getTime() + 1000 * 60 * 60 * 12,
       supplier: this.proveedorElegido._id,
       supplierNumber: this.supplierNumber,
@@ -194,6 +200,10 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     };
 
     console.log(invoice);
+
+    if (this.paymentMethod === 'credito') {
+      invoice.dueDate = this.dueDate;
+    }
 
     this._apiService.peticionesPost('compras', invoice)
       .subscribe( (data: any) => {
