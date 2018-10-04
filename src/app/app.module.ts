@@ -44,6 +44,7 @@ import { EditarDetallesComponent } from './productos/editar-producto/editar-deta
 import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
 import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
 import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.component';
+import { CrearComboComponent } from './productos/crear-combo/crear-combo.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.comp
     EditarDetallesComponent,
     AgregarVideosCmmfComponent,
     BusquedaProductosComponent,
-    CrearPedidoComponent
+    CrearPedidoComponent,
+    CrearComboComponent
   ],
   imports: [
     BrowserModule,

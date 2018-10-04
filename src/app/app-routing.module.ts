@@ -1,3 +1,4 @@
+import { CrearComboComponent } from './productos/crear-combo/crear-combo.component';
 import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.component';
 import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
 import { AgregarVideosCmmfComponent } from './productos/editar-producto/agregar-videos-cmmf/agregar-videos-cmmf.component';
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
+    { path: 'productos/crear-combo/:id', component: CrearComboComponent },
     { path: 'productos/busqueda-productos', component: BusquedaProductosComponent },
     { path: 'productos/crear-pedido', component: CrearPedidoComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
