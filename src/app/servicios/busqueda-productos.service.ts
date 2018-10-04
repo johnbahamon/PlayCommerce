@@ -33,6 +33,21 @@ export class BusquedaProductosService {
     return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.referencia)) : [];
   }
 
+  obtenerProductosFiltradosPorModelo(name: string): Observable<any[]> {
+    console.log('FUNCION NORMAL # 1');
+    if (name === '') {
+      return of([]);
+    } else {
+      return of(this.filtrarProductosPorModelo(name));
+    }
+  }
+
+  filtrarProductosPorModelo(name) {
+    console.log('FUNCION NORMAL # 2');
+    // return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
+    return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.modelo)) : [];
+  }
+
   obtenerProductosFiltradosPorNombre(name: string): Observable<any[]> {
     console.log('FUNCION NORMAL # 1');
     if (name === '') {

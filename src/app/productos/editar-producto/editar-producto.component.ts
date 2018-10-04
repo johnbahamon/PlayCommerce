@@ -14,6 +14,7 @@ import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operato
 export class EditarProductoComponent implements OnInit {
 
   @ViewChild('inputProducto') inputProducto;
+  @ViewChild('inputProductoModelo') inputProductoModelo;
 
   productoId: string;
   producto: any;
@@ -60,6 +61,15 @@ export class EditarProductoComponent implements OnInit {
       , distinctUntilChanged()
       , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
       , switchMap(title => this.busquedaProductosService.obtenerProductosFiltrados(title)))
+      .subscribe((productos: any) => {
+        this.productosFiltrados = productos;
+        console.log(this.productosFiltrados);
+      });
+
+      fromEvent(this.inputProductoModelo.nativeElement, 'keyup').pipe(debounceTime(400)
+      , distinctUntilChanged()
+      , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+      , switchMap(title => this.busquedaProductosService.obtenerProductosFiltradosPorModelo(title)))
       .subscribe((productos: any) => {
         this.productosFiltrados = productos;
         console.log(this.productosFiltrados);

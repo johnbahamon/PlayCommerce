@@ -55,7 +55,8 @@
             </table>
         </div>
         <div class="col">
-            <input #inputProducto type="text">
+            <input class="form-control" #inputProducto type="text" placeholder="Referencia">
+            <input class="form-control" #inputProductoModelo type="text" placeholder="Modelo">
             <hr>
             <ul [style.display]="productosFiltrados.length> 0 ? 'block' : 'none'">
                 <li *ngFor="let producto of productosFiltrados">
