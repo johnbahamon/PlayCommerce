@@ -1,5 +1,5 @@
 import { ApiService } from './../../servicios/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { BusquedaProductosService } from '../../servicios/busqueda-productos.service';
 
@@ -26,7 +26,8 @@ export class CrearComboComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private busquedaProductosService: BusquedaProductosService
+    private busquedaProductosService: BusquedaProductosService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -79,6 +80,7 @@ export class CrearComboComponent implements OnInit {
     this.apiService.peticionesPut(`productos/combo/${this.productoId}`, producto)
       .subscribe((data: any) => {
         swal(':)', 'Producto Actualizado', 'success');
+        this.router.navigate(['productos', 'producto', this.productoId]);
       });
   }
 
