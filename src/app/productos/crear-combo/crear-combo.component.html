@@ -25,7 +25,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let productoCombo of producto.combo">
-                        <td><img [src]="productoCombo.pictures.small[0]" alt=""></td>
+                        <td><img [src]="productoCombo.pictures.small[productoCombo.pictures.pp -1]" alt=""></td>
                         <td>{{ producto.caracteristicas.referencia }} - {{ producto.nombre }} - {{ producto.modelo }}</td>
                     </tr>
                 </tbody>
