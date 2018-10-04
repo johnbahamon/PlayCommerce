@@ -86,6 +86,7 @@ export class EditarProductoComponent implements OnInit {
     this.productosFiltrados = [];
     this.inputProducto.nativeElement.focus();
     this.inputProducto.nativeElement.value = '';
+    this.inputProductoModelo.nativeElement.value = '';
   }
 
   elegirAccesorio(accesorio) {
@@ -98,6 +99,7 @@ export class EditarProductoComponent implements OnInit {
     this.productosFiltrados = [];
     this.inputProducto.nativeElement.focus();
     this.inputProducto.nativeElement.value = '';
+    this.inputProductoModelo.nativeElement.value = '';
   }
 
   actualizarProducto() {
