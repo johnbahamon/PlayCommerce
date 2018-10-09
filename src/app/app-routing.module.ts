@@ -1,3 +1,4 @@
+import { EditarCaracteristicasComponent } from './productos/editar-producto/editar-caracteristicas/editar-caracteristicas.component';
 import { CrearComboComponent } from './productos/crear-combo/crear-combo.component';
 import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.component';
 import { BusquedaProductosComponent } from './productos/busqueda-productos/busqueda-productos.component';
@@ -57,6 +58,7 @@ const appRoutes: Routes = [
     { path: 'productos/editar-producto/agregar-descripcion/:id', component: AgregarDescripcionComponent },
     { path: 'productos/editar-producto/agregar-hermanos/:id', component: AgregarHermanosComponent },
     { path: 'productos/editar-producto/editar-detalles/:id', component: EditarDetallesComponent },
+    { path: 'productos/editar-producto/editar-caracteristicas/:id', component: EditarCaracteristicasComponent },
     { path: 'productos/editar-producto/agregar-videos-cmmf/:id', component: AgregarVideosCmmfComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },
