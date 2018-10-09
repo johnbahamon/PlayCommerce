@@ -13,6 +13,8 @@ import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operato
 export class ProductosComponent implements OnInit {
 
   @ViewChild('inputProductoPorNombre') inputProductoPorNombre;
+  @ViewChild('inputProductoPorModelo') inputProductoPorModelo;
+  @ViewChild('inputProductoPorReferencia') inputProductoPorReferencia;
 
   productos: any[] = [];
   cargando: boolean = true;
@@ -47,6 +49,24 @@ export class ProductosComponent implements OnInit {
     , distinctUntilChanged()
     , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
     , switchMap(title => this.busquedaProductosPorNombreService.obtenerProductosFiltrados(title)))
+    .subscribe((productos: any) => {
+      this.productos = productos;
+      // console.log({categoriasFiltradas: this.categoriasFiltradas});
+    });
+
+    fromEvent(this.inputProductoPorModelo.nativeElement, 'keyup').pipe(debounceTime(400)
+    , distinctUntilChanged()
+    , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+    , switchMap(title => this.busquedaProductosPorNombreService.obtenerProductosFiltradosPorModelo(title)))
+    .subscribe((productos: any) => {
+      this.productos = productos;
+      // console.log({categoriasFiltradas: this.categoriasFiltradas});
+    });
+
+    fromEvent(this.inputProductoPorReferencia.nativeElement, 'keyup').pipe(debounceTime(400)
+    , distinctUntilChanged()
+    , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+    , switchMap(title => this.busquedaProductosPorNombreService.obtenerProductosFiltradosPorReferencia(title)))
     .subscribe((productos: any) => {
       this.productos = productos;
       // console.log({categoriasFiltradas: this.categoriasFiltradas});

@@ -17,6 +17,18 @@
                 </div>
                 <input #inputProductoPorNombre type="text" class="form-control" placeholder="Buscar por nombre">
             </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Buscar</span>
+                </div>
+                <input #inputProductoPorModelo type="text" class="form-control" placeholder="Buscar por modelo">
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Buscar</span>
+                </div>
+                <input #inputProductoPorReferencia type="text" class="form-control" placeholder="Buscar por referencia">
+            </div>
         </div>
     </div>
     <div class="row">
@@ -39,7 +51,8 @@
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.caracteristicas.modelo }}</td>
                         <td>{{ producto.caracteristicas.referencia }}</td>
-                        <td><span class="badge badge-secondary pointer" routerLink="/productos/producto/{{ producto._id }}">Ver</span></td>
+                        <!-- <td><span class="badge badge-secondary pointer" routerLink="/productos/producto/{{ producto._id }}">Ver</span></td> -->
+                        <td><a class="badge badge-secondary pointer" href="/productos/producto/{{ producto._id }}" target="_blank">Ver</a></td>
                         <!-- <td><span class="badge badge-secondary pointer" routerLink="/productos/editar-producto/{{ producto._id }}">Editar</span></td> -->
                     </tr>
                 </tbody>
