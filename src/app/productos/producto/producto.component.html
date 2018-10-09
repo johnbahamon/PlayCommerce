@@ -10,9 +10,25 @@
 <div class="container" *ngIf="!cargando">
     <div class="row">
         <div class="col">
-            <h3 style="text-align: center">
-                {{ producto.nombre }}
-            </h3>
+            <div class="row" *ngIf="!cambiarNombre">
+
+                <h3 style="text-align: center">
+                    {{ producto.nombre }} -
+                    <span class="badge badge-info pointer" (click)="cambiarNombre = !cambiarNombre">Editar</span>
+                </h3>
+            </div>
+            <div class="row" *ngIf="cambiarNombre">
+
+
+                <div class="input-group">
+                    <input type="text" class="form-control" [(ngModel)]="producto.nombre">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-info" (click)="guardar()">Guardar</button>
+                    </div>
+                </div>
+
+
+            </div>
             <!-- <button (click)="irAProductoTest()">Test</button> -->
         </div>
         <div class="col-2">

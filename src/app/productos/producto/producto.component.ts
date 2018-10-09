@@ -15,6 +15,7 @@ export class ProductoComponent implements OnInit, OnDestroy {
   cargando: boolean = true;
   caracteristicas: string[] = [];
   detalles: string[] = [];
+  cambiarNombre: boolean = false;
 
   caracteristicasCap: any[] = [
     ['Modelo', 'modelo'],
@@ -70,6 +71,21 @@ export class ProductoComponent implements OnInit, OnDestroy {
 
   irAProductoTest() {
     this.router.navigate(['productos', 'producto', 'gdgdfg']);
+  }
+
+  guardar() {
+
+    const objetoNombre = {
+      nombre: this.producto.nombre,
+      slug: this.funcionesService.stringToSlug(this.producto.nombre)
+    };
+    console.log(this.producto.nombre);
+    this.apiService.peticionesPut(`editar-nombre/${this.productoId}`, objetoNombre)
+      .subscribe((data: any) => {
+        console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.cambiarNombre = false;
+      });
   }
 
 }
