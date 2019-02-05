@@ -16,6 +16,7 @@
                 <th>Cliente</th>
                 <th>Total</th>
                 <th>Detalles</th>
+                <th>Crear XML</th>
                 <!-- <th>Editar</th> -->
                 <!-- <th>Eliminar</th> -->
             </tr>
@@ -27,6 +28,8 @@
                 <td>{{ venta.clienteId.nombre }}</td>
                 <td>{{ venta.total }}</td>
                 <td><a routerLink="/ventas/venta/{{ venta._id }}" class="badge badge-info">Detalles</a></td>
+                <td><button (click)="crearXML(venta._id)" class="badge badge-info pointer">Crear XML</button></td>
+
                 <!-- <td><a routerLink="/" class="badge badge-info">Editar</a></td> -->
                 <!-- <td><span class="badge badge-danger pointer" (click)="deleteventa(venta._id)">Eliminar</span></td> -->
             </tr>

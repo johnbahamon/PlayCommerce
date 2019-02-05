@@ -26,4 +26,11 @@ export class VentasComponent implements OnInit {
       });
   }
 
+  async crearXML(venta_id) {
+    console.log('Funcion para crear XML');
+    const data: any = await this.apiService.peticionGet(`ventas/crearXML/${venta_id}`).toPromise();
+    const VENTA = data.venta;
+    console.log({venta: VENTA});
+  }
+
 }
