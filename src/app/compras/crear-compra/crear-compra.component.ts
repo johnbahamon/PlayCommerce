@@ -77,6 +77,8 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
         map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value),
         switchMap(title => this.busquedaProvedoresService.obtenerProveedoresFiltrados(title)))
       .subscribe((suppliers: any) => {
+        console.log('Evento de Teclado... Busqueda Proveedor...');
+        
         this.proveedoresEncontrados = suppliers;
       });
   }

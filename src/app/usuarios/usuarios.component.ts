@@ -23,7 +23,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   cargarUsuarios() {
-    this.apiService.peticionGet('usuarios')
+    this.apiService.peticionGet(`usuarios?desde=${this.desde}`)
       .subscribe((data: any) => {
         this.usuarios = data.usuarios;
         this.totalUsuarios = data.total;

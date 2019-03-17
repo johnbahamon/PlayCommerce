@@ -46,6 +46,7 @@ import { BusquedaProductosComponent } from './productos/busqueda-productos/busqu
 import { CrearPedidoComponent } from './productos/crear-pedido/crear-pedido.component';
 import { CrearComboComponent } from './productos/crear-combo/crear-combo.component';
 import { EditarCaracteristicasComponent } from './productos/editar-producto/editar-caracteristicas/editar-caracteristicas.component';
+import { EditarCompraComponent } from './compras/editar-compra/editar-compra.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { EditarCaracteristicasComponent } from './productos/editar-producto/edit
     BusquedaProductosComponent,
     CrearPedidoComponent,
     CrearComboComponent,
-    EditarCaracteristicasComponent
+    EditarCaracteristicasComponent,
+    EditarCompraComponent
   ],
   imports: [
     BrowserModule,

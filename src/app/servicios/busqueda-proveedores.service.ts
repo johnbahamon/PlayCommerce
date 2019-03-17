@@ -34,6 +34,6 @@ export class BusquedaProveedoresService {
 
   filtrarProveedores(name) {
     console.log('FUNCION NORMAL # 2');
-    return name ? this.listaProveedores.filter((proveedor) => new RegExp(name, 'gi').test(proveedor.nombre)) : [];
+    return name ? this.listaProveedores.filter((proveedor) => new RegExp(name, 'gi').test(proveedor.primerNombre)) : [];
   }
 }

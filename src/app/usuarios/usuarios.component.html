@@ -23,7 +23,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let usuario of usuarios">
-            <td>{{ usuario.nombre }}</td>
+            <td *ngIf="usuario.tipoId === 'nit'">{{ usuario.primerNombre }}</td>
+            <td *ngIf="usuario.tipoId === 'cc'">{{ usuario.primerNombre }} {{ usuario.segundoNombre }} {{ usuario.apellidos }}</td>
             <td>{{ usuario.tipo }}</td>
             <td>{{ usuario.tipoId }}</td>
             <td>{{ usuario.numeroId }}</td>

@@ -29,7 +29,8 @@
                 <td>{{ invoice.supplierNumber }}</td>
                 <td>{{ invoice.supplierDate | date:"dd/MM/yyyy" }}</td>
                 <td>{{ invoice.supplier.numeroId }}</td>
-                <td>{{ invoice.supplier.nombre }}</td>
+                <td *ngIf="invoice.supplier.tipoId === 'nit'">{{ invoice.supplier.primerNombre }}</td>
+                <td *ngIf="invoice.supplier.tipoId === 'cc'">{{ invoice.supplier.primerNombre }} {{ invoice.supplier.segundoNombre }} {{ invoice.supplier.apellidos }}</td>
                 <td>{{ invoice.total | currency}}</td>
                 <td><a routerLink="/compras/compra/{{ invoice._id }}" class="badge badge-info">Detalles</a></td>
                 <!-- <td><a routerLink="/" class="badge badge-info">Editar</a></td>

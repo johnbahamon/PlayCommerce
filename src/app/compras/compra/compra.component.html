@@ -40,7 +40,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Proveedor</span>
                     </div>
-                    <input type="text" class="form-control" [value]="invoice.supplier.nombre" readonly>
+                    <input *ngIf="invoice.supplier.tipoId === 'nit'" type="text" class="form-control" [value]="invoice.supplier.primerNombre" readonly>
+                    <input *ngIf="invoice.supplier.tipoId === 'cc'" type="text" class="form-control" [value]="invoice.supplier.primerNombre + invoice.supplier.segundoNombre + invoice.supplier.apellidos" readonly>
                 </div>
             </div>
         </div>
@@ -144,6 +145,14 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-1">
+                        <a class="btn btn-primary btn-block" routerLink="/compras/editar-compra/{{ invoice._id }}" role="button">Editar</a>
+                    </div>
+                    <div class="col-10"></div>
                 </div>
             </div>
 

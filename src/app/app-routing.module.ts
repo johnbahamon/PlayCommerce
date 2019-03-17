@@ -28,6 +28,7 @@ import { CrearDesdeComponent } from './productos/crear-desde/crear-desde.compone
 import { AgregarImagenesComponent } from './productos/editar-producto/agregar-imagenes/agregar-imagenes.component';
 import { AgregarDescripcionComponent } from './productos/editar-producto/agregar-descripcion/agregar-descripcion.component';
 import { CompraComponent } from './compras/compra/compra.component';
+import { EditarCompraComponent } from './compras/editar-compra/editar-compra.component';
 import { VentasComponent } from './ventas/ventas.component';
 import { CrearVentaComponent } from './ventas/crear-venta/crear-venta.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
     { path: 'compras', component: ComprasComponent },
     { path: 'compras/crear-compra', component: CrearCompraComponent },
     { path: 'compras/compra/:id', component: CompraComponent },
+    { path: 'compras/editar-compra/:id', component: EditarCompraComponent },
     { path: 'ventas', component: VentasComponent },
     { path: 'ventas/crear-venta', component: CrearVentaComponent },
     { path: 'ventas/venta/:id', component: VentaComponent },

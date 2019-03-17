@@ -9,13 +9,18 @@ import { NgForm } from '@angular/forms';
 })
 export class CrearUsuarioComponent implements OnInit {
 
-  nombre: string;
+  primerNombre: string;
+  segundoNombre: string;
+  apellidos: string;
   tipoId: string;
   numeroId: string;
-  ciudad: string;
+  ciudad: string = 'Neiva';
+  departamento: string = 'Huila';
   direccion: string;
   tipo: string;
   telefono: string;
+
+  usuarioEncontrado: boolean = true;
 
  constructor(
    private apiService: ApiService
@@ -31,7 +36,7 @@ export class CrearUsuarioComponent implements OnInit {
     console.log(formKeys);
 
     for (let i = 0; i < formKeys.length; i++) {
-      if (!formValues[formKeys[i]]) {
+      if (!formValues[formKeys[i]] && formKeys[i] != 'segundoNombre') {
         console.log(formKeys[i]);
         swal(':(', 'Valores no definidos en el formulario', 'warning');
         return;
@@ -45,6 +50,26 @@ export class CrearUsuarioComponent implements OnInit {
         swal('Muy Bien', 'Usuario creado correctamente', 'success');
         console.log(data);
       });
+  }
+
+  buscarUsuario() {
+    if (!this.numeroId || this.numeroId.length < 6) {
+      swal(':(', 'Número muy corto', 'error');
+      return;
+    }
+
+    this.apiService.peticionGet(`usuarios/usuario-por-numero/${this.numeroId}`)
+      .subscribe((data: any) => {
+        swal(':(', 'Ya existe este usuario', 'error');
+        console.log(data);
+      }, (error) => {
+        console.log('{ error }');
+        console.log({ error });
+        this.usuarioEncontrado = false;
+        console.log('{ error }');
+      })
+
+
   }
 
 }
