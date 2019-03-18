@@ -86,15 +86,15 @@
             </div> -->
 
             <div class="row">
-                <div class="col-8">
-                    <p>
-                        {{ product.productId.nombre }}
-                    </p>
-                </div>
-                <div class="col-2">
-                    <button (click)="eliminarProducto(i)" class="btn btn-outline-secondary">X</button>
-                </div>
-                <div class="col-2"></div>
+              <div class="col-8">
+                <p>
+                  {{ product.productName }}
+                </p>
+              </div>
+              <div class="col-2">
+                <button (click)="eliminarProducto(i)" class="btn btn-outline-secondary">X</button>
+              </div>
+              <div class="col-2"></div>
             </div>
           </td>
           <td>
@@ -131,10 +131,18 @@
         </tr>
       </tbody>
     </table>
+  </div>
 
+  
+
+
+</div>
+
+<div>
+  <div>
     <div>
-      <input #searchProd type="text" class="form-control" placeholder="Buscar Productos" [(ngModel)]="productSearch"
-        [ngModelOptions]="{standalone: true}">
+      <input #searchProd type="text" class="form-control" placeholder="Buscar Productos por Referencia"
+        [(ngModel)]="productSearch" [ngModelOptions]="{standalone: true}">
       <ul #suggestionsProducts [style.display]=" productosEncontrados.length> 0 ? 'block' : 'none'">
         <li *ngFor="let producto of productosEncontrados">
           {{ producto.caracteristicas.referencia }} - {{ producto.nombre }}
@@ -216,9 +224,6 @@
         </div>
       </div>
     </div>
-
   </div>
   <button type="submit" class="btn btn-primary" (click)="prueba()">Submit</button>
-
-
 </div>
