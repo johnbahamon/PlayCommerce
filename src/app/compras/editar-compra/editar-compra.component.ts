@@ -106,19 +106,52 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
   }
 
   inicializarVariables() {
-    this.productosElegidos = this.invoice.products.map(element => {
-      return {
-        discount: element.discount,
-        discount2: element.discount2,
+    this.invoice.products.forEach(element => {
+      const productInvoice = {
         productId: element.productId._id,
         productName: element.productId.nombre,
+        etiqueta: element.etiqueta,
         qty: element.qty,
-        tax: element.tax,
         unitValue: element.unitValue,
+        discount: element.discount,
+        discount2: element.discount2,
+        tax: element.tax,
+        beforeTax: element.beforeTax,
         withTax: element.withTax,
         withTaxUnit: element.withTaxUnit,
+        productos: []
       }
+
+      if (element.etiqueta === 'Combo' && element.productos && element.productos.length > 0) {
+        const productos = [];
+        element.productos.forEach(element2 => {
+
+          const productoCombo = {
+            productId: element2.productId._id,
+            productName: element2.productId.nombre,
+            etiqueta: element2.etiqueta,
+            qty: element2.qty,
+            unitValue: element2.unitValue,
+            discount: element2.discount,
+            discount2: element2.discount2,
+            tax: element2.tax,
+            beforeTax: element2.beforeTax,
+            withTax: element2.withTax,
+            withTaxUnit: element2.withTaxUnit
+          }
+
+          productos.push(productoCombo);
+
+        })
+
+        productInvoice.productos = productos;
+
+      }
+
+      this.productosElegidos.push(productInvoice);
     });
+
+
 
     console.log('PRODUCTOS DESDE EL API');
     console.log(this.invoice.products);
@@ -165,39 +198,61 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
 
   prueba() {
 
+    this.actualizar('e');
+
     const productsInvoice = [];
 
-    this.productosElegidos.forEach( (element: any) => {
+    this.productosElegidos.forEach((element: any) => {
       const productInvoice = {
         productId: element.productId,
         qty: element.qty,
+        etiqueta: element.etiqueta,
         unitValue: element.unitValue,
         discount: element.discount,
         discount2: element.discount2,
         tax: element.tax,
         // tslint:disable-next-line:max-line-length
-        withTax: Math.round( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ),
+        beforeTax: Math.round((element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))),
         // tslint:disable-next-line:max-line-length
-        withTaxUnit: Math.round(( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ) / element.qty )
+        withTax: Math.round(1.19 * (element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))),
+        // tslint:disable-next-line:max-line-length
+        withTaxUnit: Math.round((1.19 * (element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))) / element.qty),
+        productos: []
       };
+
+
+      if (element.etiqueta === 'Combo' && element.productos && element.productos.length > 0) {
+        const productos = [];
+        element.productos.forEach(element2 => {
+
+          const productoCombo = {
+            productId: element2.productId,
+            qty: element2.qty,
+            unitValue: element2.unitValue,
+            discount: element2.discount,
+            discount2: element2.discount2,
+            tax: element2.tax,
+            // tslint:disable-next-line:max-line-length
+            beforeTax: Math.round((element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))),
+            // tslint:disable-next-line:max-line-length
+            withTax: Math.round(1.19 * (element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))),
+            // tslint:disable-next-line:max-line-length
+            withTaxUnit: Math.round((1.19 * (element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))) / element2.qty),
+          }
+
+          productos.push(productoCombo);
+
+        })
+
+        productInvoice.productos = productos;
+
+      }
+
       productsInvoice.push(productInvoice);
+
     });
 
-    // console.log('products', productsInvoice);
-    // console.log('grossTotal', this.grossTotal);
-    // console.log('discounts', this.discounts);
-    // console.log('subtotal', this.subtotal);
-    // console.log('iva', this.iva);
-    // console.log('total', this.total);
-
-
     const invoice = {
-      // supplierDate: this.supplierDate,
-      // paymentMethod: this.paymentMethod,
-      // dueDate: undefined,
-      // // supplierDate: this.supplierDate.getTime() + 1000 * 60 * 60 * 12,
-      // supplier: this.proveedorElegido._id,
-      // supplierNumber: this.supplierNumber,
       products: productsInvoice,
       grossTotal: this.grossTotal,
       discounts: this.discounts,
@@ -207,10 +262,6 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
     };
 
     console.log(invoice);
-
-    // if (this.paymentMethod === 'credito') {
-    //   invoice.dueDate = this.dueDate;
-    // }
 
     this._apiService.peticionesPut(`compras/${this.postId}`, invoice)
       .subscribe( (data: any) => {

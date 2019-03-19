@@ -94,7 +94,7 @@ export class CrearProductoComponent implements OnInit {
   }
 
   testTipo() {
-    console.log({Tipo: this.tipo})
+    console.log({Tipo: this.etiqueta})
   }
 
   verificarReferencia() {

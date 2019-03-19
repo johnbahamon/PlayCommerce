@@ -57,38 +57,108 @@
         </div>
     </div>
     <div class="row">
-        <div class="table-responsive">
-            <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                        <th style="width: 5%">#</th>
-                        <th style="width: 35%">Producto</th>
-                        <th style="width: 8%">Cant.</th>
-                        <th style="width: 10%">Valor Unit.</th>
-                        <th style="width: 8%">Desc. 1 (%)</th>
-                        <th style="width: 8%">Desc. 2 (%)</th>
-                        <th style="width: 8%">Iva (%)</th>
-                        <th style="width: 9%">Unit+ Iva</th>
-                        <th style="width: 9%">Tot+ Iva</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let product of invoice.products; let i = index">
-                        <td>{{ i + 1 }}</td>
-                        <td>{{ product.productId.nombre }}</td>
-                        <td>{{ product.qty }}</td>
-                        <td>{{ product.unitValue | currency:'USD':'symbol':"1.0-2" }}</td>
-                        <td>{{ product.discount }}</td>
-                        <td>{{ product.discount2 }}</td>
-                        <td>{{ product.tax }}</td>
-                        <td>{{ product.withTaxUnit | currency:'USD':'symbol':"1.0-2" }}</td>
-                        <td>{{ product.withTax | currency:'USD':'symbol':"1.0-2" }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-12">
 
+
+            
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-4">
+                        <h5>Producto</h5>
+                    </div>
+                    <div class="col">
+                        <h5>Cant</h5>
+                    </div>
+                    <div class="col-2">
+                        <h5>Vr Unit.</h5>
+                    </div>
+                    <div class="col">
+                        <h5>Desc1(%)</h5>
+                    </div>
+                    <div class="col">
+                        <h5>Desc2(%)</h5>
+                    </div>
+                    <div class="col">
+                        <h5>Neto</h5>
+                    </div>
+                    <div class="col">
+                        <h5>+Iva</h5>
+                    </div>
+                    <div class="col">
+                        <h5>+IvaUnit</h5>
+                    </div>
+                </div>
+                <div class="row" *ngFor="let product of invoice.products; trackBy: trackByProductId; let i = index">
+
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <p>
+                                    <strong>{{ i + 1 }}</strong>
+                                    - {{ product.productId.nombre }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.qty }}</p>
+                            </div>
+                            <div class="col-2">
+                                <p>{{ product.unitValue }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.discount }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.discount2 }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.beforeTax }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.withTax }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ product.withTaxUnit }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" *ngIf="product.productos && product.productos.length > 0">
+                        <div class="row" *ngFor="let producto of product.productos; trackBy: trackByProductId; let index = index">
+                            <div class="col"></div>
+                            <div class="col-3">
+                                    <p>
+                                        <strong>{{ index + 1 }}</strong>
+                                        - {{ producto.productId.nombre }}
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.qty }}</p>
+                                </div>
+                                <div class="col-2">
+                                    <p>{{ producto.unitValue }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.discount }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.discount2 }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.beforeTax }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.withTax }}</p>
+                                </div>
+                                <div class="col">
+                                    <p>{{ producto.withTaxUnit }}</p>
+                                </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
             <br>
-
+<div class="col-12">
             <div class="container">
                 <div class="row">
                     <div class="col-6"></div>

@@ -60,7 +60,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     this.Math = Math;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngAfterViewInit() {
     this.obtenerSuppliers();
@@ -78,12 +78,14 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
         switchMap(title => this.busquedaProvedoresService.obtenerProveedoresFiltrados(title)))
       .subscribe((suppliers: any) => {
         console.log('Evento de Teclado... Busqueda Proveedor...');
-        
+
         this.proveedoresEncontrados = suppliers;
       });
   }
 
-  elegirProveedor( supplier ) {
+  elegirProveedor(supplier) {
+    console.log({ supplier });
+
     this.proveedorElegido = supplier;
   }
 
@@ -96,25 +98,53 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
         distinctUntilChanged(),
         map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value),
         switchMap(title => this.busquedaProductosService.obtenerProductosFiltrados(title)))
-    .subscribe((productNames: any) => {
-      this.productosEncontrados = productNames;
-    });
+      .subscribe((productNames: any) => {
+        this.productosEncontrados = productNames;
+      });
   }
 
-  elegirProducto( producto ) {
+  elegirProducto(producto) {
+
+    console.log({ producto });
+
 
     if (!this.idProductosElegidos.includes(producto._id)) {
       const product = {
         productId: producto._id,
         productName: producto.nombre,
+        etiqueta: producto.etiqueta,
         qty: 1,
         unitValue: 0,
         discount: 0,
         discount2: 0,
         tax: 19,
+        beforeTax: 0,
         withTax: 0,
-        withTaxUnit: 0
+        withTaxUnit: 0,
+        productos: []
       };
+
+      if (producto.combo && producto.combo.length > 0) {
+        const productos = [];
+        producto.combo.forEach(element => {
+          const productoCombo = {
+            productId: element._id,
+            productName: element.nombre,
+            etiqueta: element.etiqueta,
+            qty: 1,
+            unitValue: 0,
+            discount: 0,
+            discount2: 0,
+            tax: 19,
+            beforeTax: 0,
+            withTax: 0,
+            withTaxUnit: 0
+          }
+
+          productos.push(productoCombo);
+        })
+        product.productos = productos;
+      }
       // console.log(product);
 
       this.productosElegidos[this.productosElegidos.length] = product;
@@ -133,7 +163,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
 
 
 
-  eliminarProducto( i ) {
+  eliminarProducto(i) {
     this.productosElegidos.splice(i, 1);
     this.idProductosElegidos.splice(i, 1);
     this.actualizar(i);
@@ -143,9 +173,9 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     let _grossTotal = 0;
     let _discounts = 0;
 
-    for ( const product of this.productosElegidos ) {
+    for (const product of this.productosElegidos) {
       _grossTotal += product.qty * product.unitValue;
-      _discounts += ( product.qty * product.unitValue * ( 10000 - (( 100 - product.discount ) * ( 100 - product.discount2 )))) / 10000;
+      _discounts += (product.qty * product.unitValue * (10000 - ((100 - product.discount) * (100 - product.discount2)))) / 10000;
     }
 
     this.grossTotal = Math.round(_grossTotal);
@@ -162,21 +192,57 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
 
     const productsInvoice = [];
 
-    this.productosElegidos.forEach( (element: any) => {
+    this.productosElegidos.forEach((element: any) => {
       const productInvoice = {
         productId: element.productId,
         qty: element.qty,
+        etiqueta: element.etiqueta,
         unitValue: element.unitValue,
         discount: element.discount,
         discount2: element.discount2,
         tax: element.tax,
         // tslint:disable-next-line:max-line-length
-        withTax: Math.round( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ),
+        beforeTax: Math.round((element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))),
         // tslint:disable-next-line:max-line-length
-        withTaxUnit: Math.round(( 1.19 * ( element.qty * element.unitValue ) * ( 1 - ( element.discount / 100 ) ) * ( 1 - ( element.discount2 / 100 ) ) ) / element.qty )
+        withTax: Math.round(1.19 * (element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))),
+        // tslint:disable-next-line:max-line-length
+        withTaxUnit: Math.round((1.19 * (element.qty * element.unitValue) * (1 - (element.discount / 100)) * (1 - (element.discount2 / 100))) / element.qty),
+        productos: []
       };
+
+
+      if (element.etiqueta === 'Combo' && element.productos && element.productos.length > 0) {
+        const productos = [];
+        element.productos.forEach(element2 => {
+
+          const productoCombo = {
+            productId: element2.productId,
+            qty: element2.qty,
+            unitValue: element2.unitValue,
+            discount: element2.discount,
+            discount2: element2.discount2,
+            tax: element2.tax,
+            // tslint:disable-next-line:max-line-length
+            beforeTax: Math.round((element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))),
+            // tslint:disable-next-line:max-line-length
+            withTax: Math.round(1.19 * (element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))),
+            // tslint:disable-next-line:max-line-length
+            withTaxUnit: Math.round((1.19 * (element2.qty * element2.unitValue) * (1 - (element2.discount / 100)) * (1 - (element2.discount2 / 100))) / element2.qty),
+          }
+
+          productos.push(productoCombo);
+
+        })
+
+        productInvoice.productos = productos;
+
+      }
+
       productsInvoice.push(productInvoice);
+
     });
+
+    this.actualizar('e');
 
     console.log('products', productsInvoice);
     console.log('grossTotal', this.grossTotal);
@@ -208,7 +274,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     }
 
     this._apiService.peticionesPost('compras', invoice)
-      .subscribe( (data: any) => {
+      .subscribe((data: any) => {
         swal('Compra', 'Creada con Exito', 'success');
       });
 
