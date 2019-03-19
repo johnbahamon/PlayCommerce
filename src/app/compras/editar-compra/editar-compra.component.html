@@ -69,7 +69,8 @@
           <th style="width: 10%">Vr Unit.</th>
           <th style="width: 8%">Desc. 1 (%)</th>
           <th style="width: 8%">Desc. 2 (%)</th>
-          <th style="width: 10%">Iva (%)</th>
+          <!-- <th style="width: 10%">Iva (%)</th> -->
+          <th style="width: 10%">Neto</th>
           <th style="width: 10%">+Iva</th>
           <th style="width: 10%">+IvaUnit</th>
         </tr>
@@ -114,8 +115,9 @@
               [(ngModel)]="product.discount2" [ngModelOptions]="{standalone: true}">
           </td>
           <td>
-            <input class="form-control" type="number" readonly [(ngModel)]="product.tax"
-              [ngModelOptions]="{standalone: true}">
+            <!-- <input class="form-control" type="number" readonly [(ngModel)]="product.tax"
+              [ngModelOptions]="{standalone: true}"> -->
+              <input class="form-control" type="number" readonly value="{{ this.Math.round(product.withTax / 1.19) }}">
           </td>
           <td>
             <input class="form-control" type="number" readonly [(ngModel)]="product.withTax"
