@@ -40,6 +40,7 @@
                 <thead class="thead-light">
                     <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Modelo</th>
                         <th scope="col">Referencia</th>
                         <th scope="col">Ver</th>
@@ -48,6 +49,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let producto of productos">
+                        <td>{{ producto.tipo }}</td>
                         <td>{{ producto.nombre }}</td>
                         <td>{{ producto.caracteristicas.modelo }}</td>
                         <td>{{ producto.caracteristicas.referencia }}</td>

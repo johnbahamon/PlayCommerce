@@ -10,10 +10,23 @@
 <div class="container" [hidden]="!referenciaExiste">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
+            <label class="input-group-text">Tipo</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="tipo" (change)="testTipo()">
+            <option [value]="t" *ngFor="let t of tipos">{{t}}</option>
+        </select>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
             <span class="input-group-text">Referencia</span>
         </div>
-        <input type="text" class="form-control" [(ngModel)]="referenciaBuscar" placeholder="Buscar" (change)="verificarReferencia()">
+        <input type="text" class="form-control" [(ngModel)]="referenciaBuscar" placeholder="Buscar"
+            (change)="verificarReferencia()">
     </div>
+
+
 </div>
 
 <div class="container" [hidden]="referenciaExiste">
@@ -21,9 +34,12 @@
 
     <nav>
         <div class="nav nav-tabs nav-fill">
-            <a class="nav-item nav-link pointer" (click)="cambiarPagina(1)" [class.active]="pagina == 1" [class.show]="pagina == 1">Información</a>
-            <a class="nav-item nav-link pointer" (click)="cambiarPagina(2)" [class.active]="pagina == 2" [class.show]="pagina == 2">Caracteristicas</a>
-            <a class="nav-item nav-link pointer" (click)="cambiarPagina(3)" [class.active]="pagina == 3" [class.show]="pagina == 3">Detalles</a>
+            <a class="nav-item nav-link pointer" (click)="cambiarPagina(1)" [class.active]="pagina == 1"
+                [class.show]="pagina == 1">Información</a>
+            <a class="nav-item nav-link pointer" (click)="cambiarPagina(2)" [class.active]="pagina == 2"
+                [class.show]="pagina == 2">Caracteristicas</a>
+            <a class="nav-item nav-link pointer" (click)="cambiarPagina(3)" [class.active]="pagina == 3"
+                [class.show]="pagina == 3">Detalles</a>
             <!-- <a class="nav-item nav-link pointer" (click)="cambiarPagina(4)" [class.active]="pagina == 4" [class.show]="pagina == 4" (click)="cargarProveedores()">Otros</a> -->
         </div>
     </nav>
@@ -40,7 +56,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"><strong>Nombre</strong></label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="nombre" placeholder="Nombre" [(ngModel)]="nombre">
+                            <input type="text" class="form-control" name="nombre" placeholder="Nombre"
+                                [(ngModel)]="nombre">
                         </div>
                     </div>
 
@@ -48,15 +65,16 @@
                         <label class="col-sm-2 col-form-label"><strong>Marca</strong></label>
                         <div class="col-sm-10">
                             <select class="form-control" name="marca" [(ngModel)]="marca">
-                            <option *ngFor="let marca of marcas" [value]="marca._id">{{ marca.nombre }}</option>
-                        </select>
+                                <option *ngFor="let marca of marcas" [value]="marca._id">{{ marca.nombre }}</option>
+                            </select>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"><strong>Categoría</strong></label>
                         <div class="col-sm-10">
-                            <input type="text" (click)="buscarCategorias()" class="form-control pointer" name="categoria" placeholder="Buscar..." [(ngModel)]="categoria.nombre" readonly>
+                            <input type="text" (click)="buscarCategorias()" class="form-control pointer"
+                                name="categoria" placeholder="Buscar..." [(ngModel)]="categoria.nombre" readonly>
                         </div>
                     </div>
 
@@ -65,8 +83,10 @@
                         <hr>
                         <ul [style.display]="categoriasFiltradas.length> 0 ? 'block' : 'none'">
                             <li *ngFor="let categoria of categoriasFiltradas">
-                                <span>{{ categoria.abuelo ? categoria.abuelo.nombre : ''}} - {{ categoria.parent ? categoria.parent.nombre : ''}} - {{ categoria.nombre }}</span>
-                                <button type="button" class="btn btn-link" (click)="elegirCategoria(categoria)">Elegir Categoría</button>
+                                <span>{{ categoria.abuelo ? categoria.abuelo.nombre : ''}} -
+                                    {{ categoria.parent ? categoria.parent.nombre : ''}} - {{ categoria.nombre }}</span>
+                                <button type="button" class="btn btn-link" (click)="elegirCategoria(categoria)">Elegir
+                                    Categoría</button>
                             </li>
                         </ul>
                         <hr>
@@ -85,11 +105,14 @@
             <div class="form-group row" *ngFor="let caracteristica of caracteristicas; let i = index">
                 <label class="col-sm-2 col-form-label"><strong>{{ caracteristica[0] }}</strong></label>
                 <div class="col-sm-10">
-                    <input *ngIf="caracteristica[0] != 'Color'" [type]="caracteristica[1]" class="form-control" [name]="caracteristicasSlug[i]" [placeholder]="caracteristica[0]" [(ngModel)]="this[caracteristicasSlug[i]]">
+                    <input *ngIf="caracteristica[0] != 'Color'" [type]="caracteristica[1]" class="form-control"
+                        [name]="caracteristicasSlug[i]" [placeholder]="caracteristica[0]"
+                        [(ngModel)]="this[caracteristicasSlug[i]]">
 
-                    <select *ngIf="caracteristica[0] === 'Color'" class="form-control" [name]="caracteristicasSlug[i]" [(ngModel)]="this[caracteristicasSlug[i]]">
-                  <option *ngFor="let opcion of colores" [value]="opcion.nombre">{{ opcion.nombre }}</option>
-              </select>
+                    <select *ngIf="caracteristica[0] === 'Color'" class="form-control" [name]="caracteristicasSlug[i]"
+                        [(ngModel)]="this[caracteristicasSlug[i]]">
+                        <option *ngFor="let opcion of colores" [value]="opcion.nombre">{{ opcion.nombre }}</option>
+                    </select>
                 </div>
             </div>
 
@@ -99,7 +122,8 @@
         <div class="tab-pane" [hidden]="pagina != 3">
 
             <ng-container *ngIf="categoriaParentConDetalles">
-                <div class="form-group row" *ngFor="let caracteristica of categoriaParentConDetalles.detalles; let i = index">
+                <div class="form-group row"
+                    *ngFor="let caracteristica of categoriaParentConDetalles.detalles; let i = index">
                     <label class="col-sm-2 col-form-label"><strong>{{ caracteristica[0] }}</strong></label>
 
                     <div class="col-sm-10">
@@ -110,9 +134,11 @@
                         </ng-template> -->
                             <ng-template [ngIf]="!caracteristica[4]">
 
-                                <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]">
-                                <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
-                            </select>
+                                <select class="form-control" [name]="caracteristica[1]"
+                                    [(ngModel)]="this[caracteristica[1]]">
+                                    <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}
+                                    </option>
+                                </select>
 
                             </ng-template>
                             <!-- <ng-template [ngIf]="caracteristica[2] === null && caracteristica[3]">
@@ -127,9 +153,11 @@
 
                             <ng-template [ngIf]="caracteristica[4]">
 
-                                <select class="form-control" [name]="caracteristica[1]" [(ngModel)]="this[caracteristica[1]]" multiple>
-                                <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}</option>
-                            </select>
+                                <select class="form-control" [name]="caracteristica[1]"
+                                    [(ngModel)]="this[caracteristica[1]]" multiple>
+                                    <option *ngFor="let opcion of caracteristica[2]" [value]="opcion">{{ opcion }}
+                                    </option>
+                                </select>
 
                             </ng-template>
                         </div>
@@ -171,7 +199,8 @@
                 <div class="col">
                     <h4>Videos</h4>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Url de Video" [(ngModel)]="videoUrl" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" placeholder="Url de Video" [(ngModel)]="videoUrl"
+                            [ngModelOptions]="{standalone: true}">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="button" (click)="agregarVideo()">+</button>
                         </div>
@@ -195,7 +224,8 @@
                     <ul [style.display]="proveedoresFiltrados.length> 0 ? 'block' : 'none'">
                         <li *ngFor="let proveedor of proveedoresFiltrados">
                             <span>{{ proveedor.nombre }}</span>
-                            <button type="button" class="btn btn-link" (click)="elegirProveedor(proveedor)">Elegir Proveedor</button>
+                            <button type="button" class="btn btn-link" (click)="elegirProveedor(proveedor)">Elegir
+                                Proveedor</button>
                         </li>
                     </ul>
                     <hr>
@@ -203,7 +233,8 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Proveedor</span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Proveedor" [(ngModel)]="proveedorElegido.nombre" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" placeholder="Proveedor"
+                            [(ngModel)]="proveedorElegido.nombre" [ngModelOptions]="{standalone: true}">
                     </div>
 
                     <div class="input-group mb-3">
@@ -211,7 +242,8 @@
                             <span class="input-group-text">CMMF</span>
                         </div>
 
-                        <input type="text" class="form-control" placeholder="CMMF" [(ngModel)]="cmmf" [ngModelOptions]="{standalone: true}">
+                        <input type="text" class="form-control" placeholder="CMMF" [(ngModel)]="cmmf"
+                            [ngModelOptions]="{standalone: true}">
                     </div>
                     <button type="button" class="btn btn-secondary" (click)="guardarCmmf()">Añadir CMMF</button>
                 </div>

@@ -45,6 +45,8 @@ export class CrearProductoComponent implements OnInit {
 
   pagina: number = 1;
   nombre: string;
+  tipo: string = 'Producto';
+  tipos: string[] = ['Producto', 'Repuesto', 'Combo'];
   marca: any;
   categoria: any = {
     nombre: ''
@@ -89,6 +91,10 @@ export class CrearProductoComponent implements OnInit {
     this.cargarMarcas();
     this.convertirCaracteristicas();
     this.colores = this.coloresService.obtenerColores();
+  }
+
+  testTipo() {
+    console.log({Tipo: this.tipo})
   }
 
   verificarReferencia() {
@@ -190,6 +196,7 @@ export class CrearProductoComponent implements OnInit {
     const formValues = Object.assign({}, form.value);
     const producto = {
       nombre: this.nombre,
+      tipo: this.tipo,
       slug: this.funcionesService.stringToSlug(this.nombre),
       marca: this.marca,
       categoria: this.categoria._id,
