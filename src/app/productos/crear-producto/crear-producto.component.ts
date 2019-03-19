@@ -45,8 +45,8 @@ export class CrearProductoComponent implements OnInit {
 
   pagina: number = 1;
   nombre: string;
-  tipo: string = 'Producto';
-  tipos: string[] = ['Producto', 'Repuesto', 'Combo'];
+  etiqueta: string = 'Producto';
+  etiquetas: string[] = ['Producto', 'Repuesto', 'Combo'];
   marca: any;
   categoria: any = {
     nombre: ''
@@ -196,7 +196,7 @@ export class CrearProductoComponent implements OnInit {
     const formValues = Object.assign({}, form.value);
     const producto = {
       nombre: this.nombre,
-      tipo: this.tipo,
+      etiqueta: this.etiqueta,
       slug: this.funcionesService.stringToSlug(this.nombre),
       marca: this.marca,
       categoria: this.categoria._id,

@@ -12,8 +12,8 @@
         <div class="input-group-prepend">
             <label class="input-group-text">Tipo</label>
         </div>
-        <select class="custom-select" [(ngModel)]="tipo" (change)="testTipo()">
-            <option [value]="t" *ngFor="let t of tipos">{{t}}</option>
+        <select class="custom-select" [(ngModel)]="etiqueta" (change)="testTipo()">
+            <option [value]="t" *ngFor="let t of etiquetas">{{t}}</option>
         </select>
     </div>
 
