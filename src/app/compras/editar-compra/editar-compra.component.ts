@@ -81,18 +81,46 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
 
   elegirProducto( producto ) {
 
+    console.log({ producto });
+
+
     if (!this.idProductosElegidos.includes(producto._id)) {
       const product = {
         productId: producto._id,
         productName: producto.nombre,
+        etiqueta: producto.etiqueta,
         qty: 1,
         unitValue: 0,
         discount: 0,
         discount2: 0,
         tax: 19,
+        beforeTax: 0,
         withTax: 0,
-        withTaxUnit: 0
+        withTaxUnit: 0,
+        productos: []
       };
+
+      if (producto.combo && producto.combo.length > 0) {
+        const productos = [];
+        producto.combo.forEach(element => {
+          const productoCombo = {
+            productId: element._id,
+            productName: element.nombre,
+            etiqueta: element.etiqueta,
+            qty: 1,
+            unitValue: 0,
+            discount: 0,
+            discount2: 0,
+            tax: 19,
+            beforeTax: 0,
+            withTax: 0,
+            withTaxUnit: 0
+          }
+
+          productos.push(productoCombo);
+        })
+        product.productos = productos;
+      }
       // console.log(product);
 
       this.productosElegidos[this.productosElegidos.length] = product;
