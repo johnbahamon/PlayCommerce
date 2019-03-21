@@ -36,6 +36,7 @@ import { CrearUsuarioComponent } from './usuarios/crear-usuario/crear-usuario.co
 import { VentaComponent } from './ventas/venta/venta.component';
 import { MarcaComponent } from './marcas/marca/marca.component';
 import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
+import { HistoricoComprasComponent } from './compras/historico-compras/historico-compras.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -68,6 +69,7 @@ const appRoutes: Routes = [
     { path: 'compras/crear-compra', component: CrearCompraComponent },
     { path: 'compras/compra/:id', component: CompraComponent },
     { path: 'compras/editar-compra/:id', component: EditarCompraComponent },
+    { path: 'compras/historico-compras/:id', component: HistoricoComprasComponent },
     { path: 'ventas', component: VentasComponent },
     { path: 'ventas/crear-venta', component: CrearVentaComponent },
     { path: 'ventas/venta/:id', component: VentaComponent },

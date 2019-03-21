@@ -186,6 +186,8 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
   }
 
   prueba() {
+
+    this.actualizar('e');
     console.log('supplierDate', this.supplierDate);
     console.log('supplier', this.proveedorElegido._id);
     console.log('supplierNumber', this.supplierNumber);
@@ -242,7 +244,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
 
     });
 
-    this.actualizar('e');
+    
 
     console.log('products', productsInvoice);
     console.log('grossTotal', this.grossTotal);

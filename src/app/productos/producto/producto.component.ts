@@ -35,9 +35,9 @@ export class ProductoComponent implements OnInit, OnDestroy {
     private funcionesService: FuncionesService,
     private router: Router
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
-  };
+    };
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class ProductoComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
         this.producto = data.producto;
         this.producto.detalles = this.producto.detalles || {};
-        console.log({producto: this.producto});
+        console.log({ producto: this.producto });
         this.caracteristicas = Object.keys(this.producto.caracteristicas);
         this.detalles = this.producto.categoria.detalles.map(element => element[1]);
         // this.detalles = this.producto.categoria.detalles.map(element => element[1]) ? this.producto.categoria.detalles.map(element => element[1]) : {};
