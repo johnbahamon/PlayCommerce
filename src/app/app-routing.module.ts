@@ -37,6 +37,7 @@ import { VentaComponent } from './ventas/venta/venta.component';
 import { MarcaComponent } from './marcas/marca/marca.component';
 import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
 import { HistoricoComprasComponent } from './compras/historico-compras/historico-compras.component';
+import { HistoricoProductoComponent } from './productos/historico-producto/historico-producto.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     { path: 'productos/editar-producto/editar-caracteristicas/:id', component: EditarCaracteristicasComponent },
     { path: 'productos/editar-producto/agregar-videos-cmmf/:id', component: AgregarVideosCmmfComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
+    { path: 'productos/historico-producto/:id', component: HistoricoProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },
     { path: 'proveedores/crear-proveedor', component: CrearProveedorComponent },
     { path: 'compras', component: ComprasComponent },

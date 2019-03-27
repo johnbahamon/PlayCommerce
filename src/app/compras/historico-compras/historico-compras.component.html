@@ -8,6 +8,24 @@
 </div>
 
 
-<div class="container">
-
+<div class="container" *ngIf="compras && compras.length > 0">
+    <h3>{{ compras[0].linea.productId.nombre }}</h3>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Cantidad</th>
+            <th scope="col">Valor Unidad</th>
+            <th scope="col">Ver Factura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let compra of compras">
+            <td>{{ compra.supplierDate | date }}</td>
+            <td>{{ compra.linea.qty }}</td>
+            <td>{{ compra.linea.withTaxUnit }}</td>
+            <td><button type="button" class="btn btn-primary" (click)="irACompra(compra._id)">VER</button></td>
+          </tr>
+        </tbody>
+      </table>
 </div>

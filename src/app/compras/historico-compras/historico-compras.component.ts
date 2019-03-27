@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/servicios/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../servicios/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-historico-compras',
@@ -10,15 +10,19 @@ import { ActivatedRoute } from '@angular/router';
 export class HistoricoComprasComponent implements OnInit {
 
   productoId: string;
+  compras: any[] = [];
+  combos: any[] = [];
 
   constructor(
     private apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.encontrarId();
     this.buscarCompras();
+    this.buscarCombos();
   }
 
   encontrarId() {
@@ -28,8 +32,45 @@ export class HistoricoComprasComponent implements OnInit {
   buscarCompras() {
     this.apiService.peticionGet('historico-compras/' + this.productoId)
       .subscribe((response: any) => {
-        console.log(response);
+        console.log({compras: response});
+        
+        const compras = response.compras;
+        this.compras = [];
+        compras.forEach(element => {
+          const compra = {
+            _id: element._id,
+            supplierDate: element.supplierDate,
+            linea: element.products.find(element2 => element2.productId._id === this.productoId)
+          }
+          this.compras.push(compra);
+        });
+        // console.log(this.compras);  
+        // this.compras = []      
       })
+  }
+
+  buscarCombos() {
+    this.apiService.peticionGet('historico-combos/' + this.productoId)
+      .subscribe((response: any) => {
+        console.log({combos: response});
+        
+        const combos = response.combos;
+        this.combos = [];
+        combos.forEach(element => {
+          const combo = {
+            _id: element._id,
+            supplierDate: element.supplierDate,
+            linea: element.products.find(element2 => element2.productId._id === this.productoId)
+          }
+          this.combos.push(combo);
+        });
+        // console.log(this.combos);  
+        // this.compras = []      
+      })
+  }
+
+  irACompra(compraId) {
+    this.router.navigate(['compras', 'compra', compraId])
   }
 
 }

@@ -10,6 +10,22 @@
 
 <div class="container" *ngIf="invoice">
 
+    <div class="row justify-content-end">
+        <div class="col-1">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item pointer"
+                    routerLink="/compras/editar-compra/{{ invoice._id }}">Editar</a>
+                    <a class="dropdown-item pointer"
+                    (click)="ejecutarHistorico(invoice._id)">Ejecutar Histórico</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row justify-content-around">
         <div class="col-5">
             <div class="row">
@@ -40,8 +56,11 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="basic-addon1">Proveedor</span>
                     </div>
-                    <input *ngIf="invoice.supplier.tipoId === 'nit'" type="text" class="form-control" [value]="invoice.supplier.primerNombre" readonly>
-                    <input *ngIf="invoice.supplier.tipoId === 'cc'" type="text" class="form-control" [value]="invoice.supplier.primerNombre + invoice.supplier.segundoNombre + invoice.supplier.apellidos" readonly>
+                    <input *ngIf="invoice.supplier.tipoId === 'nit'" type="text" class="form-control"
+                        [value]="invoice.supplier.primerNombre" readonly>
+                    <input *ngIf="invoice.supplier.tipoId === 'cc'" type="text" class="form-control"
+                        [value]="invoice.supplier.primerNombre + invoice.supplier.segundoNombre + invoice.supplier.apellidos"
+                        readonly>
                 </div>
             </div>
         </div>
@@ -60,7 +79,7 @@
         <div class="col-12">
 
 
-            
+
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-4">
@@ -122,49 +141,52 @@
                         </div>
                     </div>
                     <div class="col-12" *ngIf="product.productos && product.productos.length > 0">
-                        <div class="row" *ngFor="let producto of product.productos; trackBy: trackByProductId; let index = index">
+                        <div class="row"
+                            *ngFor="let producto of product.productos; trackBy: trackByProductId; let index = index">
                             <div class="col"></div>
                             <div class="col-3">
-                                    <p>
-                                        <strong>{{ index + 1 }}</strong>
-                                        - {{ producto.productId.nombre }}
-                                    </p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.qty }}</p>
-                                </div>
-                                <div class="col-2">
-                                    <p>{{ producto.unitValue }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.discount }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.discount2 }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.beforeTax }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.withTax }}</p>
-                                </div>
-                                <div class="col">
-                                    <p>{{ producto.withTaxUnit }}</p>
-                                </div>
+                                <p>
+                                    <strong>{{ index + 1 }}</strong>
+                                    - {{ producto.productId.nombre }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.qty }}</p>
+                            </div>
+                            <div class="col-2">
+                                <p>{{ producto.unitValue }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.discount }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.discount2 }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.beforeTax }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.withTax }}</p>
+                            </div>
+                            <div class="col">
+                                <p>{{ producto.withTaxUnit }}</p>
+                            </div>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
-            <br>
-<div class="col-12">
+        <br>
+        <div class="col-12">
             <div class="container">
                 <div class="row">
                     <div class="col-6"></div>
                     <div class="col-4">
                         <div class="form-group row">
-                            <label for="" class="col-6 text-right"><h5>Total Bruto:</h5></label>
+                            <label for="" class="col-6 text-right">
+                                <h5>Total Bruto:</h5>
+                            </label>
                             <div class="col-5">
                                 {{ invoice.grossTotal | currency:'USD':'symbol':"1.0-2" }}
                             </div>
@@ -175,7 +197,9 @@
                     <div class="col-6"></div>
                     <div class="col-4">
                         <div class="form-group row">
-                            <label for="" class="col-6 text-right"><h5>Descuentos:</h5></label>
+                            <label for="" class="col-6 text-right">
+                                <h5>Descuentos:</h5>
+                            </label>
                             <div class="col-5">
                                 {{ invoice.discounts | currency:'USD':'symbol':"1.0-2" }}
                             </div>
@@ -186,7 +210,9 @@
                     <div class="col-6"></div>
                     <div class="col-4">
                         <div class="form-group row">
-                            <label for="" class="col-6 text-right"><h5>Subtotal:</h5></label>
+                            <label for="" class="col-6 text-right">
+                                <h5>Subtotal:</h5>
+                            </label>
                             <div class="col-5">
                                 {{ invoice.subtotal | currency:'USD':'symbol':"1.0-2" }}
                             </div>
@@ -197,7 +223,9 @@
                     <div class="col-6"></div>
                     <div class="col-4">
                         <div class="form-group row">
-                            <label for="" class="col-6 text-right"><h5>Iva:</h5></label>
+                            <label for="" class="col-6 text-right">
+                                <h5>Iva:</h5>
+                            </label>
                             <div class="col-5">
                                 {{ invoice.iva | currency:'USD':'symbol':"1.0-2" }}
                             </div>
@@ -209,7 +237,9 @@
                     <div class="col-6"></div>
                     <div class="col-4">
                         <div class="form-group row">
-                            <label for="" class="col-6 text-right"><h5>Total Neto:</h5></label>
+                            <label for="" class="col-6 text-right">
+                                <h5>Total Neto:</h5>
+                            </label>
                             <div class="col-5">
                                 {{ invoice.total | currency:'USD':'symbol':"1.0-2" }}
                             </div>
@@ -220,7 +250,8 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col-1">
-                        <a class="btn btn-primary btn-block" routerLink="/compras/editar-compra/{{ invoice._id }}" role="button">Editar</a>
+                        <a class="btn btn-primary btn-block" routerLink="/compras/editar-compra/{{ invoice._id }}"
+                            role="button">Editar</a>
                     </div>
                     <div class="col-10"></div>
                 </div>

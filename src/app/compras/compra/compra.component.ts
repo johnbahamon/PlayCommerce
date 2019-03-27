@@ -35,4 +35,12 @@ export class CompraComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  ejecutarHistorico(invoiceId) {
+    const url = 'ejecutar-historico/' + invoiceId;
+    this._apiService.peticionGet( url )
+      .subscribe( (data: any) => {
+        console.log(data);
+      });
+  }
 }
