@@ -5,6 +5,7 @@ import { ApiService } from '../../servicios/api.service';
 
 import { fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-compra',
@@ -55,7 +56,8 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
   constructor(
     public busquedaProductosService: BusquedaProductosService,
     public busquedaProvedoresService: BusquedaProveedoresService,
-    public _apiService: ApiService
+    public _apiService: ApiService,
+    public router: Router
   ) {
     this.Math = Math;
   }
@@ -278,6 +280,7 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
     this._apiService.peticionesPost('compras', invoice)
       .subscribe((data: any) => {
         swal('Compra', 'Creada con Exito', 'success');
+        this.router.navigate(['/compras', 'compra', data.compra._id])
       });
 
 

@@ -38,6 +38,7 @@ import { MarcaComponent } from './marcas/marca/marca.component';
 import { AgregarHermanosComponent } from './productos/editar-producto/agregar-hermanos/agregar-hermanos.component';
 import { HistoricoComprasComponent } from './compras/historico-compras/historico-compras.component';
 import { HistoricoProductoComponent } from './productos/historico-producto/historico-producto.component';
+import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -76,6 +77,7 @@ const appRoutes: Routes = [
     { path: 'ventas/crear-venta', component: CrearVentaComponent },
     { path: 'ventas/venta/:id', component: VentaComponent },
     { path: 'usuarios', component: UsuariosComponent },
+    { path: 'usuarios/usuario/:id', component: UsuarioComponent },
     { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
     { path: '',   redirectTo: '/productos', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -23,7 +24,8 @@ export class CrearUsuarioComponent implements OnInit {
   usuarioEncontrado: boolean = true;
 
  constructor(
-   private apiService: ApiService
+   private apiService: ApiService,
+   private router: Router
  ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class CrearUsuarioComponent implements OnInit {
     this.apiService.peticionesPost('usuarios', formValues)
       .subscribe((data: any) => {
         swal('Muy Bien', 'Usuario creado correctamente', 'success');
+        this.router.navigate(['/usuarios', 'usuario', data.usuario._id ])
         console.log(data);
       });
   }

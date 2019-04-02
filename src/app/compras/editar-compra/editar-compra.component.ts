@@ -87,7 +87,7 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
     if (!this.idProductosElegidos.includes(producto._id)) {
       const product = {
         productId: producto._id,
-        productName: producto.nombre,
+        productName: producto.caracteristicas.referencia + ' - ' + producto.nombre,
         etiqueta: producto.etiqueta,
         qty: 1,
         unitValue: 0,
@@ -105,7 +105,7 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
         producto.combo.forEach(element => {
           const productoCombo = {
             productId: element._id,
-            productName: element.nombre,
+            productName: element.caracteristicas.referencia + ' - ' + element.nombre,
             etiqueta: element.etiqueta,
             qty: 1,
             unitValue: 0,
@@ -135,9 +135,13 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
 
   inicializarVariables() {
     this.invoice.products.forEach(element => {
+      console.log('ELEMENT');
+      console.log(element);
+      console.log('ELEMENT');
+      
       const productInvoice = {
         productId: element.productId._id,
-        productName: element.productId.nombre,
+        productName: element.productId.caracteristicas.referencia + ' - ' + element.productId.nombre,
         etiqueta: element.etiqueta,
         qty: element.qty,
         unitValue: element.unitValue,
@@ -156,7 +160,7 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
 
           const productoCombo = {
             productId: element2.productId._id,
-            productName: element2.productId.nombre,
+            productName: element2.productId.caracteristicas.referencia + ' - ' + element2.productId.nombre,
             etiqueta: element2.etiqueta,
             qty: element2.qty,
             unitValue: element2.unitValue,

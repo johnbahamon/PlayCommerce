@@ -8,7 +8,7 @@
 </div>
 
 
-<div class="container" *ngIf="invoice">
+<div class="container-fluid" *ngIf="invoice">
 
     <div class="row justify-content-end">
         <div class="col-1">
@@ -20,10 +20,11 @@
                     <a class="dropdown-item pointer"
                     routerLink="/compras/editar-compra/{{ invoice._id }}">Editar</a>
                     <a class="dropdown-item pointer"
-                    (click)="ejecutarHistorico(invoice._id)">Ejecutar Histórico</a>
+                    (click)="ejecutarHistorico(invoice._id)">DESHABILITADO - Ejecutar Histórico</a>
                 </div>
             </div>
         </div>
+        <div class="col-2"></div>
     </div>
 
     <div class="row justify-content-around">
@@ -247,14 +248,14 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-1"></div>
                     <div class="col-1">
                         <a class="btn btn-primary btn-block" routerLink="/compras/editar-compra/{{ invoice._id }}"
                             role="button">Editar</a>
                     </div>
                     <div class="col-10"></div>
-                </div>
+                </div> -->
             </div>
 
         </div>
