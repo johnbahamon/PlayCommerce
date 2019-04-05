@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/servicios/api.service';
 import swal from 'sweetalert';
 import { FuncionesService } from 'src/app/servicios/funciones.service';
+import { fromEvent, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-ordenada',
@@ -46,7 +48,8 @@ export class ListaOrdenadaComponent implements OnInit {
       this.apiService.peticionGet(`productos-por-marca-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}`)
         .subscribe((data: any) => {
           this.productos = data.productos;
-          this.productosFiltrados = this.productos;          
+          this.productosFiltrados = this.productos;
+          this.cargarBuscador();
         })
     }
   }
@@ -67,6 +70,32 @@ export class ListaOrdenadaComponent implements OnInit {
         this.productosFiltrados[indice].editar = false;
       });
 
+  }
+
+  cargarBuscador() {
+
+    fromEvent(this.nombreProducto.nativeElement, 'keyup').pipe(debounceTime(400)
+    , distinctUntilChanged()
+    , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+    , switchMap(title => this.obtenerProductosFiltrados(title)))
+    .subscribe((productos: any) => {
+      this.productosFiltrados = productos;
+    });
+  }
+
+  obtenerProductosFiltrados(name: string): Observable<any[]> {
+    if (name === '') {
+      // return of([]);
+      return of(this.productos);
+    } else {
+      return of(this.filtrarProductos(name));
+    }
+  }
+
+  filtrarProductos(name) {
+    console.log('FUNCION NORMAL # 2');
+    return name ? this.productos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
+    // return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.referencia)) : [];
   }
 
 }
