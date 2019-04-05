@@ -51,8 +51,9 @@ export class CrearCompraComponent implements OnInit, AfterViewInit {
 
   dueDate: Date;
 
-  paymentMethod: string = 'contado';
-
+  paymentMethod: string = 'credito';
+  // paymentMethod: string = 'contado';
+  
   constructor(
     public busquedaProductosService: BusquedaProductosService,
     public busquedaProvedoresService: BusquedaProveedoresService,

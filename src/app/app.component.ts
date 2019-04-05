@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 })
 export class AppComponent {
   // mostrar = false;
+  mostrarMenu = false;
 
   swalexample() {
     swal('Hello world!');

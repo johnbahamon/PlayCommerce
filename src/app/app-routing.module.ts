@@ -39,6 +39,7 @@ import { AgregarHermanosComponent } from './productos/editar-producto/agregar-he
 import { HistoricoComprasComponent } from './compras/historico-compras/historico-compras.component';
 import { HistoricoProductoComponent } from './productos/historico-producto/historico-producto.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
+import { ListaOrdenadaComponent } from './productos/lista-ordenada/lista-ordenada.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
+    { path: 'productos/lista-ordenada', component: ListaOrdenadaComponent },
     { path: 'productos/crear-combo/:id', component: CrearComboComponent },
     { path: 'productos/busqueda-productos', component: BusquedaProductosComponent },
     { path: 'productos/crear-pedido', component: CrearPedidoComponent },
@@ -79,7 +81,7 @@ const appRoutes: Routes = [
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'usuarios/usuario/:id', component: UsuarioComponent },
     { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
-    { path: '',   redirectTo: '/productos', pathMatch: 'full' },
+    { path: '',   redirectTo: '/productos/lista-ordenada', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];
 
