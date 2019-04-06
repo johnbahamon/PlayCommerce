@@ -86,7 +86,7 @@
         <div class="input-group">
           <textarea type="text" class="form-control" [(ngModel)]="producto.nombre"></textarea>
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" (click)="cambiarNombre(producto.nombre, producto._id, i)">Guardar</button>
+            <button class="btn btn-outline-secondary" type="button" (click)="cambiarNombre(producto.nombre.trim(), producto._id, i)">Guardar</button>
           </div>
         </div>
       </div>

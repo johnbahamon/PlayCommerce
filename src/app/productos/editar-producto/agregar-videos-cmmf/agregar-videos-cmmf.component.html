@@ -26,7 +26,7 @@
                 <div class="col">
                     <h3>CMMFs Anteriores</h3>
                     <ul class="list-group">
-                        <li class="list-group-item" *ngFor="let cmmf of cmmfAnteriores">{{ cmmf }}</li>
+                        <li class="list-group-item" *ngFor="let cmmf of cmmfAnteriores">{{ cmmf.codigo }} - {{ cmmf.proveedor.primerNombre }}</li>
                     </ul>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <hr>
             <ul [style.display]="proveedoresFiltrados.length> 0 ? 'block' : 'none'">
                 <li *ngFor="let proveedor of proveedoresFiltrados">
-                    <span>{{ proveedor.nombre }}</span>
+                    <span>{{ proveedor.primerNombre }}</span>
                     <button type="button" class="btn btn-link" (click)="elegirProveedor(proveedor)">Elegir Proveedor</button>
                 </li>
             </ul>
@@ -86,7 +86,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Proveedor</span>
                 </div>
-                <input type="text" class="form-control" placeholder="Proveedor" [(ngModel)]="proveedorElegido.nombre" [ngModelOptions]="{standalone: true}">
+                <input type="text" class="form-control" placeholder="Proveedor" [(ngModel)]="proveedorElegido.primerNombre" [ngModelOptions]="{standalone: true}" readonly>
             </div>
 
             <div class="input-group mb-3">
@@ -97,6 +97,13 @@
                 <input type="text" class="form-control" placeholder="CMMF" [(ngModel)]="cmmf" [ngModelOptions]="{standalone: true}">
             </div>
             <button type="button" class="btn btn-secondary" (click)="guardarCmmf()">Añadir CMMF</button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col"></div>
+        <div class="col">
+            <button class="btn btn-primary btn-block" (click)="grabarCmmf()">Grabar en base de datos</button>
         </div>
     </div>
 </div>

@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
+import swal from 'sweetalert';
+
 @Component({
   selector: 'app-agregar-videos-cmmf',
   templateUrl: './agregar-videos-cmmf.component.html',
@@ -55,6 +57,7 @@ export class AgregarVideosCmmfComponent implements OnInit {
         this.producto = data.producto;
         this.videosAnteriores = data.producto.videos;
         this.cmmfAnteriores = data.producto.cmmf;
+        console.log(this.cmmfAnteriores);
         this.cargarProveedores();
         this.cargando = false;
       });
@@ -77,16 +80,17 @@ export class AgregarVideosCmmfComponent implements OnInit {
   }
 
   guardarCmmf() {
-    console.log('Guardar cmmf', this.proveedorElegido.nombre.length, this.cmmf);
-    if (!this.proveedorElegido.nombre || !this.cmmf) {
+    // console.log('Guardar cmmf', this.proveedorElegido.primerNombre.length, this.cmmf);
+    if (!this.proveedorElegido.primerNombre || !this.cmmf) {
       swal(':(', 'Imposible añadir CMMF', 'error');
+      return;
     }
     const cmmfUnit = {
       proveedor: this.proveedorElegido._id,
       codigo: this.cmmf,
     };
     this.cmmfNuevos.push(cmmfUnit);
-    this.cmmfProveedores.push(this.proveedorElegido.nombre);
+    this.cmmfProveedores.push(this.proveedorElegido.primerNombre);
     this.cmmf = '';
     this.proveedorElegido = {
       nombre: ''
@@ -107,6 +111,28 @@ export class AgregarVideosCmmfComponent implements OnInit {
         this.proveedoresFiltrados = provedores;
         console.log(this.proveedoresFiltrados);
       });
+  }
+
+  grabarCmmf() {
+    const anteriores = [];
+    this.cmmfAnteriores.forEach(
+      element => {
+        const cmmf = {
+          proveedor: element.proveedor._id,
+          codigo: element.codigo,
+        }
+        anteriores.push(cmmf)
+      }
+    )
+    const completo = [...anteriores, ...this.cmmfNuevos];
+    console.log({Anteriores: anteriores, Nuevos: this.cmmfNuevos, completo});
+
+    this.apiService.peticionesPut(`productos/cmmf/${this.productoId}`, {cmmf: completo})
+      .subscribe(
+        (data: any) => {
+          swal(':D', 'CMMF Agregados', 'success')
+        }
+      )
   }
 
 }
