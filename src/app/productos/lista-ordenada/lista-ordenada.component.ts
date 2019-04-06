@@ -98,4 +98,38 @@ export class ListaOrdenadaComponent implements OnInit {
     // return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.referencia)) : [];
   }
 
+  ordenar(termino) {
+
+    if (termino === 'modelo' || termino === 'referencia') {
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a.caracteristicas[termino] > b.caracteristicas[termino]) {
+            return 1;
+          }
+          if (a.caracteristicas[termino] < b.caracteristicas[termino]) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
+
+    if ( termino === 'nombre' ) {
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a[termino] > b[termino]) {
+            return 1;
+          }
+          if (a[termino] < b[termino]) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
+
+  }
+
 }
