@@ -130,6 +130,25 @@ export class ListaOrdenadaComponent implements OnInit {
       )
     }
 
+    if ( termino === 'categoria' ) {
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a[termino].nombre > b[termino].nombre) {
+            return 1;
+          }
+          if (a[termino].nombre < b[termino].nombre) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
+
+  }
+
+  test(producto) {
+    console.log({producto});
   }
 
 }

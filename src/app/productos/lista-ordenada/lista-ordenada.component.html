@@ -54,19 +54,35 @@
           Nombre
         </h5>
       </div>
-      <div class="col-2 pointer" (click)="ordenar('referencia')">
+      <div class="col-1 pointer" (click)="ordenar('referencia')">
         <h5>
           Referencia
         </h5>
       </div>
-      <div class="col-2 pointer" (click)="ordenar('modelo')">
+      <div class="col-1 pointer" (click)="ordenar('modelo')">
         <h5>
           Modelo
         </h5>
       </div>
+      <div class="col-1 pointer" (click)="ordenar('categoria')">
+        <h5>
+          Categoría
+        </h5>
+      </div>
+      <div class="col-1 pointer" (click)="ordenar('categoria_padre')">
+        <h5>
+          Cat. Padre
+        </h5>
+      </div>
       <div class="col-1">
         <h5>
+
           Detalles
+        </h5>
+      </div>
+      <div class="col-1">
+        <h5>
+          Test
         </h5>
       </div>
     </div>
@@ -79,31 +95,50 @@
       </div>
       <div class="col-4" *ngIf="!producto.editar">
         <p>
-          {{ producto.nombre }} - <span class="badge badge-primary pointer" (click)="producto.editar = !producto.editar">Editar</span>
+          {{ producto.nombre }} - <span class="badge badge-primary pointer"
+            (click)="producto.editar = !producto.editar">Editar</span>
         </p>
       </div>
       <div class="col-4" *ngIf="producto.editar">
         <div class="input-group">
           <textarea type="text" class="form-control" [(ngModel)]="producto.nombre"></textarea>
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" (click)="cambiarNombre(producto.nombre.trim(), producto._id, i)">Guardar</button>
+            <button class="btn btn-outline-secondary" type="button"
+              (click)="cambiarNombre(producto.nombre.trim(), producto._id, i)">Guardar</button>
+              <button class="btn btn-outline-danger" type="button"
+              (click)="producto.editar = !producto.editar">Cancelar</button>
           </div>
         </div>
       </div>
-      <div class="col-2">
+      <div class="col-1">
         <p>
           {{ producto.caracteristicas.referencia }}
         </p>
       </div>
-      <div class="col-2">
+      <div class="col-1">
         <p>
           {{ producto.caracteristicas.modelo }}
         </p>
       </div>
       <div class="col-1">
-          <p>
-              <a class="badge badge-secondary pointer" href="/productos/producto/{{ producto._id }}" target="_blank">Ver</a>
-          </p>
+        <p>
+          {{ producto.categoria.nombre }}
+        </p>
+      </div>
+      <div class="col-1">
+        <p>
+          {{ producto.categoria_padre ? producto.categoria_padre.nombre: '' }}
+        </p>
+      </div>
+      <div class="col-1">
+        <p>
+          <a class="badge badge-secondary pointer" href="/productos/producto/{{ producto._id }}" target="_blank">Ver</a>
+        </p>
+      </div>
+      <div class="col-1">
+        <p>
+          <button class="btn btn-block btn-primary" (click)="test(producto)">Test</button>
+        </p>
       </div>
     </div>
 
