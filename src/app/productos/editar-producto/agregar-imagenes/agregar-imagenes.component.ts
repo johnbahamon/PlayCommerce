@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UrlFirebaseService } from '../../../servicios/url-firebase.service';
 import { ApiService } from '../../../servicios/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
@@ -20,7 +20,8 @@ export class AgregarImagenesComponent implements OnInit {
     public servicioURL: UrlFirebaseService,
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -69,6 +70,7 @@ export class AgregarImagenesComponent implements OnInit {
         swal('Bien', 'Actualizada', 'success');
         this.servicioURL.resetear();
         this.coleccion = [];
+        this.router.navigate(['productos', 'producto', this.productoId])
       });
   }
 

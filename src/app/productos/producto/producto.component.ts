@@ -24,7 +24,9 @@ export class ProductoComponent implements OnInit, OnDestroy {
     ['Color', 'color'],
     ['Referencia', 'referencia'],
     ['Garantía', 'garantia'],
-    ['Código de Barras', 'codigo_de_barras']
+    // ['Código de Barras', 'codigo_de_barras'],
+    ['EAN13', 'ean13'],
+    ['EAN14', 'ean14'],
   ];
 
   detallesCap: string[] = [];

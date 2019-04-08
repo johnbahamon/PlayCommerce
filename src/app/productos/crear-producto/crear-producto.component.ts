@@ -35,7 +35,9 @@ export class CrearProductoComponent implements OnInit {
     ['Color', 'text'],
     // ['Referencia', 'text'],
     ['Garantía', 'text'],
-    ['Código de Barras', 'number']
+    // ['Código de Barras', 'text'],
+    ['EAN13', 'text'],
+    ['EAN14', 'text'],
   ];
 
   cmmfs: any[] = [];
@@ -45,7 +47,7 @@ export class CrearProductoComponent implements OnInit {
 
   pagina: number = 1;
   nombre: string;
-  etiqueta: string = 'Producto';
+  etiqueta: string = 'Repuesto';
   etiquetas: string[] = ['Producto', 'Repuesto', 'Combo'];
   marca: any;
   categoria: any = {

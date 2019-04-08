@@ -26,7 +26,9 @@ export class EditarCaracteristicasComponent implements OnInit {
     ['Color', 'text'],
     ['Referencia', 'text'],
     ['Garantía', 'text'],
-    ['Código de Barras', 'number']
+    // ['Código de Barras', 'number'],
+    ['EAN13', 'text'],
+    ['EAN14', 'text'],
   ];
 
   constructor(
