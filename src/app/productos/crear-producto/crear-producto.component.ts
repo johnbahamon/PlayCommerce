@@ -10,6 +10,7 @@ import { FuncionesService } from '../../servicios/funciones.service';
 import { NgForm } from '@angular/forms';
 import { UrlFirebaseService } from '../../servicios/url-firebase.service';
 import { Router } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-crear-producto',
@@ -110,6 +111,8 @@ export class CrearProductoComponent implements OnInit {
         if (data.productos.length === 0) {
           console.log('No hay productos');
           this.referenciaExiste = false;
+        } else {
+          swal(':(', `Ya existe un producto en la base de datos con esa referencia ${this.referenciaBuscar}`, 'warning');
         }
       });
   }

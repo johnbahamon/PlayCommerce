@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-    <h1 class="h2">Editar Producto</h1>
+    <h1 class="h2">Editar Producto ***</h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group mr-2">
             <button *ngIf="productoId" routerLink="/productos/producto/{{productoId}}" class="btn btn-sm btn-outline-secondary">Volver</button>
@@ -26,7 +26,7 @@
                 <tbody>
                     <tr *ngFor="let accesorio of producto.accesorios">
                         <td>
-                            <img [src]="accesorio.pictures.small[0]" alt="">
+                            <img [src]="accesorio.pictures.large[0]" alt="" style="width: 150px">
                         </td>
                         <th>{{ accesorio.caracteristicas.referencia }}-{{ accesorio.nombre }}-{{ accesorio.caracteristicas.modelo }}</th>
                     </tr>
@@ -47,7 +47,7 @@
                 <tbody>
                     <tr *ngFor="let repuesto of producto.repuestos">
                         <td>
-                            <img [src]="repuesto.pictures.small[0]" alt="">
+                            <img [src]="repuesto.pictures.large[0]" alt="" style="width: 150px">
                         </td>
                         <th>{{ repuesto.caracteristicas.referencia }}-{{ repuesto.nombre }}-{{ repuesto.caracteristicas.modelo }}</th>
                     </tr>
