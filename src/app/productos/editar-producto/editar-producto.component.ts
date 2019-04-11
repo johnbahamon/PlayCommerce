@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from '../../servicios/api.service';
 import { BusquedaProductosService } from '../../servicios/busqueda-productos.service';
@@ -31,7 +31,8 @@ export class EditarProductoComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private route: ActivatedRoute,
-    private busquedaProductosService: BusquedaProductosService
+    private busquedaProductosService: BusquedaProductosService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,8 +44,11 @@ export class EditarProductoComponent implements OnInit {
     this.apiService.peticionGet('productos/' + this.productoId)
       .subscribe((data: any) => {
         this.producto = data.producto;
+        console.log(this.producto)
         this.repuestosId = this.producto.repuestos.map(el => el._id);
+        this.repuestos = this.producto.repuestos;
         this.accesoriosId = this.producto.accesorios.map(el => el._id);
+        this.accesorios = this.producto.accesorios;
         this.cargando = false;
       });
   }
@@ -77,6 +81,8 @@ export class EditarProductoComponent implements OnInit {
   }
 
   elegirRepuesto(repuesto) {
+    console.log({repuesto});
+    
     if (this.repuestosId.includes(repuesto._id)) {
       swal(':(', 'Ya se encuentra en el array o base de datos', 'warning');
       return;
@@ -90,6 +96,8 @@ export class EditarProductoComponent implements OnInit {
   }
 
   elegirAccesorio(accesorio) {
+    console.log({accesorio});
+    
     if (this.accesoriosId.includes(accesorio._id)) {
       swal(':(', 'Ya se encuentra en el array o base de datos', 'warning');
       return;
@@ -103,14 +111,27 @@ export class EditarProductoComponent implements OnInit {
   }
 
   actualizarProducto() {
+    const accesoriosModificados = this.accesorios.map(element => element._id)
+    const repuestosModificados = this.repuestos.map(element => element._id)
     const producto = {
-      accesorios: this.accesoriosId,
-      repuestos: this.repuestosId
+      accesorios: accesoriosModificados,
+      repuestos: repuestosModificados
     };
+
+    
 
     this.apiService.peticionesPut(`productos/add/${this.productoId}`, producto)
       .subscribe((data: any) => {
         swal(':)', 'Producto Actualizado', 'success');
+        this.router.navigate(['productos', 'producto', this.productoId])
       });
+  }
+
+  eliminarAccesorio(indice) {
+    this.accesorios.splice(indice, 1);
+  }
+
+  eliminarRepuesto(indice) {
+    this.repuestos.splice(indice, 1);
   }
 }
