@@ -50,6 +50,10 @@ import { EditarCompraComponent } from './compras/editar-compra/editar-compra.com
 import { HistoricoComprasComponent } from './compras/historico-compras/historico-compras.component';
 import { HistoricoProductoComponent } from './productos/historico-producto/historico-producto.component';
 import { ListaOrdenadaComponent } from './productos/lista-ordenada/lista-ordenada.component';
+import { CrearProductoSencilloComponent } from './productos/crear-producto-sencillo/crear-producto-sencillo.component';
+import { CompartirRepuestosAccesoriosComponent } from './productos/editar-producto/compartir-repuestos-accesorios/compartir-repuestos-accesorios.component';
+import { VerArbolTresComponent } from './categorias/ver-arbol-tres/ver-arbol-tres.component';
+import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-marca-categoria.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +97,11 @@ import { ListaOrdenadaComponent } from './productos/lista-ordenada/lista-ordenad
     EditarCompraComponent,
     HistoricoComprasComponent,
     HistoricoProductoComponent,
-    ListaOrdenadaComponent
+    ListaOrdenadaComponent,
+    CrearProductoSencilloComponent,
+    CompartirRepuestosAccesoriosComponent,
+    VerArbolTresComponent,
+    PorMarcaCategoriaComponent
   ],
   imports: [
     BrowserModule,

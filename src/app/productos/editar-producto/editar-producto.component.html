@@ -13,7 +13,10 @@
     <hr>
     <div class="row">
         <div class="col" *ngIf="producto">
-            <h5>Accesorios</h5>
+            <h5>
+                Accesorios
+                <span class="badge badge-info" *ngIf="accesorios && accesorios.length > 0">{{ accesorios.length }}</span>
+            </h5>
             <!-- <ul class="list-group">
                 <li class="list-group-item" *ngFor="let accesorio of accesorios">{{ accesorio.nombre }}</li>
             </ul> -->
@@ -46,7 +49,10 @@
                 </tbody>
             </table>
             <hr>
-            <h5>Repuestos</h5>
+            <h5>
+                Repuestos
+                <span class="badge badge-info" *ngIf="repuestos && repuestos.length > 0">{{ repuestos.length }}</span>
+            </h5>
             <!-- <ul class="list-group">
                 <li class="list-group-item" *ngFor="let repuesto of repuestos">{{ repuesto.nombre }}</li>
             </ul> -->
@@ -82,6 +88,14 @@
             </table>
         </div>
         <div class="col">
+            
+        </div>
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
             <input class="form-control" #inputProducto type="text" placeholder="Referencia">
             <input class="form-control" #inputProductoModelo type="text" placeholder="Modelo">
             <hr>
@@ -93,7 +107,6 @@
                 </li>
             </ul>
         </div>
-
     </div>
     <hr>
     <div class="row">

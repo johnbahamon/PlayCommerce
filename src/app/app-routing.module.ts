@@ -40,6 +40,10 @@ import { HistoricoComprasComponent } from './compras/historico-compras/historico
 import { HistoricoProductoComponent } from './productos/historico-producto/historico-producto.component';
 import { UsuarioComponent } from './usuarios/usuario/usuario.component';
 import { ListaOrdenadaComponent } from './productos/lista-ordenada/lista-ordenada.component';
+import { CrearProductoSencilloComponent } from './productos/crear-producto-sencillo/crear-producto-sencillo.component';
+import { CompartirRepuestosAccesoriosComponent } from './productos/editar-producto/compartir-repuestos-accesorios/compartir-repuestos-accesorios.component';
+import { VerArbolTresComponent } from './categorias/ver-arbol-tres/ver-arbol-tres.component';
+import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-marca-categoria.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -48,15 +52,18 @@ const appRoutes: Routes = [
     { path: 'marcas/editar-marca/:id', component: EditarMarcaComponent },
     { path: 'categorias', component: CategoriasComponent },
     { path: 'categorias/ver-arbol-2', component: VerArbolDosComponent },
+    { path: 'categorias/ver-arbol-3', component: VerArbolTresComponent },
     { path: 'categorias/categoria/:id', component: CategoriaComponent },
     { path: 'categorias/crear-categoria', component: CrearCategoriaComponent },
     { path: 'categorias/editar-categoria/:id', component: EditarCategoriaComponent },
     { path: 'productos', component: ProductosComponent },
     { path: 'productos/lista-ordenada', component: ListaOrdenadaComponent },
+    { path: 'productos/por-marca-categoria', component: PorMarcaCategoriaComponent },
     { path: 'productos/crear-combo/:id', component: CrearComboComponent },
     { path: 'productos/busqueda-productos', component: BusquedaProductosComponent },
     { path: 'productos/crear-pedido', component: CrearPedidoComponent },
     { path: 'productos/crear-producto', component: CrearProductoComponent },
+    { path: 'productos/crear-producto-sencillo', component: CrearProductoSencilloComponent },
     { path: 'productos/crear-desde/:id', component: CrearDesdeComponent },
     { path: 'productos/editar-producto/:id', component: EditarProductoComponent },
     { path: 'productos/editar-producto/agregar-imagenes/:id', component: AgregarImagenesComponent },
@@ -66,6 +73,7 @@ const appRoutes: Routes = [
     { path: 'productos/editar-producto/editar-detalles/:id', component: EditarDetallesComponent },
     { path: 'productos/editar-producto/editar-caracteristicas/:id', component: EditarCaracteristicasComponent },
     { path: 'productos/editar-producto/agregar-videos-cmmf/:id', component: AgregarVideosCmmfComponent },
+    { path: 'productos/editar-producto/compartir-repuestos-accesorios/:id', component: CompartirRepuestosAccesoriosComponent },
     { path: 'productos/producto/:id', component: ProductoComponent },
     { path: 'productos/historico-producto/:id', component: HistoricoProductoComponent },
     { path: 'proveedores', component: ProveedoresComponent },

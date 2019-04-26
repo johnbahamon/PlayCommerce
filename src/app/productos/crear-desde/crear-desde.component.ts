@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../servicios/api.service';
 import { NgForm } from '@angular/forms';
 import { FuncionesService } from '../../servicios/funciones.service';
@@ -28,7 +28,8 @@ export class CrearDesdeComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private funcionesService: FuncionesService
+    private funcionesService: FuncionesService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -59,7 +60,7 @@ export class CrearDesdeComponent implements OnInit {
 
     const producto = this.producto;
     producto.slug = this.funcionesService.stringToSlug(this.producto.nombre);
-    producto.categoria_padre = this.producto.categoria_padre._id;
+    producto.categoria = this.producto.categoria._id;
 
     this.caracteristicas.forEach(element => {
       producto.caracteristicas[element[1]] = formValues[element[1]];
@@ -70,6 +71,7 @@ export class CrearDesdeComponent implements OnInit {
     this.apiService.peticionesPost('productos', producto)
       .subscribe((data: any) => {
         swal('Muy Bien', 'Producto Copia Creado', 'success');
+        this.router.navigate(['/productos', 'producto', data.producto._id])
       });
 
 
