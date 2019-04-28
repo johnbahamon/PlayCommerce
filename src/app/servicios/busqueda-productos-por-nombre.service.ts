@@ -8,14 +8,23 @@ import { Observable, of } from 'rxjs';
 export class BusquedaProductosPorNombreService {
 
   listaProductos: any[] = [];
+  totalProductos: number = 0;
+  cargando: boolean = true;
 
   constructor(private _apiService: ApiService) { }
 
   obtenerProductos( url ) {
+    
     this._apiService.peticionGet( url )
       .subscribe( (data: any) => {
+        
         this.listaProductos = data.productos;
-      });
+        this.totalProductos = data.total;
+      }, err => console.log('ERROR'),
+      () => {
+        this.cargando = false;   
+      }
+      );
   }
 
   obtenerProductosFiltrados(name: string): Observable<any[]> {
@@ -76,5 +85,35 @@ export class BusquedaProductosPorNombreService {
     console.log('FUNCION NORMAL # 2');
     // return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
     return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.modelo)) : [];
+  }
+
+
+
+
+  obtenerProductosFiltrados2(name: string, tipoBusqueda: string): Observable<any[]> {
+    if (name === '') {
+      return of([]);
+    } else {
+      return of(this.filtrarProductos2(name, tipoBusqueda));
+    }
+  }
+
+  filtrarProductos2(name, tipoBusqueda: string) {
+    console.log('Servicio');
+    
+    switch(tipoBusqueda) { 
+      case 'nombre': { 
+         return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.nombre)) : [];
+
+      } 
+      case 'referencia': { 
+        return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.referencia)) : [];
+
+      }
+      case 'modelo': { 
+        return name ? this.listaProductos.filter((producto) => new RegExp(name, 'gi').test(producto.caracteristicas.modelo)) : [];
+
+     }
+   } 
   }
 }
