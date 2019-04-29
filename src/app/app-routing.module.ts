@@ -89,7 +89,7 @@ const appRoutes: Routes = [
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'usuarios/usuario/:id', component: UsuarioComponent },
     { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
-    { path: '',   redirectTo: '/productos/lista-ordenada', pathMatch: 'full' },
+    { path: '',   redirectTo: '/productos/por-marca-categoria', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -56,8 +56,8 @@ export class CrearProductoSencilloComponent implements OnInit {
 
     const producto = {
       etiqueta: 'Repuesto',
-      marca:     '5bae7738baebd02d50bb89c7', // Universal
-      categoria: '5bb03b410f50942f28a35137', // Repuestos y Accesorios - Cafeteras y hervidoras
+      marca:     '5bae77a0baebd02d50bb89cb', // Generico
+      categoria: '5ca13d4ddae1193240d79f7c', // Repuestos y Accesorios - Estufas
       caracteristicas: {
           referencia: this.referencia.trim(),
           modelo: this.referencia.trim(),

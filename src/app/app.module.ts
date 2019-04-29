@@ -9,6 +9,8 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { ProductosComponent } from './productos/productos.component';
 import { MarcasComponent } from './marcas/marcas.component';
@@ -54,6 +56,7 @@ import { CrearProductoSencilloComponent } from './productos/crear-producto-senci
 import { CompartirRepuestosAccesoriosComponent } from './productos/editar-producto/compartir-repuestos-accesorios/compartir-repuestos-accesorios.component';
 import { VerArbolTresComponent } from './categorias/ver-arbol-tres/ver-arbol-tres.component';
 import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-marca-categoria.component';
+import { CategoriaFormComponent } from './productos/por-marca-categoria/categoria-form/categoria-form.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +104,8 @@ import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-
     CrearProductoSencilloComponent,
     CompartirRepuestosAccesoriosComponent,
     VerArbolTresComponent,
-    PorMarcaCategoriaComponent
+    PorMarcaCategoriaComponent,
+    CategoriaFormComponent
   ],
   imports: [
     BrowserModule,
@@ -109,9 +113,13 @@ import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-
     FormsModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    CategoriaFormComponent
+  ]
 })
 export class AppModule { }

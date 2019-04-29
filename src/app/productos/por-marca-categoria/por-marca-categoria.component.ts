@@ -6,6 +6,10 @@ import swal from 'sweetalert';
 import { fromEvent, Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CategoriaFormComponent } from './categoria-form/categoria-form.component';
+import { FuncionesService } from 'src/app/servicios/funciones.service';
+
 @Component({
   selector: 'app-por-marca-categoria',
   templateUrl: './por-marca-categoria.component.html',
@@ -33,7 +37,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
   productosFiltrados: any[] = [];
 
 
-
+  marcaTemp: any = {};
 
   opciones: any[] = [
     'Marca', 
@@ -48,7 +52,9 @@ export class PorMarcaCategoriaComponent implements OnInit {
   ];
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private modalService: NgbModal,
+    private funcionesService: FuncionesService
   ) { }
 
   ngOnInit() {
@@ -212,6 +218,109 @@ export class PorMarcaCategoriaComponent implements OnInit {
     } else {
       this.opciones.push(opcion);
     }
+  }
+
+  mostrarModal() {
+    const modal = this.modalService.open(CategoriaFormComponent);
+    modal.result.then(
+      this.handleModalTodoFormClose.bind(this),
+      this.handleModalTodoFormClose.bind(this)
+    )
+    // modal.componentInstance.createMode = false;
+    // modal.componentInstance.todo = todo;
+  }
+
+  handleModalTodoFormClose(response) {
+    // if (response === Object(response)) {
+    //   if (response.createMode) {
+    //     response.todo.id = response.id;
+    //     this.todos.unshift(response.todo);
+    //   } else {
+    //     let index = this.todos.findIndex(value => value.id == response.id);
+    //     this.todos[index] = response.todo;
+    //   }
+    // }
+  }
+
+  cambiarNombre(nombreNuevo, productoId, indice) {
+    console.log({
+      nombreNuevo, productoId, indice
+    });
+
+    const objetoNombre = {
+      nombre: nombreNuevo,
+      slug: this.funcionesService.stringToSlug(nombreNuevo)
+    };
+
+    this.apiService.peticionesPut(`editar-nombre/${productoId}`, objetoNombre)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarNombre = false;
+      });
+  }
+
+  cambiarMarca(marcaIdNueva, marcaNombreNuevo, productoId, indice) {
+    console.log({
+      marcaIdNueva, productoId, indice, marcaNombreNuevo
+    });
+    
+
+    const objetoMarca = {
+      marca: marcaIdNueva
+    };
+
+    this.apiService.peticionesPut(`editar-marca/${productoId}`, objetoMarca)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió la marca en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarMarca = false;
+        this.productosFiltrados[indice].marca.nombre = this.marcaTemp.nombre;
+      });
+    
+  }
+
+  crearMarcaTemp(marca) {
+    console.log({marca});
+
+    this.marcaTemp = this.marcas.find(element => element._id === marca)
+
+    console.log({marcaTemp: this.marcaTemp});
+    
+  }
+
+  cambiarModelo(modeloNuevo, productoId, indice) {
+    console.log({modeloNuevo, productoId, indice});
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.modelo = modeloNuevo;
+
+    console.log({CARACTERISTICAS});
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarModelo = false;
+      });
+  }
+
+  cambiarReferencia(referenciaNueva, productoId, indice) {
+    console.log({referenciaNueva, productoId, indice});
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.referencia = referenciaNueva;
+
+    console.log({CARACTERISTICAS});
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarReferencia = false;
+      });
   }
 
 }

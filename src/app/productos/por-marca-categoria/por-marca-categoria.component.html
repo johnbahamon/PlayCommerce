@@ -39,7 +39,8 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 2</label>
         </div>
-        <select class="custom-select" [(ngModel)]="subcategoriaElegidaId" (change)="elegirSubcategoria($event.target.value)">
+        <select class="custom-select" [(ngModel)]="subcategoriaElegidaId"
+          (change)="elegirSubcategoria($event.target.value)">
           <option *ngFor="let categoria of subcategorias" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
@@ -48,7 +49,8 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 3</label>
         </div>
-        <select class="custom-select" [(ngModel)]="subcategoria2ElegidaId" (change)="elegirSubcategoria2($event.target.value)">
+        <select class="custom-select" [(ngModel)]="subcategoria2ElegidaId"
+          (change)="elegirSubcategoria2($event.target.value)">
           <option *ngFor="let categoria of subcategorias2" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
@@ -63,20 +65,20 @@
 
 
   <div class="row">
-      <div class="col">
-          <ul class="list-inline">
-              <li class="list-inline-item" *ngFor="let opcion of opciones">
-                  {{ opcion }} <span class="badge badge-danger pointer" (click)="quitarOpcion(opcion)"> - </span>
-              </li>
-          </ul>
-      </div>
-      <div class="col">
-          <ul class="list-inline">
-              <li class="list-inline-item" *ngFor="let opcion of otrasOpciones">
-                  {{ opcion }} <span class="badge badge-primary pointer" (click)="agregarOpcion(opcion)"> + </span>
-              </li>
-          </ul>
-      </div>
+    <div class="col">
+      <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let opcion of opciones">
+          {{ opcion }} <span class="badge badge-danger pointer" (click)="quitarOpcion(opcion)"> - </span>
+        </li>
+      </ul>
+    </div>
+    <div class="col">
+      <ul class="list-inline">
+        <li class="list-inline-item" *ngFor="let opcion of otrasOpciones">
+          {{ opcion }} <span class="badge badge-primary pointer" (click)="agregarOpcion(opcion)"> + </span>
+        </li>
+      </ul>
+    </div>
 
 
   </div>
@@ -198,154 +200,214 @@
 
 
 
-    <div *ngIf="productosFiltrados.length > 0">
+  <div *ngIf="productosFiltrados.length > 0">
 
-        <div class="row">
-            <div class="col-1">
-                <h5>
-                    Imagen
-                </h5>
-            </div>
-            <div class="col-5 pointer" (click)="ordenar('nombre')">
-                <h5>
-                    Nombre
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('Marca')" (click)="ordenar('marca')">
-                <h5>
-                    Marca
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('Referencia')" (click)="ordenar('referencia')">
-                <h5>
-                    Referencia
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('Modelo')" (click)="ordenar('modelo')">
-                <h5>
-                    Modelo
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('Categoría')" (click)="ordenar('categoria')">
-                <h5>
-                    Categoría
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('EAN13')" (click)="ordenar('ean13')">
-                <h5>
-                    EAN13
-                </h5>
-            </div>
-            <div class="col-2 pointer" *ngIf="opciones.includes('EAN14')" (click)="ordenar('ean14')">
-                <h5>
-                    EAN14
-                </h5>
-            </div>
-            <!-- <div class="col-1 pointer" (click)="ordenar('categoria_padre')">
+    <div class="row">
+      <div class="col-1">
+        <h5>
+          Imagen
+        </h5>
+      </div>
+      <div class="col-5 pointer" (click)="ordenar('nombre')">
+        <h5>
+          Nombre
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('Marca')" (click)="ordenar('marca')">
+        <h5>
+          Marca
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('Modelo')" (click)="ordenar('modelo')">
+        <h5>
+          Modelo
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('Referencia')" (click)="ordenar('referencia')">
+        <h5>
+          Referencia
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('Categoría')" (click)="ordenar('categoria')">
+        <h5>
+          Categoría
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('EAN13')" (click)="ordenar('ean13')">
+        <h5>
+          EAN13
+        </h5>
+      </div>
+      <div class="col-2 pointer" *ngIf="opciones.includes('EAN14')" (click)="ordenar('ean14')">
+        <h5>
+          EAN14
+        </h5>
+      </div>
+      <!-- <div class="col-1 pointer" (click)="ordenar('categoria_padre')">
                 <h5>
                   Cat. Padre
                 </h5>
               </div> -->
-            <!-- <div class="col-1">
+      <!-- <div class="col-1">
                 <h5>
         
                   Detalles
                 </h5>
               </div> -->
-            <!-- <div class="col-1">
+      <!-- <div class="col-1">
                 <h5>
                   Test
                 </h5>
               </div> -->
-        </div>
-
-
-
-
-        <div class="row item-producto" *ngFor="let producto of productosFiltrados; index as i">
-            <div class="col-1"
-                *ngIf="producto.pictures && producto.pictures.large && producto.pictures.large.length > 0">
-                <img [src]="producto.pictures.large[ producto.pictures.pp - 1 ]" alt="Producto Img">
-            </div>
-            <div class="col-1"
-                *ngIf="!producto.pictures || !producto.pictures.large || producto.pictures.large.length === 0">
-            </div>
-            <div class="col-5" *ngIf="!producto.editar">
-                <p>
-                    <a href="/productos/producto/{{ producto._id }}" target="_blank">{{ producto.nombre }}</a>
-                    <!-- - <span class="badge badge-primary pointer"
-                    (click)="producto.editar = !producto.editar">Editar</span> -->
-                </p>
-            </div>
-            <div class="col-5" *ngIf="producto.editar">
-                <div class="input-group">
-                    <textarea type="text" class="form-control" [(ngModel)]="producto.nombre"></textarea>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button"
-                            (click)="cambiarNombre(producto.nombre.trim(), producto._id, i)">Guardar</button>
-                        <button class="btn btn-outline-danger" type="button"
-                            (click)="producto.editar = !producto.editar">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2" *ngIf="opciones.includes('Marca')">
-                <p>
-                    {{ producto.marca.nombre }}
-                </p>
-            </div>
-            <div class="col-2" *ngIf="opciones.includes('Referencia')">
-                <p>
-                    {{ producto.caracteristicas.referencia }}
-                </p>
-            </div>
-            <div class="col-2" *ngIf="opciones.includes('Modelo')">
-                <p>
-                    {{ producto.caracteristicas.modelo }}
-                </p>
-            </div>
-            <div class="col-2" *ngIf="opciones.includes('Categoría')">
-                <p>
-                    {{ producto.categoria.nombre }}
-                </p>
-            </div>
-
-            <div class="col-2" *ngIf="opciones.includes('EAN13')">
-                <p>
-                    {{ producto.caracteristicas.ean13 }}
-                </p>
-            </div>
-
-            <div class="col-2" *ngIf="opciones.includes('EAN14')">
-                <p>
-                    {{ producto.caracteristicas.ean14 }}
-                </p>
-            </div>
-
-
-
-            <!-- <div class="col-1">
-                <p>
-                  {{ producto.categoria_padre ? producto.categoria_padre.nombre: '' }}
-                </p>
-              </div> -->
-            <!-- <div class="col-1">
-                <p>
-                  <a class="badge badge-secondary pointer" href="/productos/producto/{{ producto._id }}" target="_blank">ver</a>
-                </p>
-              </div> -->
-            <!-- <div class="col-1">
-                <p>
-                  <button class="btn btn-block btn-primary" (click)="test(producto)">Test</button>
-                </p>
-              </div> -->
-        </div>
-
     </div>
 
 
 
 
+    <div class="row item-producto" *ngFor="let producto of productosFiltrados; index as i">
+      <div class="col-1" *ngIf="producto.pictures && producto.pictures.large && producto.pictures.large.length > 0">
+        <img [src]="producto.pictures.large[ producto.pictures.pp - 1 ]" alt="Producto Img">
+      </div>
+      <div class="col-1" *ngIf="!producto.pictures || !producto.pictures.large || producto.pictures.large.length === 0">
+      </div>
 
 
+
+      <div class="col-5" *ngIf="!producto.editarNombre">
+        <p>
+          <a href="/productos/producto/{{ producto._id }}" target="_blank">{{ producto.nombre }}</a>
+          - <span class="badge badge-primary pointer"
+            (click)="producto.editarNombre = !producto.editarNombre">Editar</span>
+        </p>
+      </div>
+
+      <div class="col-5" *ngIf="producto.editarNombre">
+        <div class="input-group row">
+          <textarea type="text" class="form-control" [(ngModel)]="producto.nombre"></textarea>
+        </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarNombre(producto.nombre.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarNombre = !producto.editarNombre">X</button>
+        </div>
+      </div>
+
+
+
+      <div class="col-2" *ngIf="opciones.includes('Marca') && !producto.editarMarca">
+        <p>
+          {{ producto.marca.nombre }} - <span class="badge badge-primary pointer"
+            (click)="producto.editarMarca = !producto.editarMarca">Editar</span>
+        </p>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('Marca') && producto.editarMarca">
+        <div class="input-group row">
+          <!-- <input type="" class="form-control" [(ngModel)]="producto.marca._id"> -->
+
+          <select class="custom-select" [(ngModel)]="producto.marca._id" (change)="crearMarcaTemp($event.target.value)">
+            <option *ngFor="let marca of marcas" [value]="marca._id">{{ marca.nombre }}</option>
+          </select>
+        </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarMarca(producto.marca._id, producto.marca.nombre, producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarMarca = !producto.editarMarca">X</button>
+        </div>
+      </div>
+
+
+      <div class="col-2" *ngIf="opciones.includes('Modelo') && !producto.editarModelo">
+        <p>
+          {{ producto.caracteristicas.modelo }}
+          - <span class="badge badge-primary pointer"
+            (click)="producto.editarModelo = !producto.editarModelo">Editar</span>
+        </p>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('Modelo') && producto.editarModelo">
+        <div class="input-group row">
+          <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.modelo">
+        </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarModelo(producto.caracteristicas.modelo.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarModelo = !producto.editarModelo">X</button>
+        </div>
+      </div>
+
+
+      <div class="col-2" *ngIf="opciones.includes('Referencia') && !producto.editarReferencia">
+        <p>
+          {{ producto.caracteristicas.referencia }}
+          - <span class="badge badge-primary pointer"
+            (click)="producto.editarReferencia = !producto.editarReferencia">Editar</span>
+        </p>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('Referencia') && producto.editarReferencia">
+        <div class="input-group row">
+          <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.referencia">
+        </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarReferencia(producto.caracteristicas.referencia.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarReferencia = !producto.editarReferencia">X</button>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="col-2" *ngIf="opciones.includes('Categoría')">
+        <p>
+          {{ producto.categoria.nombre }}
+          - <span class="badge badge-primary pointer" (click)="mostrarModal()">Editar</span>
+        </p>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('EAN13')">
+        <p>
+          {{ producto.caracteristicas.ean13 }}
+        </p>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('EAN14')">
+        <p>
+          {{ producto.caracteristicas.ean14 }}
+        </p>
+      </div>
+
+
+
+      <!-- <div class="col-1">
+                <p>
+                  {{ producto.categoria_padre ? producto.categoria_padre.nombre: '' }}
+                </p>
+              </div> -->
+      <!-- <div class="col-1">
+                <p>
+                  <a class="badge badge-secondary pointer" href="/productos/producto/{{ producto._id }}" target="_blank">ver</a>
+                </p>
+              </div> -->
+      <!-- <div class="col-1">
+                <p>
+                  <button class="btn btn-block btn-primary" (click)="test(producto)">Test</button>
+                </p>
+              </div> -->
+    </div>
 
   </div>
+
+
+
+
+
+
+
+</div>
