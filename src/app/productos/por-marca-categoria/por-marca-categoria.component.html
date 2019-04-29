@@ -367,7 +367,7 @@
       <div class="col-2" *ngIf="opciones.includes('Categoría')">
         <p>
           {{ producto.categoria.nombre }}
-          - <span class="badge badge-primary pointer" (click)="mostrarModal()">Editar</span>
+          - <span class="badge badge-primary pointer" (click)="mostrarModal(producto._id, producto.nombre, i)">Editar</span>
         </p>
       </div>
 

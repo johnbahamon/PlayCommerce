@@ -4,6 +4,7 @@ import { BusquedaService } from 'src/app/servicios/busqueda-categorias.service';
 
 import { fromEvent } from 'rxjs';
 import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
+import { ApiService } from 'src/app/servicios/api.service';
 
 @Component({
   selector: 'app-categoria-form',
@@ -14,12 +15,17 @@ export class CategoriaFormComponent implements OnInit {
 
   @ViewChild('inputCategoria') inputCategoria;
 
+  idProducto: string = '';
+  nombreProducto: string = '';
+  indice: number = 0;
+
   categorias: any[] = [];
   cargando: boolean = true;
 
   constructor(
     public activeModal: NgbActiveModal,
-    private busqueda: BusquedaService
+    private busqueda: BusquedaService,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
@@ -43,8 +49,33 @@ export class CategoriaFormComponent implements OnInit {
     });
   }
 
-  elegirCategoria(categoria) {
-    console.log({categoria});
+  elegirCategoria2(idCategoria, nombreCategoria) {
+    console.log({idCategoria, nombreCategoria});
+
+
+  }
+
+  elegirCategoria(idCategoriaNueva, nombreCategoriaNueva, productoId, indice) {
+    console.log({
+      idCategoriaNueva, nombreCategoriaNueva, productoId: this.idProducto, indice: this.indice
+    });
+    
+
+    const objetoCategoria = {
+      categoria: idCategoriaNueva
+    };
+
+    this.apiService.peticionesPut(`editar-categoria/${this.idProducto}`, objetoCategoria)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió la marca en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+
+        this.activeModal.dismiss({nombreCategoriaNueva, indice: this.indice})
+        // this.productosFiltrados[indice].editarMarca = false;
+        // this.productosFiltrados[indice].marca.nombre = this.marcaTemp.nombre;
+      });
+    
   }
 
 }

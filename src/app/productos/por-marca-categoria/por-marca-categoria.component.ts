@@ -220,26 +220,22 @@ export class PorMarcaCategoriaComponent implements OnInit {
     }
   }
 
-  mostrarModal() {
+  mostrarModal(idProducto, nombreProducto, indice) {
     const modal = this.modalService.open(CategoriaFormComponent);
     modal.result.then(
       this.handleModalTodoFormClose.bind(this),
       this.handleModalTodoFormClose.bind(this)
     )
-    // modal.componentInstance.createMode = false;
-    // modal.componentInstance.todo = todo;
+    modal.componentInstance.idProducto = idProducto;
+    modal.componentInstance.nombreProducto = nombreProducto;
+    modal.componentInstance.indice = indice;
   }
 
   handleModalTodoFormClose(response) {
-    // if (response === Object(response)) {
-    //   if (response.createMode) {
-    //     response.todo.id = response.id;
-    //     this.todos.unshift(response.todo);
-    //   } else {
-    //     let index = this.todos.findIndex(value => value.id == response.id);
-    //     this.todos[index] = response.todo;
-    //   }
-    // }
+    if (response === Object(response)) {
+      this.productosFiltrados[response.indice].editarCategoria = false;
+      this.productosFiltrados[response.indice].categoria.nombre = response.nombreCategoriaNueva;
+    }
   }
 
   cambiarNombre(nombreNuevo, productoId, indice) {
