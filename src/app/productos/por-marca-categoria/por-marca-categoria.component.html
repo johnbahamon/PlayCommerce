@@ -3,10 +3,10 @@
     <h1>PRODUCTOS POR MARCA Y CATEGORÍA *</h1>
   </div>
 
-  <div class="row" *ngIf="marcas.length > 0 && categorias.length > 0">
+  <div class="row" *ngIf="marcas.length > 0 && categorias1.length > 0">
     <div class="col">
 
-      <div class="input-group mb-3">
+      <!-- <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text">Tipo</label>
         </div>
@@ -15,7 +15,7 @@
           <option value="Repuesto">Repuesto</option>
           <option value="Combo">Combo</option>
         </select>
-      </div>
+      </div> -->
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -30,28 +30,38 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 1</label>
         </div>
-        <select class="custom-select" [(ngModel)]="categoriaElegidaId" (change)="elegirCategoria($event.target.value)">
-          <option *ngFor="let categoria of categorias" [value]="categoria._id">{{ categoria.nombre }}</option>
+        <select class="custom-select" [(ngModel)]="categoria1ElegidaId" (change)="elegirCategoria1()">
+          <option *ngFor="let categoria of categorias1" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
 
-      <div class="input-group mb-3" *ngIf="subcategorias.length > 0">
+      <div class="input-group mb-3" *ngIf="categorias2.length > 0">
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 2</label>
         </div>
-        <select class="custom-select" [(ngModel)]="subcategoriaElegidaId"
-          (change)="elegirSubcategoria($event.target.value)">
-          <option *ngFor="let categoria of subcategorias" [value]="categoria._id">{{ categoria.nombre }}</option>
+        <select class="custom-select" [(ngModel)]="categoria2ElegidaId"
+          (change)="elegirCategoria2()">
+          <option *ngFor="let categoria of categorias2" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
 
-      <div class="input-group mb-3" *ngIf="subcategorias2.length > 0">
+      <div class="input-group mb-3" *ngIf="categorias3.length > 0">
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 3</label>
         </div>
-        <select class="custom-select" [(ngModel)]="subcategoria2ElegidaId"
-          (change)="elegirSubcategoria2($event.target.value)">
-          <option *ngFor="let categoria of subcategorias2" [value]="categoria._id">{{ categoria.nombre }}</option>
+        <select class="custom-select" [(ngModel)]="categoria3ElegidaId"
+          (change)="elegirCategoria3()">
+          <option *ngFor="let categoria of categorias3" [value]="categoria._id">{{ categoria.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3" *ngIf="categorias4.length > 0">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Categoría - 4</label>
+        </div>
+        <select class="custom-select" [(ngModel)]="categoria4ElegidaId"
+          (change)="elegirCategoria4()">
+          <option *ngFor="let categoria of categorias4" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
 

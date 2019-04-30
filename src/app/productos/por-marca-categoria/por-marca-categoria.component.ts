@@ -22,14 +22,17 @@ export class PorMarcaCategoriaComponent implements OnInit {
   marcas: any[] = [];
   marcaElegidaId: string;
 
-  categorias: any[] = [];
-  categoriaElegidaId: string;
+  categorias1: any[] = [];
+  categoria1ElegidaId: string;
 
-  subcategorias: any[] = [];
-  subcategoriaElegidaId: string;
+  categorias2: any[] = [];
+  categoria2ElegidaId: string;
 
-  subcategorias2: any[] = [];
-  subcategoria2ElegidaId: string;
+  categorias3: any[] = [];
+  categoria3ElegidaId: string;
+
+  categorias4: any[] = [];
+  categoria4ElegidaId: string;
 
   etiqueta: string = 'Producto';
 
@@ -40,14 +43,14 @@ export class PorMarcaCategoriaComponent implements OnInit {
   marcaTemp: any = {};
 
   opciones: any[] = [
-    'Marca', 
-    'Referencia', 
+    'Marca',
+    'Referencia',
     'Modelo'
   ];
 
   otrasOpciones: any[] = [
-    'Categoría', 
-    'EAN13', 
+    'Categoría',
+    'EAN13',
     'EAN14'
   ];
 
@@ -73,98 +76,152 @@ export class PorMarcaCategoriaComponent implements OnInit {
   }
 
   cargarCategorias() {
-    this.apiService.peticionGet('crear-arbol-sin-rya')
+    // this.apiService.peticionGet('crear-arbol-sin-rya')
+    this.apiService.peticionGet('crear-arbol')
       .subscribe(
         (data: any) => {
-          this.categorias = data.categorias;
+          this.categorias1 = data.categorias;
           // console.log(this.marcas);
         }
       )
   }
 
-  elegirCategoria(categoria) {
+  elegirCategoria1() {
     this.productos = [];
     this.productosFiltrados = [];
-    const CATEGORIA = this.categorias.find(element => element._id === categoria);
-    this.subcategorias = CATEGORIA.children;
-    this.subcategoriaElegidaId = undefined;
-    this.subcategoria2ElegidaId = undefined;
-    this.subcategorias2 = [];
 
 
+    const CATEGORIA1 = this.categorias1.find(element => element._id === this.categoria1ElegidaId);
+    this.categorias2 = CATEGORIA1.children;
+    this.categoria2ElegidaId = undefined;
+    this.categorias3 = [];
+    this.categoria3ElegidaId = undefined;
+    this.categorias4 = [];
+    this.categoria4ElegidaId = undefined;
 
-    this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${categoria}`)
-        .subscribe((data: any) => {
-          this.productos = data.productos;
-          this.productosFiltrados = this.productos;
-          this.cargarBuscador();
-        })
+
+    // this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoria1ElegidaId}`)
+    this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}`)
+      .subscribe((data: any) => {
+        this.productos = data.productos;
+        this.productosFiltrados = this.productos;
+        // this.cargarBuscador();
+      })
 
   }
 
-  elegirSubcategoria(subcategoria) {
+  elegirCategoria2() {
     this.productos = [];
     this.productosFiltrados = [];
-    const CATEGORIA = this.subcategorias.find(element => element._id === subcategoria);
-    this.subcategoria2ElegidaId = undefined;
-    this.subcategorias2 = CATEGORIA.children;
 
-    this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoriaElegidaId}&categoria2=${subcategoria}`)
-        .subscribe((data: any) => {
-          this.productos = data.productos;
-          this.productosFiltrados = this.productos;
-          this.cargarBuscador();
-        })
+    const CATEGORIA2 = this.categorias2.find(element => element._id === this.categoria2ElegidaId);
+    this.categorias3 = CATEGORIA2.children;
+    this.categoria3ElegidaId = undefined;
+    this.categorias4 = [];
+    this.categoria4ElegidaId = undefined;
+
+    // this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}`)
+    this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}`)
+      .subscribe((data: any) => {
+        this.productos = data.productos;
+        this.productosFiltrados = this.productos;
+        // this.cargarBuscador();
+      })
   }
 
-  elegirSubcategoria2(subcategoria2) {
+  elegirCategoria3() {
     this.productos = [];
     this.productosFiltrados = [];
-    // const CATEGORIA = this.subcategorias.find(element => element._id === subcategoria);
-    // this.subcategoria2ElegidaId = undefined;
-    // this.subcategorias2 = CATEGORIA.children;
 
-    this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoriaElegidaId}&categoria2=${this.subcategoriaElegidaId}&categoria3=${subcategoria2}`)
-        .subscribe((data: any) => {
-          this.productos = data.productos;
-          this.productosFiltrados = this.productos;
-          this.cargarBuscador();
-        })
+    const CATEGORIA3 = this.categorias3.find(element => element._id === this.categoria3ElegidaId);
+    this.categorias4 = CATEGORIA3.children;
+    this.categoria4ElegidaId = undefined;
+
+    // if (CATEGORIA3.nombre === 'Repuestos y Accesorios') {
+    // this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=Repuesto&categoria=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}`)
+    this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}`)
+      .subscribe((data: any) => {
+        this.productos = data.productos;
+        this.productosFiltrados = this.productos;
+        // this.cargarBuscador();
+      })
+    // } else {
+    // this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}`)
+    //   this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}`)
+    //       .subscribe((data: any) => {
+    //         this.productos = data.productos;
+    //         this.productosFiltrados = this.productos;
+    //         this.cargarBuscador();
+    //       })
+    // }
+
   }
 
-  buscar() {
-    console.log(
-      {
-        marca: this.marcaElegidaId,
-        categoria: this.categoriaElegidaId,
-        subcategoria: this.subcategoriaElegidaId,
-        subcategoria2: this.subcategoria2ElegidaId,
-        etiqueta: this.etiqueta
-      }
-    );
-    
-    if (!this.etiqueta || !this.subcategoriaElegidaId || !this.marcaElegidaId) {
-      swal(`:|`, `Hay campos obligatorios`, 'warning');
-    } else {
-      const CATEGORIABUSCAR = this.subcategoria2ElegidaId || this.subcategoriaElegidaId;
-      this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${CATEGORIABUSCAR}`)
-        .subscribe((data: any) => {
-          this.productos = data.productos;
-          this.productosFiltrados = this.productos;
-          this.cargarBuscador();
-        })
-    }
+  elegirCategoria4() {
+
+    this.productos = [];
+    this.productosFiltrados = [];
+
+    this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}&categoria4=${this.categoria4ElegidaId}`)
+      .subscribe((data: any) => {
+        this.productos = data.productos;
+        this.productosFiltrados = this.productos;
+        console.log(this.productosFiltrados);
+        
+        // this.cargarBuscador();
+      })
+
+    // if (CATEGORIA.nombre === 'Repuestos y Accesorios') {
+    //   this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=Repuesto&categoria=${this.categoriaElegidaId}&categoria2=${this.subcategoriaElegidaId}&categoria3=${subcategoria2}`)
+    //       .subscribe((data: any) => {
+    //         this.productos = data.productos;
+    //         this.productosFiltrados = this.productos;
+    //         this.cargarBuscador();
+    //       })
+    // } else {
+    //   this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${this.categoriaElegidaId}&categoria2=${this.subcategoriaElegidaId}&categoria3=${subcategoria2}`)
+    //       .subscribe((data: any) => {
+    //         this.productos = data.productos;
+    //         this.productosFiltrados = this.productos;
+    //         this.cargarBuscador();
+    //       })
+    // }
+
   }
+
+  // buscar() {
+  //   console.log(
+  //     {
+  //       marca: this.marcaElegidaId,
+  //       categoria: this.categoriaElegidaId,
+  //       subcategoria: this.subcategoriaElegidaId,
+  //       subcategoria2: this.subcategoria2ElegidaId,
+  //       etiqueta: this.etiqueta
+  //     }
+  //   );
+
+  //   if (!this.etiqueta || !this.subcategoriaElegidaId || !this.marcaElegidaId) {
+  //     swal(`:|`, `Hay campos obligatorios`, 'warning');
+  //   } else {
+  //     const CATEGORIABUSCAR = this.subcategoria2ElegidaId || this.subcategoriaElegidaId;
+  //     this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${CATEGORIABUSCAR}`)
+  //       .subscribe((data: any) => {
+  //         this.productos = data.productos;
+  //         this.productosFiltrados = this.productos;
+  //         this.cargarBuscador();
+  //       })
+  //   }
+  // }
 
   cargarBuscador() {
 
     fromEvent(this.nombreProducto.nativeElement, 'keyup').pipe(debounceTime(400)
-    , distinctUntilChanged()
-    , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
-    , switchMap(title => this.obtenerProductosFiltrados(title)))
-    .subscribe((productos: any) => {
-      this.productosFiltrados = productos;
-    });
+      , distinctUntilChanged()
+      , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+      , switchMap(title => this.obtenerProductosFiltrados(title)))
+      .subscribe((productos: any) => {
+        this.productosFiltrados = productos;
+      });
   }
 
   obtenerProductosFiltrados(name: string): Observable<any[]> {
@@ -186,18 +243,20 @@ export class PorMarcaCategoriaComponent implements OnInit {
     this.productos = [];
     this.productosFiltrados = [];
 
-    this.categoriaElegidaId = undefined;
-    this.subcategoriaElegidaId = undefined;
-    this.subcategoria2ElegidaId = undefined;
-    // this.categorias = [];
-    this.subcategorias = [];
-    this.subcategorias2 = [];
+    this.categoria1ElegidaId = undefined;
+    this.categoria2ElegidaId = undefined;
+    this.categoria3ElegidaId = undefined;
+    this.categoria4ElegidaId = undefined;
+    // this.categorias1 = [];
+    this.categorias2 = [];
+    this.categorias3 = [];
+    this.categorias4 = [];
 
     this.apiService.peticionGet(`productos-por-marca-y-etiqueta?marca=${marca}&etiqueta=${this.etiqueta}`)
-        .subscribe((data: any) => {
-          this.productos = data.productos;
-          this.productosFiltrados = this.productos;
-        })
+      .subscribe((data: any) => {
+        this.productos = data.productos;
+        this.productosFiltrados = this.productos;
+      })
   }
 
 
@@ -261,7 +320,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
     console.log({
       marcaIdNueva, productoId, indice, marcaNombreNuevo
     });
-    
+
 
     const objetoMarca = {
       marca: marcaIdNueva
@@ -275,26 +334,26 @@ export class PorMarcaCategoriaComponent implements OnInit {
         this.productosFiltrados[indice].editarMarca = false;
         this.productosFiltrados[indice].marca.nombre = this.marcaTemp.nombre;
       });
-    
+
   }
 
   crearMarcaTemp(marca) {
-    console.log({marca});
+    console.log({ marca });
 
     this.marcaTemp = this.marcas.find(element => element._id === marca)
 
-    console.log({marcaTemp: this.marcaTemp});
-    
+    console.log({ marcaTemp: this.marcaTemp });
+
   }
 
   cambiarModelo(modeloNuevo, productoId, indice) {
-    console.log({modeloNuevo, productoId, indice});
+    console.log({ modeloNuevo, productoId, indice });
 
     const PRODUCTO = this.productosFiltrados[indice];
     const CARACTERISTICAS = PRODUCTO.caracteristicas;
     CARACTERISTICAS.modelo = modeloNuevo;
 
-    console.log({CARACTERISTICAS});
+    console.log({ CARACTERISTICAS });
 
     this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
       .subscribe((data: any) => {
@@ -304,13 +363,13 @@ export class PorMarcaCategoriaComponent implements OnInit {
   }
 
   cambiarReferencia(referenciaNueva, productoId, indice) {
-    console.log({referenciaNueva, productoId, indice});
+    console.log({ referenciaNueva, productoId, indice });
 
     const PRODUCTO = this.productosFiltrados[indice];
     const CARACTERISTICAS = PRODUCTO.caracteristicas;
     CARACTERISTICAS.referencia = referenciaNueva;
 
-    console.log({CARACTERISTICAS});
+    console.log({ CARACTERISTICAS });
 
     this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
       .subscribe((data: any) => {
