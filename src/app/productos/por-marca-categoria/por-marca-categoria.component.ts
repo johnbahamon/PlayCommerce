@@ -262,8 +262,54 @@ export class PorMarcaCategoriaComponent implements OnInit {
   }
 
 
-  ordenar() {
-    swal(':(', 'Funcion no creada', 'warning');
+  ordenar(termino) {
+    console.log('ORDENAR', termino);
+    
+    if (termino === 'modelo' || termino === 'referencia' || termino === 'ean13' || termino === 'ean14') {
+      console.log('CARACTERISTICAS');
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a.caracteristicas[termino] > b.caracteristicas[termino]) {
+            return 1;
+          }
+          if (a.caracteristicas[termino] < b.caracteristicas[termino]) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
+
+    if ( termino === 'nombre' || termino === 'etiqueta' ) {
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a[termino] > b[termino]) {
+            return 1;
+          }
+          if (a[termino] < b[termino]) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
+
+    if ( termino === 'categoria' || termino === 'marca' ) {
+      this.productosFiltrados.sort(
+        function (a, b) {
+          if (a[termino].nombre > b[termino].nombre) {
+            return 1;
+          }
+          if (a[termino].nombre < b[termino].nombre) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      )
+    }
   }
 
   quitarOpcion(opcion) {
