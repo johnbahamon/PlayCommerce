@@ -44,6 +44,19 @@ export class HistoricoComprasComponent implements OnInit {
           }
           this.compras.push(compra);
         });
+
+        this.compras.sort(
+          function (a, b) {
+            if (a.supplierDate > b.supplierDate) {
+              return 1;
+            }
+            if (a.supplierDate < b.supplierDate) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          }
+        )
         // console.log(this.compras);  
         // this.compras = []      
       })

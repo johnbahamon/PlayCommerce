@@ -100,6 +100,8 @@
               <div class="col-4">
                   <p>
                       <strong>{{ i + 1 }}</strong>
+                      <span class="badge badge-primary pointer ml-1" *ngIf="i > 0" (click)="subir(i)">Up</span>
+                      <span class="badge badge-success pointer ml-1" *ngIf="i < productosElegidos.length - 1" (click)="bajar(i)">Dw</span>
                       - {{ product.productName }}
                       <span class="badge badge-danger pointer" (click)="eliminarProducto(i)">X</span>
                   </p>

@@ -304,4 +304,14 @@ export class EditarCompraComponent implements OnInit, AfterViewInit {
 
   }
 
+  subir(indice) {
+    this.productosElegidos.splice(indice - 1, 0, this.productosElegidos[indice]);
+    this.productosElegidos.splice(indice + 1, 1);
+  }
+
+  bajar(indice) {
+    this.productosElegidos.splice(indice + 2, 0, this.productosElegidos[indice]);
+    this.productosElegidos.splice(indice, 1);
+  }
+
 }
