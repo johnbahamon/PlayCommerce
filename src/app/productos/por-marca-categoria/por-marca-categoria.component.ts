@@ -51,7 +51,8 @@ export class PorMarcaCategoriaComponent implements OnInit {
   otrasOpciones: any[] = [
     'Categoría',
     'EAN13',
-    'EAN14'
+    'EAN14',
+    'Etiqueta'
   ];
 
   constructor(
@@ -253,6 +254,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
     this.categorias4 = [];
 
     this.apiService.peticionGet(`productos-por-marca-y-etiqueta?marca=${marca}&etiqueta=${this.etiqueta}`)
+    // this.apiService.peticionGet(`productos-por-marca-y-etiqueta?marca=${marca}&etiqueta=${'Repuesto'}`)
       .subscribe((data: any) => {
         this.productos = data.productos;
         this.productosFiltrados = this.productos;
@@ -375,6 +377,57 @@ export class PorMarcaCategoriaComponent implements OnInit {
       .subscribe((data: any) => {
         swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
         this.productosFiltrados[indice].editarReferencia = false;
+      });
+  }
+
+  cambiarEAN13(ean13Nuevo, productoId, indice) {
+    console.log({ ean13Nuevo, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.ean13 = ean13Nuevo;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el ean13 en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarEAN13 = false;
+      });
+  }
+
+  cambiarEAN14(ean14Nuevo, productoId, indice) {
+    console.log({ ean14Nuevo, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.ean14 = ean14Nuevo;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el ean14 en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarEAN14 = false;
+      });
+  }
+
+
+  cambiarEtiqueta(etiquetaNueva, productoId, indice) {
+    console.log({
+      etiquetaNueva, productoId, indice
+    });
+
+    const objetoEtiqueta = {
+      etiqueta: etiquetaNueva
+    };
+
+    this.apiService.peticionesPut(`editar-etiqueta/${productoId}`, objetoEtiqueta)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarEtiqueta = false;
       });
   }
 
