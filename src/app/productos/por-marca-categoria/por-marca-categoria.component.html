@@ -39,8 +39,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 2</label>
         </div>
-        <select class="custom-select" [(ngModel)]="categoria2ElegidaId"
-          (change)="elegirCategoria2()">
+        <select class="custom-select" [(ngModel)]="categoria2ElegidaId" (change)="elegirCategoria2()">
           <option *ngFor="let categoria of categorias2" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
@@ -49,8 +48,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 3</label>
         </div>
-        <select class="custom-select" [(ngModel)]="categoria3ElegidaId"
-          (change)="elegirCategoria3()">
+        <select class="custom-select" [(ngModel)]="categoria3ElegidaId" (change)="elegirCategoria3()">
           <option *ngFor="let categoria of categorias3" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
@@ -59,8 +57,7 @@
         <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 4</label>
         </div>
-        <select class="custom-select" [(ngModel)]="categoria4ElegidaId"
-          (change)="elegirCategoria4()">
+        <select class="custom-select" [(ngModel)]="categoria4ElegidaId" (change)="elegirCategoria4()">
           <option *ngFor="let categoria of categorias4" [value]="categoria._id">{{ categoria.nombre }}</option>
         </select>
       </div>
@@ -263,10 +260,16 @@
       </div>
 
       <div class="col-2 pointer" *ngIf="opciones.includes('Etiqueta')" (click)="ordenar('etiqueta')">
-          <h5>
-            Etiqueta
-          </h5>
-        </div>
+        <h5>
+          Etiqueta
+        </h5>
+      </div>
+
+      <div class="col-2" *ngIf="opciones.includes('cmmf')">
+        <h5>
+          CMMF
+        </h5>
+      </div>
       <!-- <div class="col-1 pointer" (click)="ordenar('categoria_padre')">
                 <h5>
                   Cat. Padre
@@ -384,7 +387,8 @@
       <div class="col-2" *ngIf="opciones.includes('Categoría')">
         <p>
           {{ producto.categoria.nombre }}
-          - <span class="badge badge-primary pointer" (click)="mostrarModal(producto._id, producto.nombre, i)">Editar</span>
+          - <span class="badge badge-primary pointer"
+            (click)="mostrarModal(producto._id, producto.nombre, i)">Editar</span>
         </p>
       </div>
 
@@ -397,16 +401,16 @@
       </div>
 
       <div class="col-2" *ngIf="opciones.includes('EAN13') && producto.editarEAN13">
-          <div class="input-group row">
-            <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.ean13">
-          </div>
-          <div class="input-group row">
-            <button class="btn btn-outline-success col" type="button"
-              (click)="cambiarEAN13(producto.caracteristicas.ean13.trim(), producto._id, i)">+</button>
-            <button class="btn btn-outline-danger col" type="button"
-              (click)="producto.editarEAN13 = !producto.editarEAN13">X</button>
-          </div>
+        <div class="input-group row">
+          <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.ean13">
         </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarEAN13(producto.caracteristicas.ean13.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarEAN13 = !producto.editarEAN13">X</button>
+        </div>
+      </div>
 
       <div class="col-2" *ngIf="opciones.includes('EAN14') && !producto.editarEAN14">
         <p>
@@ -417,43 +421,51 @@
       </div>
 
       <div class="col-2" *ngIf="opciones.includes('EAN14') && producto.editarEAN14">
-          <div class="input-group row">
-            <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.ean14">
-          </div>
-          <div class="input-group row">
-            <button class="btn btn-outline-success col" type="button"
-              (click)="cambiarEAN14(producto.caracteristicas.ean14.trim(), producto._id, i)">+</button>
-            <button class="btn btn-outline-danger col" type="button"
-              (click)="producto.editarEAN14 = !producto.editarEAN14">X</button>
-          </div>
+        <div class="input-group row">
+          <input type="text" class="form-control" [(ngModel)]="producto.caracteristicas.ean14">
         </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarEAN14(producto.caracteristicas.ean14.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarEAN14 = !producto.editarEAN14">X</button>
+        </div>
+      </div>
 
 
-        <div class="col-2" *ngIf="opciones.includes('Etiqueta') && !producto.editarEtiqueta">
-            <p>
-              {{ producto.etiqueta }}
-              - <span class="badge badge-primary pointer"
-                (click)="producto.editarEtiqueta = !producto.editarEtiqueta">Editar</span>
-            </p>
-          </div>
-    
-          <div class="col-2" *ngIf="opciones.includes('Etiqueta') && producto.editarEtiqueta">
-              <div class="input-group row">
-                <!-- <input type="text" class="form-control" [(ngModel)]="producto.etiqueta"> -->
+      <div class="col-2" *ngIf="opciones.includes('Etiqueta') && !producto.editarEtiqueta">
+        <p>
+          {{ producto.etiqueta }}
+          - <span class="badge badge-primary pointer"
+            (click)="producto.editarEtiqueta = !producto.editarEtiqueta">Editar</span>
+        </p>
+      </div>
 
-                <select class="custom-select" [(ngModel)]="producto.etiqueta">
-                    <option value="Producto">Producto</option>
-                    <option value="Repuesto">Repuesto</option>
-                    <option value="Combo">Combo</option>
-                  </select>
-              </div>
-              <div class="input-group row">
-                <button class="btn btn-outline-success col" type="button"
-                  (click)="cambiarEtiqueta(producto.etiqueta.trim(), producto._id, i)">+</button>
-                <button class="btn btn-outline-danger col" type="button"
-                  (click)="producto.editarEtiqueta = !producto.editarEtiqueta">X</button>
-              </div>
-            </div>
+      <div class="col-2" *ngIf="opciones.includes('Etiqueta') && producto.editarEtiqueta">
+        <div class="input-group row">
+          <!-- <input type="text" class="form-control" [(ngModel)]="producto.etiqueta"> -->
+
+          <select class="custom-select" [(ngModel)]="producto.etiqueta">
+            <option value="Producto">Producto</option>
+            <option value="Repuesto">Repuesto</option>
+            <option value="Combo">Combo</option>
+          </select>
+        </div>
+        <div class="input-group row">
+          <button class="btn btn-outline-success col" type="button"
+            (click)="cambiarEtiqueta(producto.etiqueta.trim(), producto._id, i)">+</button>
+          <button class="btn btn-outline-danger col" type="button"
+            (click)="producto.editarEtiqueta = !producto.editarEtiqueta">X</button>
+        </div>
+      </div>
+
+
+      <div class="col-2" *ngIf="opciones.includes('cmmf')">
+        <p>
+          {{ producto.cmmf.length }}
+          <span class="badge badge-primary pointer" (click)="editarCmmf(i)">Editar</span>
+        </p>
+      </div>
 
 
       <!-- <div class="col-1">

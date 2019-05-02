@@ -57,6 +57,7 @@ import { CompartirRepuestosAccesoriosComponent } from './productos/editar-produc
 import { VerArbolTresComponent } from './categorias/ver-arbol-tres/ver-arbol-tres.component';
 import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-marca-categoria.component';
 import { CategoriaFormComponent } from './productos/por-marca-categoria/categoria-form/categoria-form.component';
+import { CmmfFormComponent } from './productos/cmmf-form/cmmf-form.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { CategoriaFormComponent } from './productos/por-marca-categoria/categori
     CompartirRepuestosAccesoriosComponent,
     VerArbolTresComponent,
     PorMarcaCategoriaComponent,
-    CategoriaFormComponent
+    CategoriaFormComponent,
+    CmmfFormComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +121,8 @@ import { CategoriaFormComponent } from './productos/por-marca-categoria/categori
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    CategoriaFormComponent
+    CategoriaFormComponent,
+    CmmfFormComponent
   ]
 })
 export class AppModule { }

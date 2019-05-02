@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import { FuncionesService } from '../servicios/funciones.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriaFormComponent } from './por-marca-categoria/categoria-form/categoria-form.component';
+import { CmmfFormComponent } from './cmmf-form/cmmf-form.component';
 
 @Component({
   selector: 'app-productos',
@@ -46,9 +47,11 @@ export class ProductosComponent implements OnInit {
   ];
 
   otrasOpciones: any[] = [
-    'Categoría', 
-    'EAN13', 
-    'EAN14'
+    'Categoría',
+    'EAN13',
+    'EAN14',
+    'Etiqueta',
+    'cmmf'
   ];
 
   constructor(
@@ -329,6 +332,28 @@ export class ProductosComponent implements OnInit {
 
     console.log({ marcaTemp: this.marcaTemp });
 
+  }
+
+  editarCmmf(indice) {
+    const PRODUCTO = this.productosFiltrados[indice];
+    console.log(PRODUCTO.cmmf);
+
+    const modal = this.modalService.open(CmmfFormComponent);
+    modal.result.then(
+      this.cerrarModalCmmf.bind(this),
+      this.cerrarModalCmmf.bind(this)
+    )
+    modal.componentInstance.idProducto = PRODUCTO._id;
+    modal.componentInstance.nombreProducto = PRODUCTO.nombre;
+    modal.componentInstance.cmmf = PRODUCTO.cmmf;
+    modal.componentInstance.indice = indice;
+  }
+
+
+  cerrarModalCmmf(response) {
+    if (response === Object(response)) {
+      this.productosFiltrados[response.indice].cmmf = response.cmmf;
+    }
   }
 
 }

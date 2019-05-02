@@ -9,6 +9,7 @@ import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operato
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriaFormComponent } from './categoria-form/categoria-form.component';
 import { FuncionesService } from 'src/app/servicios/funciones.service';
+import { CmmfFormComponent } from '../cmmf-form/cmmf-form.component';
 
 @Component({
   selector: 'app-por-marca-categoria',
@@ -52,7 +53,8 @@ export class PorMarcaCategoriaComponent implements OnInit {
     'Categoría',
     'EAN13',
     'EAN14',
-    'Etiqueta'
+    'Etiqueta',
+    'cmmf'
   ];
 
   constructor(
@@ -475,6 +477,28 @@ export class PorMarcaCategoriaComponent implements OnInit {
         // this.router.navigate(['productos', 'producto', data.producto._id]);
         this.productosFiltrados[indice].editarEtiqueta = false;
       });
+  }
+
+  editarCmmf(indice) {
+    const PRODUCTO = this.productosFiltrados[indice];
+    console.log(PRODUCTO.cmmf);
+
+    const modal = this.modalService.open(CmmfFormComponent);
+    modal.result.then(
+      this.cerrarModalCmmf.bind(this),
+      this.cerrarModalCmmf.bind(this)
+    )
+    modal.componentInstance.idProducto = PRODUCTO._id;
+    modal.componentInstance.nombreProducto = PRODUCTO.nombre;
+    modal.componentInstance.cmmf = PRODUCTO.cmmf;
+    modal.componentInstance.indice = indice;
+  }
+
+
+  cerrarModalCmmf(response) {
+    if (response === Object(response)) {
+      this.productosFiltrados[response.indice].cmmf = response.cmmf;
+    }
   }
 
 }
