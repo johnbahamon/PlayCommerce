@@ -32,7 +32,7 @@ export class HistoricoComprasComponent implements OnInit {
   buscarCompras() {
     this.apiService.peticionGet('historico-compras/' + this.productoId)
       .subscribe((response: any) => {
-        console.log({compras: response});
+        // console.log({compras: response});
         
         const compras = response.compras;
         this.compras = [];
@@ -65,20 +65,55 @@ export class HistoricoComprasComponent implements OnInit {
   buscarCombos() {
     this.apiService.peticionGet('historico-combos/' + this.productoId)
       .subscribe((response: any) => {
-        console.log({combos: response});
+        // console.log({combos: response});
         
         const combos = response.combos;
+        console.log({combos});
+        
         this.combos = [];
+        
         combos.forEach(element => {
+
           const combo = {
             _id: element._id,
             supplierDate: element.supplierDate,
-            linea: element.products.find(element2 => element2.productId._id === this.productoId)
+            linea: undefined
           }
-          this.combos.push(combo);
+
+          const LINEAS_COMBOS = element.products.filter(element2 => element2.productos.length > 0);
+
+          console.log({LINEAS_COMBOS});
+
+          const ARRAY_LINEAS_COMBOS = [];
+
+          LINEAS_COMBOS.forEach(element3 => {
+            ARRAY_LINEAS_COMBOS.push(...element3.productos)
+          });
+
+          const LINEAS_COMBOS_PRODUCTO = ARRAY_LINEAS_COMBOS.filter(element4 => element4.productId._id === this.productoId)
+
+          console.log({LINEAS_COMBOS_PRODUCTO});
+          
+          LINEAS_COMBOS_PRODUCTO.forEach(element5 => {
+            combo.linea = element5;
+            this.combos.push(combo);
+          });
+          
         });
-        // console.log(this.combos);  
-        // this.compras = []      
+
+        this.combos.sort(
+          function (a, b) {
+            if (a.supplierDate > b.supplierDate) {
+              return 1;
+            }
+            if (a.supplierDate < b.supplierDate) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          }
+        )
+
       })
   }
 

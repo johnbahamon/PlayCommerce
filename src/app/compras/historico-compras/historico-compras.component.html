@@ -21,11 +21,35 @@
         </thead>
         <tbody>
           <tr *ngFor="let compra of compras">
-            <td>{{ compra.supplierDate | date }}</td>
+            <td>{{ compra.supplierDate | date:'d/M/yy' }}</td>
             <td>{{ compra.linea.qty }}</td>
             <td>{{ compra.linea.withTaxUnit }}</td>
-            <td><button type="button" class="btn btn-primary" (click)="irACompra(compra._id)">VER</button></td>
+            <!-- <td><button type="button" class="btn btn-primary" (click)="irACompra(compra._id)">VER</button></td> -->
+            <td><a href="/compras/compra/{{compra._id}}" target="_blank">Ver</a></td>
           </tr>
         </tbody>
       </table>
+</div>
+
+<div class="container" *ngIf="combos && combos.length > 0">
+    <h3>{{ combos[0].linea.productId.nombre }} - Combos</h3>
+  <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Fecha</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Valor Unidad</th>
+          <th scope="col">Ver Factura</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let combo of combos">
+          <td>{{ combo.supplierDate | date:'d/M/yy' }}</td>
+          <td>{{ combo.linea.qty }}</td>
+          <td>{{ combo.linea.withTaxUnit }}</td>
+          <!-- <td><button type="button" class="btn btn-primary" (click)="irACompra(combo._id)">VER</button></td> -->
+          <td><a href="/compras/compra/{{combo._id}}" target="_blank">Ver</a></td>
+        </tr>
+      </tbody>
+    </table>
 </div>
