@@ -5,6 +5,9 @@ import { ApiService } from '../servicios/api.service';
 import { fromEvent } from 'rxjs';
 import { map, switchMap, distinctUntilChanged, debounceTime } from 'rxjs/operators';
 import swal from 'sweetalert';
+import { FuncionesService } from '../servicios/funciones.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CategoriaFormComponent } from './por-marca-categoria/categoria-form/categoria-form.component';
 
 @Component({
   selector: 'app-productos',
@@ -19,18 +22,22 @@ export class ProductosComponent implements OnInit {
   
   @ViewChild('inputBusqueda') inputBusqueda;
 
+  marcas: any[] = [];
+
   productosFiltrados: any[] = [];
   cargando: boolean = true;
 
   desde: number = 0;
   totalProductos: number = 0;
 
-  tipoBusqueda: string = 'nombre'; // Nombre, Referencia, Modelo
+  tipoBusqueda: string = 'referencia'; // Nombre, Referencia, Modelo
 
   verMarca: boolean = true;
   verReferencia: boolean = true;
   verModelo: boolean = true;
   verCategoria: boolean = false;
+
+  marcaTemp: any = {};
 
   opciones: any[] = [
     'Marca', 
@@ -46,13 +53,16 @@ export class ProductosComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private busquedaProductosPorNombreService: BusquedaProductosPorNombreService
+    private busquedaProductosPorNombreService: BusquedaProductosPorNombreService,
+    private funcionesService: FuncionesService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
     this.cargarProductos();
     this.cargarBuscador();
     this.verificarServicio();
+    this.cargarMarcas();
   }
 
   verificarServicio() {
@@ -158,6 +168,167 @@ export class ProductosComponent implements OnInit {
     } else {
       this.opciones.push(opcion);
     }
+  }
+
+
+  cambiarModelo(modeloNuevo, productoId, indice) {
+    console.log({ modeloNuevo, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.modelo = modeloNuevo;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarModelo = false;
+      });
+  }
+
+  cambiarReferencia(referenciaNueva, productoId, indice) {
+    console.log({ referenciaNueva, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.referencia = referenciaNueva;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarReferencia = false;
+      });
+  }
+
+  cambiarEAN13(ean13Nuevo, productoId, indice) {
+    console.log({ ean13Nuevo, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.ean13 = ean13Nuevo;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el ean13 en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarEAN13 = false;
+      });
+  }
+
+  cambiarEAN14(ean14Nuevo, productoId, indice) {
+    console.log({ ean14Nuevo, productoId, indice });
+
+    const PRODUCTO = this.productosFiltrados[indice];
+    const CARACTERISTICAS = PRODUCTO.caracteristicas;
+    CARACTERISTICAS.ean14 = ean14Nuevo;
+
+    console.log({ CARACTERISTICAS });
+
+    this.apiService.peticionesPut(`editar-caracteristicas/${productoId}`, CARACTERISTICAS)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el ean14 en la base de datos`, 'success');
+        this.productosFiltrados[indice].editarEAN14 = false;
+      });
+  }
+
+
+  cambiarEtiqueta(etiquetaNueva, productoId, indice) {
+    console.log({
+      etiquetaNueva, productoId, indice
+    });
+
+    const objetoEtiqueta = {
+      etiqueta: etiquetaNueva
+    };
+
+    this.apiService.peticionesPut(`editar-etiqueta/${productoId}`, objetoEtiqueta)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarEtiqueta = false;
+      });
+  }
+
+  cambiarNombre(nombreNuevo, productoId, indice) {
+    console.log({
+      nombreNuevo, productoId, indice
+    });
+
+    const objetoNombre = {
+      nombre: nombreNuevo,
+      slug: this.funcionesService.stringToSlug(nombreNuevo)
+    };
+
+    this.apiService.peticionesPut(`editar-nombre/${productoId}`, objetoNombre)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió el nombre en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarNombre = false;
+      });
+  }
+
+  mostrarModal(idProducto, nombreProducto, indice) {
+    const modal = this.modalService.open(CategoriaFormComponent);
+    modal.result.then(
+      this.handleModalTodoFormClose.bind(this),
+      this.handleModalTodoFormClose.bind(this)
+    )
+    modal.componentInstance.idProducto = idProducto;
+    modal.componentInstance.nombreProducto = nombreProducto;
+    modal.componentInstance.indice = indice;
+  }
+
+  handleModalTodoFormClose(response) {
+    if (response === Object(response)) {
+      this.productosFiltrados[response.indice].editarCategoria = false;
+      this.productosFiltrados[response.indice].categoria.nombre = response.nombreCategoriaNueva;
+    }
+  }
+
+  cargarMarcas() {
+    this.apiService.peticionGet('nombre-marcas-lista-completa')
+      .subscribe(
+        (data: any) => {
+          this.marcas = data.marcas;
+          // console.log(this.marcas);
+        }
+      )
+  }
+
+  cambiarMarca(marcaIdNueva, marcaNombreNuevo, productoId, indice) {
+    console.log({
+      marcaIdNueva, productoId, indice, marcaNombreNuevo
+    });
+
+
+    const objetoMarca = {
+      marca: marcaIdNueva
+    };
+
+    this.apiService.peticionesPut(`editar-marca/${productoId}`, objetoMarca)
+      .subscribe((data: any) => {
+        swal(`:)`, `Se cambió la marca en la base de datos`, 'success');
+        // console.log('Bien');
+        // this.router.navigate(['productos', 'producto', data.producto._id]);
+        this.productosFiltrados[indice].editarMarca = false;
+        this.productosFiltrados[indice].marca.nombre = this.marcaTemp.nombre;
+      });
+
+  }
+
+  crearMarcaTemp(marca) {
+    console.log({ marca });
+
+    this.marcaTemp = this.marcas.find(element => element._id === marca)
+
+    console.log({ marcaTemp: this.marcaTemp });
+
   }
 
 }

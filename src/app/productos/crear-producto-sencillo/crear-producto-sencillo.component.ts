@@ -19,6 +19,10 @@ export class CrearProductoSencilloComponent implements OnInit {
 
   productoId: string = '';
 
+  datax = [0.1, 0.001, 0.001, 1, 10, 100, 1000, 10000];
+  // datax = [1, 10, 100, 1000, 10000];
+  data = 'Hola';
+
   constructor(
     private apiService: ApiService,
     private funcionesService: FuncionesService,
@@ -26,9 +30,11 @@ export class CrearProductoSencilloComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.data = 'Hello';
   }
 
   buscarReferencia() {
+    swal(':|', 'Buscando...', 'success')
     if (this.referencia.trim() === '') {
       swal(':(', 'Debes escribir una referencia', 'warning');
       return;
