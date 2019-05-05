@@ -230,6 +230,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
             this.obtenerProductosFiltrados(this.nombreBuscar)
               .subscribe((productos: any) => {
                 this.productosFiltrados = productos;
+                this.nombreBuscar = '';
               });
           }
 
