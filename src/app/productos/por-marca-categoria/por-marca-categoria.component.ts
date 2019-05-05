@@ -202,6 +202,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
   }
 
   buscar() {
+    this.nombreProducto.nativeElement.value = '';
     console.log(
       {
         marca: this.marcaElegidaId,
@@ -265,6 +266,11 @@ export class PorMarcaCategoriaComponent implements OnInit {
     this.categoria4ElegidaId = undefined;
     this.productos = [];
     this.productosFiltrados = [];
+    this.nombreBuscar = '';
+    this.nombreProducto.nativeElement.value = '';
+    this.categorias2 = [];
+    this.categorias3 = [];
+    this.categorias4 = [];
   }
 
   cargarBuscador() {
