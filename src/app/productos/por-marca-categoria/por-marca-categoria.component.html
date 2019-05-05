@@ -30,6 +30,14 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
+          <label class="input-group-text">Nombre</label>
+        </div>
+        <input type="text" class="form-control" placeholder="Buscar" [(ngModel)]="nombreBuscar">
+
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
           <label class="input-group-text">Categoría - 1</label>
         </div>
         <select class="custom-select" [(ngModel)]="categoria1ElegidaId" (change)="elegirCategoria1()">

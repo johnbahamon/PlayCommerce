@@ -58,6 +58,7 @@ export class PorMarcaCategoriaComponent implements OnInit {
   ];
 
   tipoBusqueda: string = 'nombre';
+  nombreBuscar: string = '';
 
   constructor(
     private apiService: ApiService,
@@ -220,7 +221,17 @@ export class PorMarcaCategoriaComponent implements OnInit {
       this.apiService.peticionGet(`productos-por-marca-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}`)
         .subscribe((data: any) => {
           this.productos = data.productos;
-          this.productosFiltrados = this.productos;
+
+          if (this.nombreBuscar === '') {
+            this.productosFiltrados = this.productos;
+          } else {
+            this.nombreProducto.nativeElement.value = this.nombreBuscar;
+            this.obtenerProductosFiltrados(this.nombreBuscar)
+              .subscribe((productos: any) => {
+                this.productosFiltrados = productos;
+              });
+          }
+
         })
     } else {
       this.apiService.peticionGet(`productos-filtrados?marca=${this.marcaElegidaId}&categoria1=${this.categoria1ElegidaId}&categoria2=${this.categoria2ElegidaId}&categoria3=${this.categoria3ElegidaId}&categoria4=${this.categoria4ElegidaId}`)
