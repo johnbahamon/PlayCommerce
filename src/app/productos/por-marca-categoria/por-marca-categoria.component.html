@@ -1,6 +1,8 @@
 <div class="container-fluid">
   <div class="row">
-    <h1>PRODUCTOS POR MARCA Y CATEGORÍA *</h1>
+    <h1>PRODUCTOS POR MARCA Y CATEGORÍA - 
+      <span class="badge badge-warning pointer" (click)="reset()">RESET</span>
+    </h1>
   </div>
 
   <div class="row" *ngIf="marcas.length > 0 && categorias1.length > 0">
@@ -62,7 +64,7 @@
         </select>
       </div>
 
-      <!-- <button type="button" class="btn btn-primary btn-lg btn-block mb-3" (click)="buscar()">Buscar</button> -->
+      <button type="button" class="btn btn-primary btn-lg btn-block mb-3" (click)="buscar()">Buscar</button>
 
 
 
@@ -71,32 +73,34 @@
   </div>
 
 
-  <div class="row">
-    <div class="col">
-      <ul class="list-inline">
-        <li class="list-inline-item" *ngFor="let opcion of opciones">
-          {{ opcion }} <span class="badge badge-danger pointer" (click)="quitarOpcion(opcion)"> - </span>
-        </li>
-      </ul>
-    </div>
-    <div class="col">
-      <ul class="list-inline">
-        <li class="list-inline-item" *ngFor="let opcion of otrasOpciones">
-          {{ opcion }} <span class="badge badge-primary pointer" (click)="agregarOpcion(opcion)"> + </span>
-        </li>
-      </ul>
-    </div>
 
 
-  </div>
-
-  <div class="row" [hidden]="!productos || productos.length === 0">
+  <!-- <div class="row" [hidden]="!productos || productos.length === 0">
     <div class="col">
       <div class="input-group mb-3">
         <input #nombreProducto type="text" class="form-control" placeholder="Nombre del Producto">
       </div>
     </div>
+  </div> -->
+
+
+  <div class="row" [hidden]="!productos || productos.length === 0">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <select class="custom-select" [(ngModel)]="tipoBusqueda">
+          <option value="nombre">Nombre</option>
+          <option value="modelo">Modelo</option>
+          <option value="referencia">Referencia</option>
+        </select>
+      </div>
+      <input #nombreProducto type="text" class="form-control" placeholder="Buscar">
+    </div>
   </div>
+
+
+
+
+
 
   <!-- <div *ngIf="productosFiltrados.length > 0">
 
@@ -201,7 +205,24 @@
   
     </div> -->
 
-
+    <div class="row" *ngIf="productosFiltrados && productosFiltrados.length > 0">
+      <div class="col">
+        <ul class="list-inline">
+          <li class="list-inline-item" *ngFor="let opcion of opciones">
+            {{ opcion }} <span class="badge badge-danger pointer" (click)="quitarOpcion(opcion)"> - </span>
+          </li>
+        </ul>
+      </div>
+      <div class="col">
+        <ul class="list-inline">
+          <li class="list-inline-item" *ngFor="let opcion of otrasOpciones">
+            {{ opcion }} <span class="badge badge-primary pointer" (click)="agregarOpcion(opcion)"> + </span>
+          </li>
+        </ul>
+      </div>
+  
+  
+    </div>
 
 
 
