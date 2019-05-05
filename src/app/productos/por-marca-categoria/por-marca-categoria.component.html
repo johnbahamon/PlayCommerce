@@ -323,7 +323,8 @@
     <div class="row item-producto" *ngFor="let producto of productosFiltrados; index as i">
 
       <div class="col-1" *ngIf="producto.pictures && producto.pictures.large && producto.pictures.large.length > 0">
-        <img [src]="producto.pictures.large[ producto.pictures.pp - 1 ]" alt="Producto Img">
+        <!-- <img [src]="producto.pictures.large[ producto.pictures.pp - 1 ]" alt="Producto Img"> -->
+        <img src="http://localhost:3001/images/{{producto._id}}.png" alt="Producto Img">
       </div>
       <div class="col-1" *ngIf="!producto.pictures || !producto.pictures.large || producto.pictures.large.length === 0">
       </div>
