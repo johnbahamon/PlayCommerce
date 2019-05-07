@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoriaFormComponent } from './categoria-form/categoria-form.component';
 import { FuncionesService } from 'src/app/servicios/funciones.service';
 import { CmmfFormComponent } from '../cmmf-form/cmmf-form.component';
+import { BusquedaService } from 'src/app/servicios/busqueda-categorias.service';
 
 @Component({
   selector: 'app-por-marca-categoria',
@@ -19,9 +20,13 @@ import { CmmfFormComponent } from '../cmmf-form/cmmf-form.component';
 export class PorMarcaCategoriaComponent implements OnInit {
 
   @ViewChild('nombreProducto') nombreProducto;
+  @ViewChild('categoriaBuscar') categoriaBuscar;
+
 
   marcas: any[] = [];
   marcaElegidaId: string;
+
+  categorias: any[] = [];
 
   categorias1: any[] = [];
   categoria1ElegidaId: string;
@@ -44,9 +49,10 @@ export class PorMarcaCategoriaComponent implements OnInit {
   marcaTemp: any = {};
 
   opciones: any[] = [
+    // '_id',
     'Marca',
     'Referencia',
-    'Modelo'
+    'Modelo',
   ];
 
   otrasOpciones: any[] = [
@@ -63,13 +69,15 @@ export class PorMarcaCategoriaComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private modalService: NgbModal,
-    private funcionesService: FuncionesService
+    private funcionesService: FuncionesService,
+    private busqueda: BusquedaService
   ) { }
 
   ngOnInit() {
     this.cargarMarcas();
     this.cargarCategorias();
     this.cargarBuscador();
+    this.cargarCategoriasBusqueda();
   }
 
   cargarMarcas() {
@@ -91,6 +99,98 @@ export class PorMarcaCategoriaComponent implements OnInit {
           // console.log(this.marcas);
         }
       )
+  }
+
+  cargarCategoriasBusqueda() {
+    // if (!this.busqueda.busquedaCargada) {
+    this.busqueda.obtenerCategorias('categorias-lista-completa');
+    // }
+
+    // this.cargando = false;
+
+    fromEvent(this.categoriaBuscar.nativeElement, 'keyup').pipe(debounceTime(400)
+      , distinctUntilChanged()
+      , map((event: KeyboardEvent) => (<HTMLInputElement>event.target).value)
+      , switchMap(title => this.busqueda.obtenerCategoriasFiltradas(title)))
+      .subscribe((categories: any) => {
+        this.categorias = categories;
+        console.log(this.categorias);
+      });
+  }
+
+  elegirCategoria(categoria) {
+    this.categorias = [];
+    this.categoriaBuscar.nativeElement.value = '';
+
+    if (categoria.parent && categoria.parent.parent && categoria.parent.parent.parent) {
+
+      this.categoria1ElegidaId = categoria.parent.parent.parent._id;
+      const CATEGORIA1 = this.categorias1.find(element => element._id === this.categoria1ElegidaId);
+
+      this.categorias2 = CATEGORIA1.children;
+      this.categoria2ElegidaId = categoria.parent.parent._id;
+      const CATEGORIA2 = this.categorias2.find(element => element._id === this.categoria2ElegidaId);
+
+      this.categorias3 = CATEGORIA2.children;
+      this.categoria3ElegidaId = categoria.parent._id;
+      const CATEGORIA3 = this.categorias3.find(element => element._id === this.categoria3ElegidaId);
+
+      this.categorias4 = CATEGORIA3.children;
+      this.categoria4ElegidaId = categoria._id;
+
+      return;
+
+    }
+
+    if (categoria.parent && categoria.parent.parent) {
+
+      this.categoria1ElegidaId = categoria.parent.parent._id;
+      const CATEGORIA1 = this.categorias1.find(element => element._id === this.categoria1ElegidaId);
+
+      this.categorias2 = CATEGORIA1.children;
+      this.categoria2ElegidaId = categoria.parent._id;
+      const CATEGORIA2 = this.categorias2.find(element => element._id === this.categoria2ElegidaId);
+
+      this.categorias3 = CATEGORIA2.children;
+      this.categoria3ElegidaId = categoria._id;
+      const CATEGORIA3 = this.categorias3.find(element => element._id === this.categoria3ElegidaId);
+
+      this.categorias4 = CATEGORIA3.children;
+      this.categoria4ElegidaId = undefined;
+      return;
+
+    }
+
+    if (categoria.parent) {
+
+      this.categoria1ElegidaId = categoria.parent._id;
+      const CATEGORIA1 = this.categorias1.find(element => element._id === this.categoria1ElegidaId);
+
+      this.categorias2 = CATEGORIA1.children;
+      this.categoria2ElegidaId = categoria._id;
+      const CATEGORIA2 = this.categorias2.find(element => element._id === this.categoria2ElegidaId);
+
+      this.categorias3 = CATEGORIA2.children;
+      this.categoria3ElegidaId = undefined;
+
+      this.categorias4 = [];
+      this.categoria4ElegidaId = undefined;
+
+      return;
+
+    }
+
+    this.categoria1ElegidaId = categoria._id;
+    const CATEGORIA1 = this.categorias1.find(element => element._id === this.categoria1ElegidaId);
+
+    this.categorias2 = CATEGORIA1.children;
+    this.categoria2ElegidaId = undefined;
+
+    this.categorias3 = [];
+    this.categoria3ElegidaId = undefined;
+
+    this.categorias4 = [];
+    this.categoria4ElegidaId = undefined;
   }
 
   elegirCategoria1() {
@@ -244,19 +344,6 @@ export class PorMarcaCategoriaComponent implements OnInit {
 
     }
 
-
-
-    // if (!this.etiqueta || !this.subcategoriaElegidaId || !this.marcaElegidaId) {
-    //   swal(`:|`, `Hay campos obligatorios`, 'warning');
-    // } else {
-    //   const CATEGORIABUSCAR = this.subcategoria2ElegidaId || this.subcategoriaElegidaId;
-    //   this.apiService.peticionGet(`productos-por-categoria-y-etiqueta?marca=${this.marcaElegidaId}&etiqueta=${this.etiqueta}&categoria=${CATEGORIABUSCAR}`)
-    //     .subscribe((data: any) => {
-    //       this.productos = data.productos;
-    //       this.productosFiltrados = this.productos;
-    //       this.cargarBuscador();
-    //     })
-    // }
   }
 
   reset() {
