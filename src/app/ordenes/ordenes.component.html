@@ -1,0 +1,172 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Ordenes <span class="badge badge-secondary" *ngIf="totalOrdenes > 0">{{ totalOrdenes }}</span></h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <div class="btn-group mr-2">
+      <button class="btn btn-sm btn-outline-secondary" (click)="cargarOrdenes()">RECARGAR</button>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="ordenes.length > 0">
+  <div class="row">
+    <div class="col-3">
+      <h2>Cliente</h2>
+    </div>
+    <div class="col-3">
+      <h2>Productos</h2>
+    </div>
+    <div class="col-3">
+      <h2>Total</h2>
+    </div>
+    <div class="col-3"></div>
+  </div>
+
+  <div class="row" *ngFor="let orden of ordenes; let i = index">
+    <div class="col-3">
+      <p *ngIf="orden.clienteId.tipoId === 'cc'">
+        <strong *ngIf="orden.clienteId.nombreComercial">{{ orden.clienteId.nombreComercial }}</strong>
+        <br>
+        {{ orden.clienteId.primerNombre }} {{ orden.clienteId.segundoNombre }} {{ orden.clienteId.apellidos }}
+      </p>
+      <p *ngIf="orden.clienteId.tipoId === 'nit'">
+        {{ orden.clienteId.razonSocial }}
+      </p>
+    </div>
+    <div class="col-3">
+      <p *ngFor="let producto of orden.productos">
+        <strong>{{ producto.referencia }}</strong> {{ producto.nombre }}
+      </p>
+    </div>
+    <div class="col-3">{{ orden.total }}</div>
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="elegirOrden(i)">
+        Detalles
+      </button>
+    </div>
+  </div>
+
+  <hr>
+
+
+</div>
+
+<div class="container-fluid" *ngIf="ordenElegida">
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-10">
+      <h3>Datos del Cliente</h3>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-2">
+      <strong>Primer Nombre: </strong><br> {{ ordenElegida.clienteId.primerNombre }}
+    </div>
+    <div class="col-2">
+      <strong>Segundo Nombre: </strong><br> {{ ordenElegida.clienteId.segundoNombre }}
+    </div>
+    <div class="col-3">
+      <strong>Apellidos: </strong><br> {{ ordenElegida.clienteId.apellidos }}
+    </div>
+    <div class="col-3"></div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-4">
+      <strong>Nombre Comercial: </strong><br> {{ ordenElegida.clienteId.nombreComercial }}
+    </div>
+    <div class="col-4">
+      <strong>Razón Social: </strong><br> {{ ordenElegida.clienteId.razonSocial }}
+    </div>
+    <div class="col-2"></div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-2">
+      <strong>Tipo Id: </strong><br> {{ ordenElegida.clienteId.tipoId }}
+    </div>
+    <div class="col-2">
+      <strong>Numero Id: </strong><br> {{ ordenElegida.clienteId.numeroId }}
+    </div>
+    <div class="col-6"></div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-3">
+      <strong>Dirección: </strong><br> {{ ordenElegida.clienteId.direccion }}
+    </div>
+    <div class="col-2">
+      <strong>Teléfono: </strong><br> {{ ordenElegida.clienteId.telefono }}
+    </div>
+    <div class="col-2">
+      <strong>Ciudad: </strong><br> {{ ordenElegida.clienteId.ciudad }}
+    </div>
+    <div class="col-2">
+      <strong>Departamento: </strong><br> {{ ordenElegida.clienteId.departamento }}
+    </div>
+    <div class="col-1"></div>
+
+  </div>
+  <hr>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-10">
+      <h3>Productos</h3>
+    </div>
+
+  </div>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-4"><strong>Nombre</strong></div>
+    <div class="col-2"><strong>Cantidad</strong></div>
+    <div class="col-2"><strong>Valor</strong></div>
+    <div class="col-2"></div>
+
+  </div>
+  <div class="row" *ngFor="let producto of ordenElegida.productos">
+
+
+    <div class="col-2"></div>
+    <div class="col-4"><strong>{{ producto.referencia }}</strong> {{ producto.nombre }}</div>
+    <div class="col-2">{{ producto.cantidad }}</div>
+    <div class="col-2">{{ producto.valorVenta }}</div>
+    <div class="col-2"></div>
+
+  </div>
+  <hr>
+  <div class="row">
+
+    <div class="col-2"></div>
+    <div class="col-10">
+      <h1>Total: $ {{ ordenElegida.total }}</h1>
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <div class="col-3"></div>
+    <div class="col-2">
+      <button type="button" class="btn btn-primary btn-block" (click)="modificarOrden(ordenElegida._id, 'COMPLETADA')">Completada</button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-warning btn-block" (click)="modificarOrden(ordenElegida._id, 'RECHAZADA')">Rechazada</button>
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-danger btn-block" (click)="modificarOrden(ordenElegida._id)">Eliminada</button>
+    </div>
+    <div class="col-3"></div>
+  </div>
+  <hr>
+</div>

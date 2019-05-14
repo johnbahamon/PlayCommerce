@@ -44,6 +44,7 @@ import { CrearProductoSencilloComponent } from './productos/crear-producto-senci
 import { CompartirRepuestosAccesoriosComponent } from './productos/editar-producto/compartir-repuestos-accesorios/compartir-repuestos-accesorios.component';
 import { VerArbolTresComponent } from './categorias/ver-arbol-tres/ver-arbol-tres.component';
 import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-marca-categoria.component';
+import { OrdenesComponent } from './ordenes/ordenes.component';
 
 const appRoutes: Routes = [
     { path: 'marcas', component: MarcasComponent },
@@ -89,6 +90,7 @@ const appRoutes: Routes = [
     { path: 'usuarios', component: UsuariosComponent },
     { path: 'usuarios/usuario/:id', component: UsuarioComponent },
     { path: 'usuarios/crear-usuario', component: CrearUsuarioComponent },
+    { path: 'ordenes', component: OrdenesComponent },
     { path: '',   redirectTo: '/productos/por-marca-categoria', pathMatch: 'full' },
 //   { path: '**', component: PageNotFoundComponent }
 ];

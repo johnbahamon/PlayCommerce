@@ -23,4 +23,8 @@ export class ApiService {
   peticionesPut( url: string, body: any ) {
     return this.http.put( this.urlApi + url, body );
   }
+
+  peticionesDelete( url: string ) {
+    return this.http.delete( this.urlApi + url );
+  }
 }
