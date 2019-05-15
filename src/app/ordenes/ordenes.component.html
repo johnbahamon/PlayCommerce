@@ -24,9 +24,9 @@
   <div class="row" *ngFor="let orden of ordenes; let i = index">
     <div class="col-3">
       <p *ngIf="orden.clienteId.tipoId === 'cc'">
-        <strong *ngIf="orden.clienteId.nombreComercial">{{ orden.clienteId.nombreComercial }}</strong>
-        <br>
         {{ orden.clienteId.primerNombre }} {{ orden.clienteId.segundoNombre }} {{ orden.clienteId.apellidos }}
+        <br>
+        <strong *ngIf="orden.clienteId.nombreComercial">{{ orden.clienteId.nombreComercial }}</strong>
       </p>
       <p *ngIf="orden.clienteId.tipoId === 'nit'">
         {{ orden.clienteId.razonSocial }}
@@ -62,11 +62,8 @@
   <div class="row">
 
     <div class="col-2"></div>
-    <div class="col-2">
-      <strong>Primer Nombre: </strong><br> {{ ordenElegida.clienteId.primerNombre }}
-    </div>
-    <div class="col-2">
-      <strong>Segundo Nombre: </strong><br> {{ ordenElegida.clienteId.segundoNombre }}
+    <div class="col-4">
+      <strong>Nombres: </strong><br> {{ ordenElegida.clienteId.primerNombre }} {{ ordenElegida.clienteId.segundoNombre }}
     </div>
     <div class="col-3">
       <strong>Apellidos: </strong><br> {{ ordenElegida.clienteId.apellidos }}
@@ -128,20 +125,22 @@
   <div class="row">
 
     <div class="col-2"></div>
-    <div class="col-4"><strong>Nombre</strong></div>
-    <div class="col-2"><strong>Cantidad</strong></div>
+    <div class="col-3"><strong>Id</strong></div>
+    <div class="col-3"><strong>Nombre</strong></div>
+    <div class="col-1"><strong>Cantidad</strong></div>
     <div class="col-2"><strong>Valor</strong></div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
   </div>
   <div class="row" *ngFor="let producto of ordenElegida.productos">
 
 
     <div class="col-2"></div>
-    <div class="col-4"><strong>{{ producto.referencia }}</strong> {{ producto.nombre }}</div>
-    <div class="col-2">{{ producto.cantidad }}</div>
+    <div class="col-3"><strong>{{ producto.productoId }}</strong></div>
+    <div class="col-3">{{ producto.nombre }}</div>
+    <div class="col-1">{{ producto.cantidad }}</div>
     <div class="col-2">{{ producto.valorVenta }}</div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
   </div>
   <hr>
