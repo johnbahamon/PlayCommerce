@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: 'bigsaledev.appspot.com',
     messagingSenderId: '1072537226666'
   },
-  urlApi: 'http://localhost:3001/'
+  // urlApi: 'http://localhost:3001/'
+  urlApi: 'http://192.168.1.100/'
 };
 
 /*

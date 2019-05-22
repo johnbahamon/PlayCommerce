@@ -13,12 +13,12 @@ export class CrearUsuarioComponent implements OnInit {
   primerNombre: string;
   segundoNombre: string;
   apellidos: string;
-  tipoId: string;
+  tipoId: string = 'cc';
   numeroId: string;
   ciudad: string = 'Neiva';
   departamento: string = 'Huila';
   direccion: string;
-  tipo: string;
+  tipo: string = 'cliente';
   telefono: string;
 
   usuarioEncontrado: boolean = true;
@@ -50,9 +50,25 @@ export class CrearUsuarioComponent implements OnInit {
     this.apiService.peticionesPost('usuarios', formValues)
       .subscribe((data: any) => {
         swal('Muy Bien', 'Usuario creado correctamente', 'success');
-        this.router.navigate(['/usuarios', 'usuario', data.usuario._id ])
+        // this.router.navigate(['/usuarios', 'usuario', data.usuario._id ])
+        this.reset();
         console.log(data);
       });
+  }
+
+  reset() {
+    this.primerNombre = '';
+    this.segundoNombre = '';
+    this.apellidos = '';
+    this.tipoId = 'cc';
+    this.numeroId = '';
+    this.ciudad = 'Neiva';
+    this.departamento = 'Huila';
+    this.direccion = '';
+    this.tipo = 'cliente';
+    this.telefono = '';
+
+    this.usuarioEncontrado = true;
   }
 
   buscarUsuario() {

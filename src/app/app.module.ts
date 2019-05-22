@@ -59,6 +59,8 @@ import { PorMarcaCategoriaComponent } from './productos/por-marca-categoria/por-
 import { CategoriaFormComponent } from './productos/por-marca-categoria/categoria-form/categoria-form.component';
 import { CmmfFormComponent } from './productos/cmmf-form/cmmf-form.component';
 import { OrdenesComponent } from './ordenes/ordenes.component';
+import { ClientesCcComponent } from './usuarios/clientes-cc/clientes-cc.component';
+import { ClientesNitComponent } from './usuarios/clientes-nit/clientes-nit.component';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,9 @@ import { OrdenesComponent } from './ordenes/ordenes.component';
     PorMarcaCategoriaComponent,
     CategoriaFormComponent,
     CmmfFormComponent,
-    OrdenesComponent
+    OrdenesComponent,
+    ClientesCcComponent,
+    ClientesNitComponent
   ],
   imports: [
     BrowserModule,
