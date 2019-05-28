@@ -16,6 +16,8 @@ export class CrearMarcaComponent implements OnInit {
 
   @ViewChild('inputCategoria') inputCategoria: ElementRef;
 
+  buscarCategoria: boolean;
+
   nombre: string;
   categoriasHijas: any[] = [];
   categoriasHijasId: any[] = [];

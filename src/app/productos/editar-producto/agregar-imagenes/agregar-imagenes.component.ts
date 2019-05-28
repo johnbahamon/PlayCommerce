@@ -67,10 +67,13 @@ export class AgregarImagenesComponent implements OnInit {
 
     this.apiService.peticionesPut(`productos/${this.productoId}`, pictures )
       .subscribe((data: any) => {
-        swal('Bien', 'Actualizada', 'success');
         this.servicioURL.resetear();
         this.coleccion = [];
-        this.router.navigate(['productos', 'producto', this.productoId])
+        this.apiService.peticionGet(`descargar-imagen/${this.productoId}`)
+        .subscribe((data2: any) => {
+            swal('Bien', 'Actualizada', 'success');
+            this.router.navigate(['productos', 'producto', this.productoId])
+          })
       });
   }
 

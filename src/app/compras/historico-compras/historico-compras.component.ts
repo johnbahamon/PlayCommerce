@@ -12,6 +12,7 @@ export class HistoricoComprasComponent implements OnInit {
   productoId: string;
   compras: any[] = [];
   combos: any[] = [];
+  producto: any;
 
   constructor(
     private apiService: ApiService,
@@ -21,12 +22,22 @@ export class HistoricoComprasComponent implements OnInit {
 
   ngOnInit() {
     this.encontrarId();
+    this.encontrarProducto();
     this.buscarCompras();
     this.buscarCombos();
   }
 
   encontrarId() {
     this.productoId = this.route.snapshot.params.id;
+  }
+
+  encontrarProducto() {
+    console.log('Buscando Producto');
+    this.apiService.peticionGet('productos/' + this.productoId)
+    .subscribe((data: any) => {
+      this.producto = data.producto;
+      console.log('PRODUCTO', this.producto);
+    });
   }
 
   buscarCompras() {
@@ -48,10 +59,10 @@ export class HistoricoComprasComponent implements OnInit {
         this.compras.sort(
           function (a, b) {
             if (a.supplierDate > b.supplierDate) {
-              return 1;
+              return -1;
             }
             if (a.supplierDate < b.supplierDate) {
-              return -1;
+              return 1;
             }
             // a must be equal to b
             return 0;
@@ -104,10 +115,10 @@ export class HistoricoComprasComponent implements OnInit {
         this.combos.sort(
           function (a, b) {
             if (a.supplierDate > b.supplierDate) {
-              return 1;
+              return -1;
             }
             if (a.supplierDate < b.supplierDate) {
-              return -1;
+              return 1;
             }
             // a must be equal to b
             return 0;

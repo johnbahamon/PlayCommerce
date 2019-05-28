@@ -359,7 +359,8 @@
 
       <div class="col-5" *ngIf="!producto.editarNombre">
         <p>
-          {{ producto.nombre }}
+          <!-- {{ producto.nombre }} -->
+          <a href="/#/productos/producto/{{ producto._id }}" target="_blank">{{ producto.nombre }}</a>
           - <span class="badge badge-primary pointer"
             (click)="producto.editarNombre = !producto.editarNombre">Editar</span>
 
@@ -368,7 +369,8 @@
 
             <br>
             <br>
-            <a href="/productos/producto/{{ producto._id }}" target="_blank">Ver Más</a>
+            <!-- <a href="/#/productos/producto/{{ producto._id }}" target="_blank">Ver Más</a> -->
+            <a class="btn btn-info" role="button" href="/#/compras/historico-compras/{{ producto._id }}" target="_blank">Ver Precios</a>
         </p>
       </div>
 
