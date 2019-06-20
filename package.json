@@ -1,6 +1,6 @@
 {
-  "name": "angular",
-  "version": "0.0.0",
+  "name": "playcommerce",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -30,7 +30,10 @@
     "popper.js": "^1.14.4",
     "rxjs": "^6.0.0",
     "sweetalert": "^2.1.0",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "image-downloader": "^3.4.2"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^6.0.2",
