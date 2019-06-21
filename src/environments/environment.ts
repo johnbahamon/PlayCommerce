@@ -13,7 +13,7 @@ export const environment = {
     messagingSenderId: '1072537226666'
   },
   urlApi: 'http://localhost:3001/'
-  // urlApi: 'http://192.168.1.100/'
+  // urlApi: 'https://demo.playcommerce.org/'
 };
 
 /*
