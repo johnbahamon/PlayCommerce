@@ -4,7 +4,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'development') {
     console.log('Estamos en modo desarrollo');
 
-    urlDB = process.env.MONGO_URI_LOCAL;
+    urlDB = process.env.MONGO_URI;
     
 } else {
     urlDB = process.env.MONGO_URI;
