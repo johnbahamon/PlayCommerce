@@ -10,7 +10,7 @@
 
 # ENVIRONMENTS
 /src/environments
-
+.env
 # IDEs and editors
 /.idea
 .project
