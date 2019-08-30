@@ -22,6 +22,6 @@ export const environment = {
     messagingSenderId: '1072537226666'
   },
   // urlApi: 'http://localhost:3001/'
-  urlApi: 'https://demo.playcommerce.org/'
+  urlApi: 'https://admin-uni.herokuapp.com/'
 };
 

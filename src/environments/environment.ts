@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: 'bigsaledev.appspot.com',
     messagingSenderId: '1072537226666'
   },
-  urlApi: 'http://localhost:3001/'
+  urlApi: 'https://admin-uni.herokuapp.com/'
   // urlApi: 'https://demo.playcommerce.org/'
 };
 
