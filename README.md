@@ -1,8 +1,8 @@
 # PlayCommerce
 
 ## Empezar
-
-git clone https://github.com/PlayCommerce/PlayCommerce
+raelizar un fork
+git clone a tu fork
 npm install
 
 ## .env File
